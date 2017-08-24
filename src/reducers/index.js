@@ -1,15 +1,12 @@
 /*jshint esversion: 6*/
-import { FETCH_CATEGORIES } from '../actions';
+import { combineReducers } from 'redux';
 
-export function categoriesReducer (state = {categories: []}, action){
-  switch (action.type) {
-    case FETCH_CATEGORIES:
-      state = {
-        ...state,
-        categories: action.categories
-      };
-      return state;
-    default :
-    return state;
-  }
-}
+import { categoriesReducer } from '../reducers/CategoriesReducer';
+import { postsReducer } from '../reducers/PostsReducer';
+import { activeViewReducer } from '../reducers/ActiveViewReducer';
+
+export default combineReducers({
+  activeViewReducer,
+  categoriesReducer,
+  postsReducer,
+});

@@ -8,3 +8,15 @@
   padding: 20px;
   color: white;
 }
+
+.Category-List {
+  background-color: red;
+  list-style: none;
+  padding: 10px;
+}
+
+.Post-List {
+  background-color: yellow;
+  list-style: none;
+  padding: 10px;
+}
