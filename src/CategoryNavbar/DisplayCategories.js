@@ -1,12 +1,12 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import './App.css';
-import { fetchCategories } from './actions/CategoriesAction';
-import { activeView } from './actions/ActiveViewAction';
-import { fetchPosts, fetchCategoryPosts } from './actions/PostsAction';
+import '../App.css';
+import { fetchCategories } from '../actions/CategoriesAction';
+import { activeView } from '../actions/ActiveViewAction';
+import { fetchPosts, fetchCategoryPosts } from '../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
-import { Capitalize } from './utils/Capitalize';
+import { Capitalize } from '../utils/Capitalize';
 
 
 class DisplayCategories extends React.Component {

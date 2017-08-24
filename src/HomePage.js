@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import DisplayCategories from './DisplayCategories';
-import DisplayPosts from './DisplayPosts';
+import DisplayCategories from './CategoryNavbar/DisplayCategories';
+import DisplayPosts from './Posts/DisplayPosts';
 import './App.css';
 
 class HomePage extends React.Component {

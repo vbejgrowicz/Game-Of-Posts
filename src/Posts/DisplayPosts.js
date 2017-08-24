@@ -1,8 +1,12 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import './App.css';
-import { fetchPosts } from './actions/PostsAction';
+import '../App.css';
+import { fetchPosts } from '../actions/PostsAction';
+import PostTitle from './PostTitle';
+import PostAuthor from './PostAuthor';
+import PostBody from './PostBody';
+import PostTimestamp from './PostTimestamp';
 
 class DisplayPosts extends React.Component {
 
@@ -14,7 +18,11 @@ class DisplayPosts extends React.Component {
             return(
               <li className="Post-List" key={post.id}>
                 <div>
-                  {post.title}
+                  <PostTitle title={post.title}/>
+                  <PostAuthor author={post.author}/>
+                  <PostBody body={post.body}/>
+                  <PostTimestamp timestamp={post.timestamp}/>
+
                 </div>
               </li>
             );
