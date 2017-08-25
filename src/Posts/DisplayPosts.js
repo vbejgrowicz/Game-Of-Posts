@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import { fetchPosts } from '../actions/PostsAction';
 import PostTitle from './PostTitle';
 import PostAuthor from './PostAuthor';
 import PostBody from './PostBody';
@@ -39,7 +38,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getPosts: dispatch(fetchPosts()),
   };
 };
 

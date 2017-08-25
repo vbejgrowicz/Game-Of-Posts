@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import { fetchCategories } from '../actions/CategoriesAction';
 import { activeView } from '../actions/ActiveViewAction';
 import { fetchPosts, fetchCategoryPosts } from '../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
@@ -33,9 +32,13 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCategories: dispatch(fetchCategories()),
-    reloadHomePage: (category) => { dispatch(activeView(category)); dispatch(fetchPosts()); },
-    updateCurrentCategoryPosts: (category) => { dispatch(activeView(category)); dispatch(fetchCategoryPosts(category)); }
+    reloadHomePage: (category) => {
+      dispatch(activeView(category));
+      dispatch(fetchPosts());
+    },
+    updateCurrentCategoryPosts: (category) => {
+      dispatch(activeView(category));
+      dispatch(fetchCategoryPosts(category)); }
   };
 };
 
