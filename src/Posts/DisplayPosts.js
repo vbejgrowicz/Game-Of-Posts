@@ -2,13 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import PostTitle from './PostTitle';
-import PostAuthor from './PostAuthor';
-import PostBody from './PostBody';
-import PostTimestamp from './PostTimestamp';
+import DisplayTitle from '../DisplayData/DisplayTitle';
+import DisplayAuthor from '../DisplayData/DisplayAuthor';
+import DisplayBody from '../DisplayData/DisplayBody';
+import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 
 class DisplayPosts extends React.Component {
-
 
   render() {
       return this.props.posts ? (
@@ -17,15 +16,13 @@ class DisplayPosts extends React.Component {
             return(
               <li className="Post" key={post.id}>
                 <div className="Post-Data">
-                  <PostTitle title={post.title}/>
-                  <PostBody body={post.body}/>
+                  <DisplayTitle title={post.title}/>
+                  <DisplayBody body={post.body}/>
                   <div className="post-date-and-author">
-                    <PostTimestamp timestamp={post.timestamp}/>
+                    <DisplayTimestamp timestamp={post.timestamp}/>
                     &nbsp;by&nbsp;
-                    <PostAuthor author={post.author}/>
+                    <DisplayAuthor author={post.author}/>
                   </div>
-
-
                 </div>
               </li>
             );

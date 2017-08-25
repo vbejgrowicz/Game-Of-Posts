@@ -1,7 +1,7 @@
 /*jshint esversion:6*/
 import React from 'react';
 
-class PostAuthor extends React.Component {
+class DisplayAuthor extends React.Component {
 
   render() {
     return (
@@ -10,4 +10,4 @@ class PostAuthor extends React.Component {
   }
 }
 
-export default PostAuthor;
+export default DisplayAuthor;

@@ -2,7 +2,7 @@
 import React from 'react';
 import DateCheck from '../utils/DateCheck';
 
-class PostTimestamp extends React.Component {
+class DisplayTimestamp extends React.Component {
 
   render() {
     var currentTime = Date.now();
@@ -16,4 +16,4 @@ class PostTimestamp extends React.Component {
   }
 }
 
-export default PostTimestamp;
+export default DisplayTimestamp;

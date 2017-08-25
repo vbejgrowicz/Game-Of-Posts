@@ -7,7 +7,6 @@ import { fetchPosts, fetchCategoryPosts } from '../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
 import { Capitalize } from '../utils/Capitalize';
 
-
 class DisplayCategories extends React.Component {
 
   render() {
@@ -27,7 +26,7 @@ class DisplayCategories extends React.Component {
 const mapStateToProps = (state) => {
   return {
     categories: state.categoriesReducer.categories,
-    category: state.activeViewReducer.category
+    category: state.activeViewReducer.category,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -38,7 +37,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateCurrentCategoryPosts: (category) => {
       dispatch(activeView(category));
-      dispatch(fetchCategoryPosts(category)); }
+      dispatch(fetchCategoryPosts(category));
+    }
   };
 };
 

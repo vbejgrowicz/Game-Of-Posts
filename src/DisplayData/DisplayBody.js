@@ -1,7 +1,7 @@
 /*jshint esversion:6*/
 import React from 'react';
 
-class PostBody extends React.Component {
+class DisplayBody extends React.Component {
 
   render() {
     return (
@@ -10,4 +10,4 @@ class PostBody extends React.Component {
   }
 }
 
-export default PostBody;
+export default DisplayBody;

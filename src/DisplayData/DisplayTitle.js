@@ -1,7 +1,7 @@
 /*jshint esversion:6*/
 import React from 'react';
 
-class PostTitle extends React.Component {
+class DisplayTitle extends React.Component {
 
   render() {
     return (
@@ -10,4 +10,4 @@ class PostTitle extends React.Component {
   }
 }
 
-export default PostTitle;
+export default DisplayTitle;
