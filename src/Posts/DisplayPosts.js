@@ -12,15 +12,19 @@ class DisplayPosts extends React.Component {
 
   render() {
       return this.props.posts ? (
-          <div>
+          <div className="Post-List">
           {this.props.posts.map((post) => {
             return(
-              <li className="Post-List" key={post.id}>
-                <div>
+              <li className="Post" key={post.id}>
+                <div className="Post-Data">
                   <PostTitle title={post.title}/>
-                  <PostAuthor author={post.author}/>
                   <PostBody body={post.body}/>
-                  <PostTimestamp timestamp={post.timestamp}/>
+                  <div className="post-date-and-author">
+                    <PostTimestamp timestamp={post.timestamp}/>
+                    &nbsp;by&nbsp;
+                    <PostAuthor author={post.author}/>
+                  </div>
+
 
                 </div>
               </li>

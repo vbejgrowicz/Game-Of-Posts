@@ -8,9 +8,20 @@
 }
 
 .Post-List {
-  background-color: yellow;
+  background-color: #8f9297;
   list-style: none;
   padding: 10px;
+}
+
+.Post {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #e4e3e3;
+  border-radius: 25px;
+  width: 70%;
+  align-content: center;
 }
 
 .nav-tabs {
@@ -19,4 +30,14 @@
 
 .nav-tabs>li>a {
   color: black;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.post-date-and-author {
+  display: inline-flex;
+  font-style: italic;
 }
