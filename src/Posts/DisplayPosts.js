@@ -6,6 +6,9 @@ import DisplayTitle from '../DisplayData/DisplayTitle';
 import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
+import DisplayComments from './DisplayComments';
+import { fetchComments } from '../actions/CommentsAction';
+
 
 class DisplayPosts extends React.Component {
 
@@ -13,16 +16,18 @@ class DisplayPosts extends React.Component {
       return this.props.posts ? (
           <div className="Post-List">
           {this.props.posts.map((post) => {
+            this.props.getComments(post.id);
             return(
               <li className="Post" key={post.id}>
                 <div className="Post-Data">
-                  <DisplayTitle title={post.title}/>
-                  <DisplayBody body={post.body}/>
+                  <DisplayTitle title={post.title} />
+                  <DisplayBody body={post.body} />
                   <div className="post-date-and-author">
-                    <DisplayTimestamp timestamp={post.timestamp}/>
+                    <DisplayTimestamp timestamp={post.timestamp} />
                     &nbsp;by&nbsp;
-                    <DisplayAuthor author={post.author}/>
+                    <DisplayAuthor author={post.author} />
                   </div>
+                  <DisplayComments parentId = {post.id} />
                 </div>
               </li>
             );
@@ -39,6 +44,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    getComments: (id) => dispatch(fetchComments(id)),
   };
 };
 

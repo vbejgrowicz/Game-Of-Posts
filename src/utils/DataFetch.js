@@ -14,3 +14,7 @@ export const getPosts = () =>
 export const getCategoryPosts = (category) =>
   fetch(url + '/' + category + '/posts', { headers: { 'Authorization': 'whatever-you-want' }})
     .then(res => res.json());
+
+  export const getComments = (id) =>
+    fetch(url + '/posts/' + id +'/comments', { headers: { 'Authorization': 'whatever-you-want' }})
+      .then(res => res.json());

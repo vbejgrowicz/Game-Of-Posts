@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { ACTIVE_CATEGORY, ACTIVE_SORT } from '../actions/ActiveViewAction';
+import { ACTIVE_CATEGORY } from '../actions/ActiveViewAction';
 
 export function activeViewReducer (state = {category:"home"}, action) {
   switch (action.type) {
