@@ -7,6 +7,7 @@ export const FETCH_POSTS = "FETCH_POSTS";
 export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const ADD_POST = "ADD_POST";
+export const TOGGLE_POST_FORM = "TOGGLE_POST_FORM";
 
 
 export function fetchPosts() {
@@ -53,8 +54,8 @@ export function changeVoteScore(post, vote) {
         const sortMethod = getState().postsReducer.sortedby;
         return dispatch(sortPosts(updatedPosts, sortMethod));
       });
-    };
-  }
+  };
+}
 
   export function newPost(id, timestamp, title, body, author, category) {
     return function newPostThunk(dispatch, getState) {
@@ -64,5 +65,19 @@ export function changeVoteScore(post, vote) {
           const sortMethod = getState().postsReducer.sortedby;
           return dispatch(sortPosts(updatedPosts, sortMethod));
         });
-      };
-    }
+    };
+  }
+
+  export function openPostForm() {
+    return {
+      type: TOGGLE_POST_FORM,
+      formOpen: true
+    };
+  }
+
+  export function closePostForm() {
+    return {
+      type: TOGGLE_POST_FORM,
+      formOpen: false
+    };
+  }
