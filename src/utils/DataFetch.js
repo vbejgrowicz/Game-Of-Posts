@@ -26,3 +26,21 @@ export const updateVoteScore = (id, vote) =>
     body: JSON.stringify({ option: vote })
   })
   .then(res => res.json());
+
+export const addPost = (id, timestamp, title, body, author, category) =>
+  fetch(url + '/posts', {
+    method: 'POST',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: id,
+      timestamp: timestamp,
+      title: title,
+      body: body,
+      author: author,
+      category: category
+    })
+  })
+  .then(res => {
+    debugger
+    return res.json()}
+  );

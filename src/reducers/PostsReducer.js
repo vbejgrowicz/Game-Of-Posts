@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { FETCH_POSTS, SORT_POSTS, CHANGE_VOTESCORE } from '../actions/PostsAction';
+import { FETCH_POSTS, SORT_POSTS, CHANGE_VOTESCORE, ADD_POST } from '../actions/PostsAction';
 
 const initialState = {
   posts: [],
@@ -27,6 +27,10 @@ export function postsReducer (state = initialState, action) {
               }
             return post;
           })
+      });
+    case ADD_POST:
+      return Object.assign({}, state,
+        {posts: state.posts.concat(action.newPost),
       });
     default:
     return state;
