@@ -1,17 +1,35 @@
 /*jshint esversion: 6*/
-import { FETCH_POSTS, SORT_POSTS } from '../actions/PostsAction';
+import { FETCH_POSTS, SORT_POSTS, CHANGE_VOTESCORE } from '../actions/PostsAction';
 
-export function postsReducer (state = {posts:[]}, action) {
+const initialState = {
+  posts: [],
+  sortedby: "voteScore"
+};
+
+export function postsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts
+        {posts: action.posts,
       });
     case SORT_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts
+        {posts: action.posts,
+        sortedby: action.sort
       });
-  default:
+      case CHANGE_VOTESCORE:
+        return Object.assign({}, state,
+          {posts:
+            state.posts.map((post) => {
+              if (post.id === action.id) {
+                return Object.assign({}, post, {
+                  voteScore: action.voteScore
+                });
+              }
+            return post;
+          })
+        });
+    default:
     return state;
   }
 }

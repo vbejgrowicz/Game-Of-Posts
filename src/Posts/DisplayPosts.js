@@ -1,14 +1,16 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import '../App.css';
+
 import DisplayTitle from '../DisplayData/DisplayTitle';
 import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
-import DisplayComments from './DisplayComments';
-import { fetchComments } from '../actions/CommentsAction';
+import DisplayNumComments from '../DisplayData/DisplayNumComments';
+import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
+import DisplayPostDetails from './DisplayPostDetails';
 
+import { fetchComments } from '../actions/CommentsAction';
 
 class DisplayPosts extends React.Component {
 
@@ -18,7 +20,8 @@ class DisplayPosts extends React.Component {
           {this.props.posts.map((post) => {
             this.props.getComments(post.id);
             return(
-              <li className="Post" key={post.id}>
+              <li className="Post" key={post.id} onClick={() => console.log(post.id)}>
+                <DisplayVoteScore voteScore={post.voteScore} post={post.id}/>
                 <div className="Post-Data">
                   <DisplayTitle title={post.title} />
                   <DisplayBody body={post.body} />
@@ -27,7 +30,7 @@ class DisplayPosts extends React.Component {
                     &nbsp;by&nbsp;
                     <DisplayAuthor author={post.author} />
                   </div>
-                  <DisplayComments parentId = {post.id} />
+                  <DisplayNumComments parentId={post.id} />
                 </div>
               </li>
             );

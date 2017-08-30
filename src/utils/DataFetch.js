@@ -15,6 +15,14 @@ export const getCategoryPosts = (category) =>
   fetch(url + '/' + category + '/posts', { headers: { 'Authorization': 'whatever-you-want' }})
     .then(res => res.json());
 
-  export const getComments = (id) =>
-    fetch(url + '/posts/' + id +'/comments', { headers: { 'Authorization': 'whatever-you-want' }})
-      .then(res => res.json());
+export const getComments = (id) =>
+  fetch(url + '/posts/' + id +'/comments', { headers: { 'Authorization': 'whatever-you-want' }})
+    .then(res => res.json());
+
+export const updateVoteScore = (id, vote) =>
+  fetch(url + '/posts/' + id, {
+    method: 'POST',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ option: vote })
+  })
+  .then(res => res.json());
