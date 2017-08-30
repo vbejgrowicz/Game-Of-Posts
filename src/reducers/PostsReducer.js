@@ -19,8 +19,7 @@ export function postsReducer (state = initialState, action) {
       });
       case CHANGE_VOTESCORE:
         return Object.assign({}, state,
-          {posts:
-            state.posts.map((post) => {
+          {posts: state.posts.map((post) => {
               if (post.id === action.id) {
                 return Object.assign({}, post, {
                   voteScore: action.voteScore
@@ -28,7 +27,7 @@ export function postsReducer (state = initialState, action) {
               }
             return post;
           })
-        });
+      });
     default:
     return state;
   }

@@ -1,15 +1,15 @@
 /* jshint esversion:6 */
 import React from 'react';
 import { connect } from 'react-redux';
-import { voteScoreSort, timestampSort } from './actions/PostsAction';
+import { sortPosts } from './actions/PostsAction';
 
 class DisplaySorter extends React.Component {
 
   render() {
     return (
       <div>
-        <button onClick={() => this.props.sortByVoteScore(this.props.posts)}>sort by voteScore</button>
-        <button onClick={() => this.props.sortbyTimestamp(this.props.posts)}>sort by timestamp</button>
+        <button onClick={() => this.props.sortPosts(this.props.posts, "voteScore")}>sort by voteScore</button>
+        <button onClick={() => this.props.sortPosts(this.props.posts, "timestamp")}>sort by timestamp</button>
         </div>
     );
   }
@@ -22,8 +22,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    sortByVoteScore: (posts) => dispatch(voteScoreSort(posts)),
-    sortbyTimestamp: (posts) => dispatch(timestampSort(posts)),
+    sortPosts: (posts, sortMethod) => dispatch(sortPosts(posts, sortMethod)),
   };
 };
 
