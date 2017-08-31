@@ -2,12 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import { newPost, closePostForm } from './actions/PostsAction';
+import { newPost, closePostForm } from '../../actions/PostsAction';
+import { makeID, uniqueID } from '../../utils/MakeID';
 
 class PostForm extends React.Component {
 
   render() {
-    var id = '0xf0y6ziyjabvozdd253zz';
+    var newID = makeID();
+    var IDsUsed = this.props.IDsUsed;
     var timestamp = Date.now();
     var title = 'New Title';
     var body = 'New Body';
@@ -51,7 +53,7 @@ class PostForm extends React.Component {
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={()=>this.props.newPost(id, timestamp, title, body, author, category)}>Submit</Button>
+          <Button onClick={()=>this.props.newPost(newID, IDsUsed, timestamp, title, body, author, category)}>Submit</Button>
         </Modal.Footer>
       </Modal>
     ):null;
@@ -62,11 +64,13 @@ class PostForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     postFormOpen: state.postsReducer.postFormOpen,
+    IDsUsed: state.postsReducer.IDsUsed,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    newPost: (id, timestamp, title, body, author, category) => {
+    newPost: (newID, IDsUsed, timestamp, title, body, author, category) => {
+      var id = uniqueID(newID, IDsUsed);
       dispatch(newPost(id, timestamp, title, body, author, category));
       dispatch(closePostForm());
     },

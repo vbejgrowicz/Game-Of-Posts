@@ -2,8 +2,8 @@
 import React from 'react';
 import DisplayCategories from './CategoryNavbar/DisplayCategories';
 import DisplayPosts from './Posts/DisplayPosts';
-import DisplaySorter from './DisplaySorter';
-import AddPost from './AddPost';
+import DisplaySorter from './Sort/DisplaySorter';
+import AddPost from './Posts/AddPost/AddPost';
 import './App.css';
 
 class HomePage extends React.Component {

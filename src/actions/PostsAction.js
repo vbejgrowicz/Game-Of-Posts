@@ -2,10 +2,10 @@
 import { getPosts, getCategoryPosts, updateVoteScore, addPost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
-
 export const FETCH_POSTS = "FETCH_POSTS";
 export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
+export const FETCH_ID = "FETCH_ID";
 export const ADD_POST = "ADD_POST";
 export const TOGGLE_POST_FORM = "TOGGLE_POST_FORM";
 
@@ -57,27 +57,36 @@ export function changeVoteScore(post, vote) {
   };
 }
 
-  export function newPost(id, timestamp, title, body, author, category) {
-    return function newPostThunk(dispatch, getState) {
-      addPost(id, timestamp, title, body, author, category).then(response => {
-        dispatch({type: ADD_POST, newPost: response });
-          const updatedPosts = getState().postsReducer.posts;
-          const sortMethod = getState().postsReducer.sortedby;
-          return dispatch(sortPosts(updatedPosts, sortMethod));
-        });
+
+export function fetchAllIDs() {
+  return function fetchAllIDsThunk(dispatch) {
+    getPosts().then(response => {
+      dispatch({type: FETCH_ID, posts: response});
+      });
     };
   }
 
-  export function openPostForm() {
-    return {
-      type: TOGGLE_POST_FORM,
-      formOpen: true
-    };
-  }
+export function newPost(id, timestamp, title, body, author, category) {
+  return function newPostThunk(dispatch, getState) {
+    addPost(id, timestamp, title, body, author, category).then(response => {
+      dispatch({type: ADD_POST, newPost: response });
+      const updatedPosts = getState().postsReducer.posts;
+      const sortMethod = getState().postsReducer.sortedby;
+      return dispatch(sortPosts(updatedPosts, sortMethod));
+    });
+  };
+}
 
-  export function closePostForm() {
-    return {
-      type: TOGGLE_POST_FORM,
-      formOpen: false
-    };
-  }
+export function openPostForm() {
+  return {
+    type: TOGGLE_POST_FORM,
+    formOpen: true
+  };
+}
+
+export function closePostForm() {
+  return {
+    type: TOGGLE_POST_FORM,
+    formOpen: false
+  };
+}

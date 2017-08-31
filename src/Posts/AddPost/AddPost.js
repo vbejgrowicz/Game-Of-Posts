@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { openPostForm } from './actions/PostsAction';
+import { openPostForm, fetchAllIDs } from '../../actions/PostsAction';
 import PostForm from './PostForm';
 
 class AddPost extends React.Component {
@@ -22,7 +22,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    openPostForm: () => dispatch(openPostForm()),
+    openPostForm: () => {
+      dispatch(openPostForm());
+      dispatch(fetchAllIDs());
+    }
   };
 };
 
