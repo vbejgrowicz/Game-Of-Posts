@@ -5,10 +5,13 @@ import { categoriesReducer } from '../reducers/CategoriesReducer';
 import { postsReducer } from '../reducers/PostsReducer';
 import { activeViewReducer } from '../reducers/ActiveViewReducer';
 import { commentsReducer } from '../reducers/CommentsReducer';
+import { EditPostReducer } from '../reducers/EditPostReducer';
+
 
 export default combineReducers({
   activeViewReducer,
   categoriesReducer,
   postsReducer,
   commentsReducer,
+  EditPostReducer
 });

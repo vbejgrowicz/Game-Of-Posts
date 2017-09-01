@@ -7,8 +7,6 @@ export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const FETCH_ID = "FETCH_ID";
 export const ADD_POST = "ADD_POST";
-export const TOGGLE_POST_FORM = "TOGGLE_POST_FORM";
-
 
 export function fetchPosts() {
   return function fetchPostsThunk(dispatch) {
@@ -74,19 +72,5 @@ export function newPost(id, timestamp, title, body, author, category) {
       const sortMethod = getState().postsReducer.sortedby;
       return dispatch(sortPosts(updatedPosts, sortMethod));
     });
-  };
-}
-
-export function openPostForm() {
-  return {
-    type: TOGGLE_POST_FORM,
-    formOpen: true
-  };
-}
-
-export function closePostForm() {
-  return {
-    type: TOGGLE_POST_FORM,
-    formOpen: false
   };
 }

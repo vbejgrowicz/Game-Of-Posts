@@ -40,7 +40,4 @@ export const addPost = (id, timestamp, title, body, author, category) =>
       category: category
     })
   })
-  .then(res => {
-    debugger
-    return res.json()}
-  );
+  .then(res => res.json());

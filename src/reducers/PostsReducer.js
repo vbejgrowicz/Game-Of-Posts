@@ -1,11 +1,23 @@
 /*jshint esversion: 6*/
-import { FETCH_POSTS, SORT_POSTS, CHANGE_VOTESCORE, ADD_POST, TOGGLE_POST_FORM, FETCH_ID } from '../actions/PostsAction';
+import {
+  FETCH_POSTS,
+  SORT_POSTS,
+  CHANGE_VOTESCORE,
+  ADD_POST,
+  FETCH_ID,
+} from '../actions/PostsAction';
 
 const initialState = {
   posts: [],
   sortedby: "voteScore",
   postFormOpen: false,
-  IDsUsed: []
+  IDsUsed: [],
+  newPost: {
+    title: '',
+    body: '',
+    author: '',
+    category: ''
+  }
 };
 
 export function postsReducer (state = initialState, action) {
@@ -37,13 +49,10 @@ export function postsReducer (state = initialState, action) {
         })
     });
     case ADD_POST:
-      return Object.assign({}, state,
-        {posts: state.posts.concat(action.newPost),
-      });
-    case TOGGLE_POST_FORM:
-      return Object.assign({}, state,
-      {postFormOpen: action.formOpen,
-      });
+      return Object.assign({}, state, {
+        posts: state.posts.concat(action.newPost),
+      }
+    );
     default:
     return state;
   }

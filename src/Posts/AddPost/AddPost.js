@@ -1,7 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { openPostForm, fetchAllIDs } from '../../actions/PostsAction';
+import { fetchAllIDs } from '../../actions/PostsAction';
+import { openPostForm } from '../../actions/EditPostAction';
 import PostForm from './PostForm';
 
 class AddPost extends React.Component {
