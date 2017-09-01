@@ -11,6 +11,7 @@ import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
 import DisplayPostDetails from './DisplayPostDetails';
 
 import { fetchComments } from '../actions/CommentsAction';
+import { openPostForm, updateID, updateTitle, updateBody, updateAuthor, updateCategory, isExistingPost } from '../actions/EditPostAction';
 
 class DisplayPosts extends React.Component {
 
@@ -32,6 +33,7 @@ class DisplayPosts extends React.Component {
                   </div>
                   <DisplayNumComments parentId={post.id} />
                 </div>
+                <button onClick={() => this.props.openPostForm(post.id, post.title, post.body, post.author, post.category)}>Edit Post</button>
               </li>
             );
           })}
@@ -48,6 +50,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getComments: (id) => dispatch(fetchComments(id)),
+    openPostForm: (id, title, body, author, category) => {
+      dispatch(updateID(id));
+      dispatch(updateTitle(title));
+      dispatch(updateBody(body));
+      dispatch(updateAuthor(author));
+      dispatch(updateCategory(category));
+      dispatch(isExistingPost(true));
+      dispatch(openPostForm());
+    }
   };
 };
 

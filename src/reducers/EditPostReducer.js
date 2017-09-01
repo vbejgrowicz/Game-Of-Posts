@@ -1,21 +1,31 @@
 /*jshint esversion: 6*/
 import {
   TOGGLE_POST_FORM,
+  UPDATE_ID,
   UPDATE_TITLE,
   UPDATE_BODY,
   UPDATE_AUTHOR,
-  UPDATE_CATEGORY
+  UPDATE_CATEGORY,
+  IS_EXISTING_POST
 } from '../actions/EditPostAction';
 
 const initialState = {
   postFormOpen: false,
   post: {
+    isExistingPost: null,
+    id: '',
     title: '',
     body: '',
     author: '',
-    category: ''
+    category: '',
   }
 };
+
+function assignID(state, action) {
+  return Object.assign({}, state.post, {
+    id: action.id
+  });
+}
 
 function assignTitle(state, action) {
   return Object.assign({}, state.post, {
@@ -34,9 +44,16 @@ function assignAuthor(state, action) {
       author: action.author
   });
 }
+
 function assignCategory(state, action) {
   return Object.assign({}, state.post, {
       category: action.category
+  });
+}
+
+function assignPostValue(state, action) {
+  return Object.assign({}, state.post, {
+      isExistingPost: action.isExistingPost
   });
 }
 
@@ -45,6 +62,11 @@ export function EditPostReducer (state = initialState, action) {
     case TOGGLE_POST_FORM:
       return Object.assign({}, state, {
         postFormOpen: action.formOpen,
+      }
+    );
+    case UPDATE_ID:
+      return Object.assign({}, state, {
+        post: assignID(state, action)
       }
     );
     case UPDATE_TITLE:
@@ -65,6 +87,11 @@ export function EditPostReducer (state = initialState, action) {
     case UPDATE_CATEGORY:
       return Object.assign({}, state, {
         post: assignCategory(state, action)
+      }
+    );
+    case IS_EXISTING_POST:
+      return Object.assign({}, state, {
+        post: assignPostValue(state, action)
       }
     );
     default:

@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { getPosts, getCategoryPosts, updateVoteScore, addPost } from '../utils/DataFetch';
+import { getPosts, getCategoryPosts, updateVoteScore, addPost, updatePost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 export const FETCH_POSTS = "FETCH_POSTS";
@@ -7,6 +7,7 @@ export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const FETCH_ID = "FETCH_ID";
 export const ADD_POST = "ADD_POST";
+export const EDIT_POST = "EDIT_POST";
 
 export function fetchPosts() {
   return function fetchPostsThunk(dispatch) {
@@ -68,6 +69,17 @@ export function newPost(id, timestamp, title, body, author, category) {
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
       dispatch({type: ADD_POST, newPost: response });
+      const updatedPosts = getState().postsReducer.posts;
+      const sortMethod = getState().postsReducer.sortedby;
+      return dispatch(sortPosts(updatedPosts, sortMethod));
+    });
+  };
+}
+
+export function editPost(id, title, body) {
+  return function editPostThunk(dispatch, getState) {
+    updatePost(id, title, body).then(response => {
+      dispatch({type: EDIT_POST, id: response.id, updatedPost: response });
       const updatedPosts = getState().postsReducer.posts;
       const sortMethod = getState().postsReducer.sortedby;
       return dispatch(sortPosts(updatedPosts, sortMethod));

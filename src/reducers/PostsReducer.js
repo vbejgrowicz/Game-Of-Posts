@@ -5,19 +5,13 @@ import {
   CHANGE_VOTESCORE,
   ADD_POST,
   FETCH_ID,
+  EDIT_POST
 } from '../actions/PostsAction';
 
 const initialState = {
   posts: [],
   sortedby: "voteScore",
-  postFormOpen: false,
-  IDsUsed: [],
-  newPost: {
-    title: '',
-    body: '',
-    author: '',
-    category: ''
-  }
+  IDsUsed: []
 };
 
 export function postsReducer (state = initialState, action) {
@@ -51,6 +45,18 @@ export function postsReducer (state = initialState, action) {
     case ADD_POST:
       return Object.assign({}, state, {
         posts: state.posts.concat(action.newPost),
+      }
+    );
+    case EDIT_POST:
+    return Object.assign({}, state,
+      {posts: state.posts.map((post) => {
+        if (post.id === action.id) {
+          return Object.assign({}, post,
+            action.updatedPost
+            );
+          }
+        return post;
+        })
       }
     );
     default:

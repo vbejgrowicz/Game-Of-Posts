@@ -41,3 +41,14 @@ export const addPost = (id, timestamp, title, body, author, category) =>
     })
   })
   .then(res => res.json());
+
+export const updatePost = (id, title, body) =>
+  fetch(url + '/posts/' + id, {
+    method: 'PUT',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: title,
+      body: body,
+    })
+  })
+  .then(res => res.json());
