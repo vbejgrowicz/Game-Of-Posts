@@ -9,8 +9,8 @@ import './App.css';
 class HomePage extends React.Component {
 
   render() {
-    return (
-      <div className="App">
+    return(
+      <div>
         <DisplayCategories />
         <DisplaySorter />
         <DisplayPosts />

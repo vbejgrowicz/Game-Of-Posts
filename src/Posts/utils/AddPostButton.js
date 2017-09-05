@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllIDs } from '../../actions/PostsAction';
 import { openPostForm, updateID, isExistingPost } from '../../actions/EditPostAction';
-import PostForm from '../PostForm';
 import { makeID, uniqueID } from '../../utils/MakeID';
 
 
@@ -18,8 +17,7 @@ class AddPostButton extends React.Component {
     var IDsUsed = this.props.IDsUsed;
     return (
       <div className="Add-Post">
-      <button onClick={() => this.props.openPostForm(newID, IDsUsed)}>Add Post</button>
-      <PostForm />
+        <button onClick={() => this.props.openPostForm(newID, IDsUsed)}>Add Post</button>
       </div>
     );
   }
