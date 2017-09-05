@@ -2,20 +2,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostDetails from './PostDetails';
+import DisplayComments from '../Comments/DisplayComments';
+import { fetchPost } from '../actions/ActiveViewAction';
 import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
 
 
 class PostDetailView extends React.Component {
 
   render() {
-    console.log(this.props.post);
     return (
       <div>
         <div>
           <button onClick={() => this.props.detailedPostViewNotActive()}>Back</button>
         </div>
         <div className="detailed-post">
-          <PostDetails post={this.props.post} />
+          <PostDetails post={this.props.currentPost} />
+        </div>
+        <div className="comments">
+          <DisplayComments parentId={this.props.posts.id}/>
         </div>
       </div>
     );
@@ -24,13 +28,17 @@ class PostDetailView extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    post: state.activeViewReducer.post,
+    currentPost: state.activeViewReducer.post,
+    posts: state.postsReducer.posts,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     detailedPostViewNotActive: () => {
       dispatch(detailedPostViewNotActive());
+    },
+    fetchPost: (id) => {
+      dispatch(fetchPost(id));
     }
   };
 };

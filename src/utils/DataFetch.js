@@ -11,6 +11,10 @@ export const getPosts = () =>
   fetch(url + '/posts', { headers: { 'Authorization': 'whatever-you-want' }})
     .then(res => res.json());
 
+export const getPost = (id) =>
+  fetch(url + '/posts/' + id , { headers: { 'Authorization': 'whatever-you-want' }})
+    .then(res => res.json());
+
 export const getCategoryPosts = (category) =>
   fetch(url + '/' + category + '/posts', { headers: { 'Authorization': 'whatever-you-want' }})
     .then(res => res.json());
