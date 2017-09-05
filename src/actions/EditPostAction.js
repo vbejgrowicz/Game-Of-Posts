@@ -1,5 +1,6 @@
 /*jshint esversion: 6*/
-export const TOGGLE_POST_FORM = "TOGGLE_POST_FORM";
+export const TOGGLE_FORM_OPEN = "TOGGLE_FORM_OPEN";
+export const TOGGLE_FORM_CLOSED = "TOGGLE_FORM_CLOSED";
 export const UPDATE_ID = "UPDATE_ID";
 export const UPDATE_TITLE = "UPDATE_TITLE";
 export const UPDATE_BODY = "UPDATE_BODY";
@@ -9,14 +10,14 @@ export const IS_EXISTING_POST = "IS_EXISTING_POST";
 
 export function openPostForm() {
   return {
-    type: TOGGLE_POST_FORM,
+    type: TOGGLE_FORM_OPEN,
     formOpen: true
   };
 }
 
 export function closePostForm() {
   return {
-    type: TOGGLE_POST_FORM,
+    type: TOGGLE_FORM_CLOSED,
     formOpen: false
   };
 }

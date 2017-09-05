@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import {
-  TOGGLE_POST_FORM,
+  TOGGLE_FORM_OPEN,
+  TOGGLE_FORM_CLOSED,
   UPDATE_ID,
   UPDATE_TITLE,
   UPDATE_BODY,
@@ -59,9 +60,22 @@ function assignPostValue(state, action) {
 
 export function EditPostReducer (state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_POST_FORM:
+    case TOGGLE_FORM_OPEN:
       return Object.assign({}, state, {
         postFormOpen: action.formOpen,
+      }
+    );
+    case TOGGLE_FORM_CLOSED:
+      return Object.assign({}, state, {
+        postFormOpen: action.formOpen,
+        post: {
+          isExistingPost: null,
+          id: '',
+          title: '',
+          body: '',
+          author: '',
+          category: '',
+        }
       }
     );
     case UPDATE_ID:
