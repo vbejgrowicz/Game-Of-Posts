@@ -9,7 +9,7 @@ class SubmitNewPostButton extends React.Component {
 
   render() {
     return(
-      <Button onClick={()=>this.props.newPost(this.props.id, Date.now(), this.props.title, this.props.body, this.props.author, this.props.category)}>Submit</Button>
+      <Button onClick={()=>this.props.newPost(this.props.activeView, this.props.id, Date.now(), this.props.title, this.props.body, this.props.author, this.props.category)}>Submit</Button>
     );
   }
 }
@@ -22,12 +22,13 @@ const mapStateToProps = (state) => {
     body: state.EditPostReducer.post.body,
     author: state.EditPostReducer.post.author,
     category: state.EditPostReducer.post.category,
+    activeView: state.activeViewReducer.category,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    newPost: (id, timestamp, title, body, author, category) => {
-      dispatch(newPost(id, timestamp, title, body, author, category));
+    newPost: (activeView, id, timestamp, title, body, author, category) => {
+      dispatch(newPost(activeView, id, timestamp, title, body, author, category));
       dispatch(closePostForm());
     }
   };

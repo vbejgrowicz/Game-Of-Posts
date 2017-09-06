@@ -65,10 +65,12 @@ export function fetchAllIDs() {
     };
   }
 
-export function newPost(id, timestamp, title, body, author, category) {
+export function newPost(activeView, id, timestamp, title, body, author, category) {
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
-      dispatch({type: ADD_POST, newPost: response });
+      if (activeView === ("home" || response.category)) {
+        dispatch({type: ADD_POST, newPost: response });
+      }
       const updatedPosts = getState().postsReducer.posts;
       const sortMethod = getState().postsReducer.sortedby;
       return dispatch(sortPosts(updatedPosts, sortMethod));
