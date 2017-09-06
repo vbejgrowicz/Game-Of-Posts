@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { getComments, updateCommentVoteScore } from '../utils/DataFetch';
+import { getComments, updateCommentVoteScore, deleteComment } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 
@@ -16,6 +16,14 @@ export function fetchComments(id) {
       });
     };
   }
+
+export function removeComment(parentId, id) {
+  return function removeCommentThunk(dispatch) {
+    deleteComment(id).then(
+      dispatch({type: DELETE_COMMENT, parentId: parentId, id: id })
+    );
+  };
+}
 
   export function sortComments(parentId, comments, sortMethod) {
     return function sortThunk(dispatch, getState) {

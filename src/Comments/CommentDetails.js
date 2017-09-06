@@ -4,6 +4,8 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
+import DeleteCommentButton from './utils/DeleteCommentButton';
+
 
 class CommentDetails extends React.Component {
   // <EditPostButton id={this.props.post.id} title={this.props.post.title} body={this.props.post.body} author={this.props.post.author} category={this.props.post.category} />
@@ -20,6 +22,7 @@ class CommentDetails extends React.Component {
           <DisplayAuthor author={this.props.comment.author} />
         </div>
       </div>
+      <DeleteCommentButton parentId={this.props.comment.parentId} id={this.props.comment.id} />
       </div>
     );
   }

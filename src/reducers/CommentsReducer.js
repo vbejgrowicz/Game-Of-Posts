@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { FETCH_COMMENTS, SORT_COMMENTS, CHANGE_COMMENT_VOTESCORE } from '../actions/CommentsAction';
+import { FETCH_COMMENTS, SORT_COMMENTS, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT } from '../actions/CommentsAction';
 
 const initialState = {
   sortedby: "voteScore",
@@ -27,6 +27,10 @@ export function commentsReducer (state = initialState, action) {
             }
             return comment;
           })}
+        );
+      case DELETE_COMMENT:
+        return Object.assign({}, state,
+          {[action.parentId]: state[action.parentId].filter(function(comment) {return (comment.id !== action.id);})}
         );
   default:
   return state;

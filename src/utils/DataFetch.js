@@ -74,3 +74,13 @@ export const updatePost = (id, title, body) =>
       {if (res.ok) {
         return;
       }});
+
+  export const deleteComment = (id) =>
+    fetch(url + '/comments/' + id, {
+      method: 'DELETE',
+      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    })
+    .then(res =>
+      {if (res.ok) {
+        return;
+      }});
