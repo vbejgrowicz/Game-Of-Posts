@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import {
   FETCH_POSTS,
+  FETCH_POST,
   SORT_POSTS,
   CHANGE_VOTESCORE,
   ADD_POST,
@@ -21,6 +22,10 @@ export function postsReducer (state = initialState, action) {
       return Object.assign({}, state,
         {posts: action.posts.filter(function(post) {return (post.deleted !== true);}),
       });
+    case FETCH_POST:
+      return Object.assign({}, state,
+        {posts: action.posts}
+      );
     case SORT_POSTS:
       return Object.assign({}, state,
         {posts: action.posts,

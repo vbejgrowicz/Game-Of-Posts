@@ -1,9 +1,10 @@
 /*jshint esversion: 6*/
-import { getPosts, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
+import { getPosts, getPost, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
-import { detailedPostViewNotActive } from './ActiveViewAction';
+import { detailedPostViewNotActive, currentPost } from './ActiveViewAction';
 
 export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_POST = "FETCH_POST";
 export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const FETCH_ID = "FETCH_ID";
@@ -25,6 +26,15 @@ export function fetchCategoryPosts(category) {
     getCategoryPosts(category).then(response => {
       var sorted = sortByVoteScore(response);
       dispatch({type: FETCH_POSTS, posts: sorted});
+    });
+  };
+}
+
+export function fetchPost(id) {
+  return function fetchPostThunk(dispatch) {
+    getPost(id).then(response => {
+      console.log(response);
+      dispatch({type: FETCH_POST, posts: response});
     });
   };
 }
@@ -83,6 +93,10 @@ export function newPost(activeView, id, timestamp, title, body, author, category
 export function editPost(id, title, body) {
   return function editPostThunk(dispatch, getState) {
     updatePost(id, title, body).then(response => {
+      const activeView = getState().activeViewReducer.detailedPostView;
+      if (activeView === true) {
+        dispatch(currentPost(response));
+      }
       dispatch({type: EDIT_POST, id: response.id, updatedPost: response });
       const updatedPosts = getState().postsReducer.posts;
       const sortMethod = getState().postsReducer.sortedby;
@@ -94,11 +108,11 @@ export function editPost(id, title, body) {
 export function removePost(id) {
   return function removePostThunk(dispatch, getState) {
     deletePost(id).then(() => {
-      dispatch({type: DELETE_POST, id: id });
-      const activeView = getState().activeViewReducer.detailedPostView;
+      var activeView = getState().activeViewReducer.detailedPostView;
       if (activeView === true) {
         dispatch(detailedPostViewNotActive());
       }
+      dispatch({type: DELETE_POST, id: id });
     });
   };
 }
