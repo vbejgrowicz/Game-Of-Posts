@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { getPosts, getCategoryPosts, updateVoteScore, addPost, updatePost } from '../utils/DataFetch';
+import { getPosts, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 export const FETCH_POSTS = "FETCH_POSTS";
@@ -8,6 +8,7 @@ export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const FETCH_ID = "FETCH_ID";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
+export const DELETE_POST = "DELETE_POST";
 
 export function fetchPosts() {
   return function fetchPostsThunk(dispatch) {
@@ -68,7 +69,6 @@ export function fetchAllIDs() {
 export function newPost(activeView, id, timestamp, title, body, author, category) {
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
-      console.log(response.category.toString());
       if ((activeView === "home") || (activeView === response.category)) {
         dispatch({type: ADD_POST, newPost: response });
       }
@@ -86,6 +86,14 @@ export function editPost(id, title, body) {
       const updatedPosts = getState().postsReducer.posts;
       const sortMethod = getState().postsReducer.sortedby;
       return dispatch(sortPosts(updatedPosts, sortMethod));
+    });
+  };
+}
+
+export function removePost(id) {
+  return function removePostThunk(dispatch) {
+    deletePost(id).then(() => {
+      dispatch({type: DELETE_POST, id: id });
     });
   };
 }

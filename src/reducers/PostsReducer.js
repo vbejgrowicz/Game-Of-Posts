@@ -5,7 +5,8 @@ import {
   CHANGE_VOTESCORE,
   ADD_POST,
   FETCH_ID,
-  EDIT_POST
+  EDIT_POST,
+  DELETE_POST
 } from '../actions/PostsAction';
 
 const initialState = {
@@ -18,7 +19,7 @@ export function postsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts,
+        {posts: action.posts.filter(function(post) {return (post.deleted !== true);}),
       });
     case SORT_POSTS:
       return Object.assign({}, state,
@@ -57,6 +58,11 @@ export function postsReducer (state = initialState, action) {
           }
         return post;
         })
+      }
+    );
+    case DELETE_POST:
+      return Object.assign({}, state, {
+        posts: state.posts.filter(function(post) {return (post.id !== action.id);}),
       }
     );
     default:

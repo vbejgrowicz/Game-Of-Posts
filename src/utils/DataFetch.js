@@ -56,3 +56,13 @@ export const updatePost = (id, title, body) =>
     })
   })
   .then(res => res.json());
+
+  export const deletePost = (id) =>
+    fetch(url + '/posts/' + id, {
+      method: 'DELETE',
+      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    })
+    .then(res =>
+      {if (res.ok) {
+        return;
+      }});
