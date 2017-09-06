@@ -6,7 +6,6 @@ import DisplayComments from '../Comments/DisplayComments';
 import { fetchPost } from '../actions/ActiveViewAction';
 import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
 
-
 class PostDetailView extends React.Component {
 
   render() {

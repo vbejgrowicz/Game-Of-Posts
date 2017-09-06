@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import { getPosts, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
+import { detailedPostViewNotActive } from './ActiveViewAction';
 
 export const FETCH_POSTS = "FETCH_POSTS";
 export const SORT_POSTS = "SORT_POSTS";
@@ -91,9 +92,13 @@ export function editPost(id, title, body) {
 }
 
 export function removePost(id) {
-  return function removePostThunk(dispatch) {
+  return function removePostThunk(dispatch, getState) {
     deletePost(id).then(() => {
       dispatch({type: DELETE_POST, id: id });
+      const activeView = getState().activeViewReducer.detailedPostView;
+      if (activeView === true) {
+        dispatch(detailedPostViewNotActive());
+      }
     });
   };
 }
