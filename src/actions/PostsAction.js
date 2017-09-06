@@ -68,7 +68,8 @@ export function fetchAllIDs() {
 export function newPost(activeView, id, timestamp, title, body, author, category) {
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
-      if (activeView === ("home" || response.category)) {
+      console.log(response.category.toString());
+      if ((activeView === "home") || (activeView === response.category)) {
         dispatch({type: ADD_POST, newPost: response });
       }
       const updatedPosts = getState().postsReducer.posts;
