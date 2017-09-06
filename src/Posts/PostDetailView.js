@@ -5,6 +5,7 @@ import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
 import { fetchPost } from '../actions/ActiveViewAction';
 import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
+import DisplaySorter from '../Sort/DisplaySorter';
 
 class PostDetailView extends React.Component {
 
@@ -18,7 +19,8 @@ class PostDetailView extends React.Component {
           <PostDetails post={this.props.currentPost} />
         </div>
         <div className="comments">
-          <DisplayComments parentId={this.props.posts.id}/>
+          <DisplaySorter parentId={this.props.currentPost.id} />
+          <DisplayComments parentId={this.props.currentPost.id}/>
         </div>
       </div>
     );
@@ -28,7 +30,6 @@ class PostDetailView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currentPost: state.activeViewReducer.post,
-    posts: state.postsReducer.posts,
   };
 };
 const mapDispatchToProps = (dispatch) => {

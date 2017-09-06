@@ -31,6 +31,14 @@ export const updateVoteScore = (id, vote) =>
   })
   .then(res => res.json());
 
+  export const updateCommentVoteScore = (id, vote) =>
+    fetch(url + '/comments/' + id, {
+      method: 'POST',
+      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ option: vote })
+    })
+    .then(res => res.json());
+
 export const addPost = (id, timestamp, title, body, author, category) =>
   fetch(url + '/posts', {
     method: 'POST',

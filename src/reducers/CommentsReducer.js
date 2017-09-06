@@ -1,13 +1,34 @@
 /*jshint esversion: 6*/
-import { FETCH_COMMENTS } from '../actions/CommentsAction';
+import { FETCH_COMMENTS, SORT_COMMENTS, CHANGE_COMMENT_VOTESCORE } from '../actions/CommentsAction';
 
-export function commentsReducer (state = [], action) {
+const initialState = {
+  sortedby: "voteScore",
+};
+
+export function commentsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_COMMENTS:
       return Object.assign({}, state,
         {[action.id]: action.comments
       });
+      case SORT_COMMENTS:
+        console.log(action);
+        return Object.assign({}, state,
+          {[action.parentId]: action.comments,
+          sortedby: action.sort
+      });
+      case CHANGE_COMMENT_VOTESCORE:
+        return Object.assign({}, state,
+          {[action.parentId]: state[action.parentId].map((comment) => {
+            if (comment.id === action.id) {
+              return Object.assign({}, comment, {
+                voteScore: action.voteScore
+              });
+            }
+            return comment;
+          })}
+        );
   default:
-    return state;
+  return state;
   }
 }

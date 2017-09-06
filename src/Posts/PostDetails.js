@@ -10,8 +10,6 @@ import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
 import { detailedPostViewActive, currentPost } from '../actions/ActiveViewAction';
-import { removePost } from '../actions/PostsAction';
-
 
 class PostDetails extends React.Component {
 
