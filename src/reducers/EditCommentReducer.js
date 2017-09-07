@@ -3,9 +3,9 @@ import {
   TOGGLE_COMMENT_FORM_OPEN,
   TOGGLE_COMMENT_FORM_CLOSED,
   UPDATE_PARENT_ID,
-  UPDATE_ID,
-  UPDATE_BODY,
-  UPDATE_AUTHOR,
+  UPDATE_COMMENT_ID,
+  UPDATE_COMMENT_BODY,
+  UPDATE_COMMENT_AUTHOR,
   IS_EXISTING_COMMENT
 } from '../actions/EditCommentAction';
 
@@ -70,7 +70,7 @@ export function EditCommentReducer (state = initialState, action) {
         }
       }
     );
-    case UPDATE_ID:
+    case UPDATE_COMMENT_ID:
       return Object.assign({}, state, {
         comment: assignID(state, action)
       }
@@ -80,12 +80,12 @@ export function EditCommentReducer (state = initialState, action) {
         comment: assignParentID(state, action)
       }
     );
-    case UPDATE_BODY:
+    case UPDATE_COMMENT_BODY:
       return Object.assign({}, state, {
         comment: assignBody(state, action)
       }
     );
-    case UPDATE_AUTHOR:
+    case UPDATE_COMMENT_AUTHOR:
       return Object.assign({}, state, {
         comment: assignAuthor(state, action)
       }

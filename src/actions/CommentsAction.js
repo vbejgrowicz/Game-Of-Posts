@@ -22,8 +22,8 @@ export function fetchComments(id) {
     };
   }
 
-export function fetchAllIDs(id) {
-  return function fetchAllIDsThunk(dispatch) {
+export function fetchCommentIDs(id) {
+  return function fetchCommentIDsThunk(dispatch) {
     getComments(id).then(response => {
       dispatch({type: FETCH_COMMENT_ID, comments: response});
       });

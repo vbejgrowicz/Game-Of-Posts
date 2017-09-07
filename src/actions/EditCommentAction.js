@@ -2,9 +2,9 @@
 export const TOGGLE_COMMENT_FORM_OPEN = "TOGGLE_COMMENT_FORM_OPEN";
 export const TOGGLE_COMMENT_FORM_CLOSED = "TOGGLE_COMMENT_FORM_CLOSED";
 export const UPDATE_PARENT_ID = "UPDATE_PARENT_ID";
-export const UPDATE_ID = "UPDATE_ID";
-export const UPDATE_BODY = "UPDATE_BODY";
-export const UPDATE_AUTHOR = "UPDATE_AUTHOR";
+export const UPDATE_COMMENT_ID = "UPDATE_COMMENT_ID";
+export const UPDATE_COMMENT_BODY = "UPDATE_COMMENT_BODY";
+export const UPDATE_COMMENT_AUTHOR = "UPDATE_COMMENT_AUTHOR";
 export const IS_EXISTING_COMMENT = "IS_EXISTING_COMMENT";
 
 export function openCommentForm() {
@@ -28,23 +28,23 @@ export function updateParentID(value) {
   };
 }
 
-export function updateID(value) {
+export function updateCommentID(value) {
   return {
-    type: UPDATE_ID,
+    type: UPDATE_COMMENT_ID,
     id: value
   };
 }
 
-export function updateBody(value) {
+export function updateCommentBody(value) {
   return {
-    type: UPDATE_BODY,
+    type: UPDATE_COMMENT_BODY,
     body: value
   };
 }
 
-export function updateAuthor(value) {
+export function updateCommentAuthor(value) {
   return {
-    type: UPDATE_AUTHOR,
+    type: UPDATE_COMMENT_AUTHOR,
     author: value
   };
 }

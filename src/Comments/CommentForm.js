@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import {closeCommentForm, updateBody, updateAuthor } from '../actions/EditCommentAction';
+import { closeCommentForm, updateCommentBody, updateCommentAuthor } from '../actions/EditCommentAction';
 import SubmitNewCommentButton from './utils/SubmitNewCommentButton';
 import SubmitEditCommentButton from './utils/SubmitEditCommentButton';
 
@@ -25,7 +25,7 @@ class CommentForm extends React.Component {
               type="text"
               value={this.props.body}
               placeholder="Enter Body"
-              onChange= {(e) => this.props.updateBody(e.target.value)}
+              onChange= {(e) => this.props.updateCommentBody(e.target.value)}
             />
           </FormGroup>
           <FormGroup controlId = 'formControlsAuthor'>
@@ -35,7 +35,7 @@ class CommentForm extends React.Component {
               type="text"
               value={this.props.author}
               placeholder="Enter Author"
-              onChange= {(e) => this.props.updateAuthor(e.target.value)}
+              onChange= {(e) => this.props.updateCommentAuthor(e.target.value)}
             />
           </FormGroup>
         </Modal.Body>
@@ -63,8 +63,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateBody: (value) => dispatch(updateBody(value)),
-    updateAuthor: (value) => dispatch(updateAuthor(value)),
+    updateCommentBody: (value) => dispatch(updateCommentBody(value)),
+    updateCommentAuthor: (value) => dispatch(updateCommentAuthor(value)),
     closeCommentForm: () => dispatch(closeCommentForm()),
   };
 };
