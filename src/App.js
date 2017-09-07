@@ -3,6 +3,7 @@ import React from 'react';
 import HomePage from './HomePage';
 import PostDetailView from './Posts/PostDetailView';
 import PostForm from './Posts/PostForm';
+import CommentForm from './Comments/CommentForm';
 import { connect } from 'react-redux';
 import { fetchPosts } from './actions/PostsAction';
 import { fetchCategories } from './actions/CategoriesAction';
@@ -22,6 +23,7 @@ class App extends React.Component {
         <div className="Post-Detail-Page">
           <PostDetailView />
           <PostForm />
+          <CommentForm />
         </div>
       </div>
     ):(

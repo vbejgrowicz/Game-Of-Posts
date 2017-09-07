@@ -14,7 +14,6 @@ class DisplayVoteScore extends React.Component {
       }
   }
   voteEventComment(vote) {
-    console.log(this.props.comment);
     this.props.changeCommentVoteScore(this.props.comment, vote);
   }
 

@@ -6,6 +6,7 @@ import DisplayComments from '../Comments/DisplayComments';
 import { fetchPost } from '../actions/ActiveViewAction';
 import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
 import DisplaySorter from '../Sort/DisplaySorter';
+import AddCommentButton from '../Comments/utils/AddCommentButton';
 
 class PostDetailView extends React.Component {
 
@@ -20,7 +21,8 @@ class PostDetailView extends React.Component {
         </div>
         <div className="comments">
           <DisplaySorter parentId={this.props.currentPost.id} />
-          <DisplayComments parentId={this.props.currentPost.id}/>
+          <DisplayComments parentId={this.props.currentPost.id} />
+          <AddCommentButton parentId={this.props.currentPost.id} />
         </div>
       </div>
     );

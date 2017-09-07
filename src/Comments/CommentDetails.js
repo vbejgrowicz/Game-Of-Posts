@@ -5,10 +5,10 @@ import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
 import DeleteCommentButton from './utils/DeleteCommentButton';
+import EditCommentButton from './utils/EditCommentButton';
 
 
 class CommentDetails extends React.Component {
-  // <EditPostButton id={this.props.post.id} title={this.props.post.title} body={this.props.post.body} author={this.props.post.author} category={this.props.post.category} />
 
   render() {
     return(
@@ -22,6 +22,7 @@ class CommentDetails extends React.Component {
           <DisplayAuthor author={this.props.comment.author} />
         </div>
       </div>
+      <EditCommentButton parentId={this.props.comment.parentId} id={this.props.comment.id} body={this.props.comment.body} author={this.props.comment.author}/>
       <DeleteCommentButton parentId={this.props.comment.parentId} id={this.props.comment.id} />
       </div>
     );

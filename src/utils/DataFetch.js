@@ -31,13 +31,13 @@ export const updateVoteScore = (id, vote) =>
   })
   .then(res => res.json());
 
-  export const updateCommentVoteScore = (id, vote) =>
-    fetch(url + '/comments/' + id, {
-      method: 'POST',
-      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ option: vote })
-    })
-    .then(res => res.json());
+export const updateCommentVoteScore = (id, vote) =>
+  fetch(url + '/comments/' + id, {
+    method: 'POST',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ option: vote })
+  })
+  .then(res => res.json());
 
 export const addPost = (id, timestamp, title, body, author, category) =>
   fetch(url + '/posts', {
@@ -65,22 +65,47 @@ export const updatePost = (id, title, body) =>
   })
   .then(res => res.json());
 
-  export const deletePost = (id) =>
-    fetch(url + '/posts/' + id, {
-      method: 'DELETE',
-      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
-    })
-    .then(res =>
-      {if (res.ok) {
-        return;
-      }});
+export const deletePost = (id) =>
+  fetch(url + '/posts/' + id, {
+    method: 'DELETE',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+  })
+  .then(res =>
+    {if (res.ok) {
+      return;
+    }});
 
-  export const deleteComment = (id) =>
-    fetch(url + '/comments/' + id, {
-      method: 'DELETE',
-      headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+export const deleteComment = (id) =>
+  fetch(url + '/comments/' + id, {
+    method: 'DELETE',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+  })
+  .then(res =>
+    {if (res.ok) {
+      return;
+    }});
+
+export const addComment = (id, timestamp, body, author, parentId) =>
+  fetch(url + '/comments', {
+    method: 'POST',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: id,
+      timestamp: timestamp,
+      body: body,
+      author: author,
+      parentId: parentId
     })
-    .then(res =>
-      {if (res.ok) {
-        return;
-      }});
+  })
+  .then(res => res.json());
+
+export const updateComment = (id, timestamp, body) =>
+  fetch(url + '/comments/' + id, {
+    method: 'PUT',
+    headers: { 'Authorization': 'whatever-you-want', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      timestamp: timestamp,
+      body: body,
+    })
+  })
+  .then(res => res.json());

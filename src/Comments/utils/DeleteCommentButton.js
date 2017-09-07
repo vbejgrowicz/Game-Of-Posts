@@ -7,7 +7,7 @@ class DeleteCommentButton extends React.Component {
 
   render() {
     return (
-      <div className="Delete-Post">
+      <div className="Delete-Comment">
         <button onClick={() => this.props.removeComment(this.props.parentId, this.props.id)}>Delete Comment</button>
       </div>
     );

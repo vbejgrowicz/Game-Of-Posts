@@ -9,7 +9,7 @@ import SubmitEditPostButton from './utils/SubmitEditPostButton';
 class PostForm extends React.Component {
 
   render() {
-    return this.props.postFormOpen ? (
+    return(
       <Modal show={this.props.postFormOpen} onHide={() => this.props.closePostForm()}>
         <Modal.Header closeButton>
           {(this.props.isExistingPost === true) ? (
@@ -65,7 +65,7 @@ class PostForm extends React.Component {
           )}
         </Modal.Footer>
       </Modal>
-    ):null;
+    );
   }
 }
 

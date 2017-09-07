@@ -68,7 +68,6 @@ export function changeVoteScore(post, vote) {
   };
 }
 
-
 export function fetchAllIDs() {
   return function fetchAllIDsThunk(dispatch) {
     getPosts().then(response => {

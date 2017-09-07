@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CommentDetails from './CommentDetails';
 
+
 class DisplayComments extends React.Component {
 
   render() {
@@ -15,8 +16,8 @@ class DisplayComments extends React.Component {
                 <CommentDetails comment={comment}/>
               </li>
             );
-          })}
-        </div>
+        })}
+      </div>
       ):(
         null
       );
