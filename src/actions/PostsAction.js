@@ -2,23 +2,34 @@
 import { getPosts, getPost, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 import { detailedPostViewNotActive, currentPost } from './ActiveViewAction';
+import { fetchComments } from './CommentsAction';
 
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST = "FETCH_POST";
 export const SORT_POSTS = "SORT_POSTS";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
-export const FETCH_ID = "FETCH_ID";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 
+function getPostIDs(posts) {
+  var list = [];
+  posts.forEach(function(post) {
+    list.push(post.id);
+  });
+  return list;
+}
+
 export function fetchPosts() {
   return function fetchPostsThunk(dispatch) {
     getPosts().then(response => {
-      var sorted = sortByVoteScore(response);
-      dispatch({type: FETCH_POSTS, posts: sorted});
+      var filteredPosts = response.filter(post => {return post.deleted !== true;});
+      var list = getPostIDs(filteredPosts);
+      var sorted = sortByVoteScore(filteredPosts);
+      sorted.map((post) => dispatch(fetchComments(post.id)));
+      dispatch({type: FETCH_POSTS, posts: sorted, idlist: list });
     });
-  };
+};
 }
 
 export function fetchCategoryPosts(category) {
@@ -68,17 +79,10 @@ export function changeVoteScore(post, vote) {
   };
 }
 
-export function fetchAllIDs() {
-  return function fetchAllIDsThunk(dispatch) {
-    getPosts().then(response => {
-      dispatch({type: FETCH_ID, posts: response});
-      });
-    };
-  }
-
 export function newPost(activeView, id, timestamp, title, body, author, category) {
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
+      dispatch(fetchComments(response.id));
       if ((activeView === "home") || (activeView === response.category)) {
         dispatch({type: ADD_POST, newPost: response });
       }

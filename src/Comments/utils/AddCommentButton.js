@@ -1,16 +1,11 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCommentIDs } from '../../actions/CommentsAction';
 import { openCommentForm, updateParentID, updateCommentID, isExistingComment } from '../../actions/EditCommentAction';
 import { makeID, uniqueID } from '../../utils/MakeID';
 
 
 class AddCommentButton extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchCommentIDs(this.props.parentId);
-  }
 
   render() {
     var IDsUsed = this.props.IDsUsed;
@@ -36,9 +31,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateParentID(parentId));
       dispatch(openCommentForm());
       dispatch(isExistingComment(false));
-    },
-    fetchCommentIDs: () => {
-      dispatch(fetchCommentIDs());
     }
   };
 };

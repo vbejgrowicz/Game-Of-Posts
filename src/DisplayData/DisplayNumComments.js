@@ -7,9 +7,9 @@ class DisplayNumComments extends React.Component {
 
   render() {
     var parentId = this.props.parentId;
-    return this.props.commentsReducer[parentId] ?(
+    return this.props.comments[parentId] ?(
     <div className="comments-number">
-      {this.props.commentsReducer[parentId].length} Comments
+      {this.props.comments[parentId].length} Comments
     </div>
   ):(
     <div>&nbsp;</div>
@@ -19,7 +19,7 @@ class DisplayNumComments extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    commentsReducer: state.commentsReducer,
+    comments: state.commentsReducer.comments,
   };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -8,9 +8,9 @@ class DisplayComments extends React.Component {
 
   render() {
     var parentId = this.props.parentId;
-    return this.props.commentsReducer[parentId] ? (
+    return this.props.comments[parentId] ? (
       <div className="Comment-List">
-        {this.props.commentsReducer[parentId].map((comment) => {
+        {this.props.comments[parentId].map((comment) => {
             return(
               <li className="Comment" key={comment.id}>
                 <CommentDetails comment={comment}/>
@@ -26,7 +26,7 @@ class DisplayComments extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    commentsReducer: state.commentsReducer,
+    comments: state.commentsReducer.comments,
   };
 };
 const mapDispatchToProps = (dispatch) => {

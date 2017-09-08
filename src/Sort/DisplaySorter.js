@@ -9,8 +9,8 @@ class DisplaySorter extends React.Component {
   render() {
     return this.props.parentId ?(
       <div>
-        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.commentsReducer[this.props.parentId], "voteScore")}>sort by voteScore</button>
-        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.commentsReducer[this.props.parentId], "timestamp")}>sort by timestamp</button>
+        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "voteScore")}>sort by voteScore</button>
+        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "timestamp")}>sort by timestamp</button>
       </div>
     ):(
       <div>
@@ -24,7 +24,7 @@ class DisplaySorter extends React.Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.postsReducer.posts,
-    commentsReducer: state.commentsReducer,
+    comments: state.commentsReducer.comments,
   };
 };
 const mapDispatchToProps = (dispatch) => {

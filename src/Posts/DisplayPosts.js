@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostDetails from './PostDetails';
-import { fetchComments } from '../actions/CommentsAction';
 
 class DisplayPosts extends React.Component {
 
@@ -10,7 +9,6 @@ class DisplayPosts extends React.Component {
       return this.props.posts ? (
           <div className="Post-List">
           {this.props.posts.map((post) => {
-            this.props.getComments(post.id);
             return(
               <li className="Post" key={post.id}>
                 <PostDetails post={post}/>
@@ -29,7 +27,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getComments: (id) => dispatch(fetchComments(id)),
   };
 };
 

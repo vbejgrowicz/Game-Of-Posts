@@ -5,7 +5,6 @@ import {
   SORT_POSTS,
   CHANGE_VOTESCORE,
   ADD_POST,
-  FETCH_ID,
   EDIT_POST,
   DELETE_POST
 } from '../actions/PostsAction';
@@ -20,6 +19,7 @@ export function postsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return Object.assign({}, state,
+        {IDsUsed: state.IDsUsed.concat(action.idlist)},
         {posts: action.posts.filter(function(post) {return (post.deleted !== true);}),
       });
     case FETCH_POST:
@@ -31,12 +31,6 @@ export function postsReducer (state = initialState, action) {
         {posts: action.posts,
         sortedby: action.sort
       });
-    case FETCH_ID:
-      return Object.assign({},state,
-        {IDsUsed: action.posts.map((post) => {
-          return post.id;
-        })}
-      );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
         {posts: state.posts.map((post) => {
@@ -49,8 +43,9 @@ export function postsReducer (state = initialState, action) {
         })
     });
     case ADD_POST:
-      return Object.assign({}, state, {
-        posts: state.posts.concat(action.newPost),
+      return Object.assign({}, state,
+        {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
+        {posts: state.posts.concat(action.newPost),
       }
     );
     case EDIT_POST:
@@ -66,8 +61,9 @@ export function postsReducer (state = initialState, action) {
       }
     );
     case DELETE_POST:
-      return Object.assign({}, state, {
-        posts: state.posts.filter(function(post) {return (post.id !== action.id);}),
+      return Object.assign({}, state,
+        {IDsUsed: state.IDsUsed.filter(function(id) {return (id !== action.id);})},
+        {posts: state.posts.filter(function(post) {return (post.id !== action.id);}),
       }
     );
     default:
