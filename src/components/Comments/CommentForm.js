@@ -9,10 +9,11 @@ import SubmitEditCommentButton from './utils/SubmitEditCommentButton';
 class CommentForm extends React.Component {
 
   render() {
+    const { commentFormOpen, closeCommentForm, isExistingComment, body, updateCommentBody, author, updateCommentAuthor } = this.props;
     return (
-      <Modal show={this.props.commentFormOpen} onHide={() => this.props.closeCommentForm()}>
+      <Modal show={commentFormOpen} onHide={() => closeCommentForm()}>
         <Modal.Header closeButton>
-          {(this.props.isExistingComment === true) ? (
+          {(isExistingComment === true) ? (
             <Modal.Title>Edit Comment</Modal.Title>
           ):(
             <Modal.Title>Add New Comment</Modal.Title>
@@ -23,24 +24,24 @@ class CommentForm extends React.Component {
             <ControlLabel>Body</ControlLabel>
             <FormControl
               type="text"
-              value={this.props.body}
+              value={body}
               placeholder="Enter Body"
-              onChange= {(e) => this.props.updateCommentBody(e.target.value)}
+              onChange= {(e) => updateCommentBody(e.target.value)}
             />
           </FormGroup>
           <FormGroup controlId = 'formControlsAuthor'>
             <ControlLabel>Author</ControlLabel>
             <FormControl
-              disabled={this.props.isExistingComment}
+              disabled={isExistingComment}
               type="text"
-              value={this.props.author}
+              value={author}
               placeholder="Enter Author"
-              onChange= {(e) => this.props.updateCommentAuthor(e.target.value)}
+              onChange= {(e) => updateCommentAuthor(e.target.value)}
             />
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          {(this.props.isExistingComment === true) ? (
+          {(isExistingComment === true) ? (
             <SubmitEditCommentButton />
           ):(
             <SubmitNewCommentButton />

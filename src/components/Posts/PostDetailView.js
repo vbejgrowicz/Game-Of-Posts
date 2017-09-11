@@ -1,9 +1,9 @@
 /*jshint esversion:6*/
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
-import { fetchPost } from '../../actions/ActiveViewAction';
 import { detailedPostViewNotActive } from '../../actions/ActiveViewAction';
 import DisplaySorter from '../Sort/DisplaySorter';
 import AddCommentButton from '../Comments/utils/AddCommentButton';
@@ -11,18 +11,19 @@ import AddCommentButton from '../Comments/utils/AddCommentButton';
 class PostDetailView extends React.Component {
 
   render() {
+    const { currentPost, detailedPostViewNotActive } = this.props;
     return (
       <div>
         <div>
-          <button onClick={() => this.props.detailedPostViewNotActive()}>Back</button>
+          <Button onClick={() => detailedPostViewNotActive()}>Back</Button>
         </div>
         <div className="detailed-post">
-          <PostDetails post={this.props.currentPost} />
+          <PostDetails post={currentPost} />
         </div>
         <div className="comments">
-          <DisplaySorter parentId={this.props.currentPost.id} />
-          <DisplayComments parentId={this.props.currentPost.id} />
-          <AddCommentButton parentId={this.props.currentPost.id} />
+          <DisplaySorter parentId={currentPost.id} />
+          <DisplayComments parentId={currentPost.id} />
+          <AddCommentButton parentId={currentPost.id} />
         </div>
       </div>
     );
@@ -36,12 +37,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    detailedPostViewNotActive: () => {
-      dispatch(detailedPostViewNotActive());
-    },
-    fetchPost: (id) => {
-      dispatch(fetchPost(id));
-    }
+    detailedPostViewNotActive: () => dispatch(detailedPostViewNotActive()),
   };
 };
 

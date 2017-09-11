@@ -8,8 +8,9 @@ import { newComment } from '../../../actions/CommentsAction';
 class SubmitNewCommentButton extends React.Component {
 
   render() {
+    const { newComment, id, body, author, parentId } = this.props;
     return(
-      <Button onClick={()=>this.props.newComment(this.props.id, Date.now(), this.props.body, this.props.author, this.props.parentId)}>Submit</Button>
+      <Button onClick={()=> newComment(id, Date.now(), body, author, parentId)}>Submit</Button>
     );
   }
 }

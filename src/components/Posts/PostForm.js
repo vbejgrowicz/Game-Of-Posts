@@ -9,10 +9,11 @@ import SubmitEditPostButton from './utils/SubmitEditPostButton';
 class PostForm extends React.Component {
 
   render() {
+    const { postFormOpen, closePostForm, isExistingPost, title, updateTitle, body, updateBody, author, updateAuthor, category, updateCategory } = this.props;
     return(
-      <Modal show={this.props.postFormOpen} onHide={() => this.props.closePostForm()}>
+      <Modal show={postFormOpen} onHide={() => closePostForm()}>
         <Modal.Header closeButton>
-          {(this.props.isExistingPost === true) ? (
+          {(isExistingPost === true) ? (
             <Modal.Title>Edit Post</Modal.Title>
           ):(
             <Modal.Title>Add New Post</Modal.Title>
@@ -23,33 +24,33 @@ class PostForm extends React.Component {
             <ControlLabel>Title</ControlLabel>
             <FormControl
               type="text"
-              value={this.props.title}
+              value={title}
               placeholder="Enter Title"
-              onChange= {(e) => this.props.updateTitle(e.target.value)}
+              onChange= {(e) => updateTitle(e.target.value)}
             />
           </FormGroup>
           <FormGroup controlId = 'formControlsBody'>
             <ControlLabel>Body</ControlLabel>
             <FormControl
               type="text"
-              value={this.props.body}
+              value={body}
               placeholder="Enter Body"
-              onChange= {(e) => this.props.updateBody(e.target.value)}
+              onChange= {(e) => updateBody(e.target.value)}
             />
           </FormGroup>
           <FormGroup controlId = 'formControlsAuthor'>
             <ControlLabel>Author</ControlLabel>
             <FormControl
-              disabled={this.props.isExistingPost}
+              disabled={isExistingPost}
               type="text"
-              value={this.props.author}
+              value={author}
               placeholder="Enter Author"
-              onChange= {(e) => this.props.updateAuthor(e.target.value)}
+              onChange= {(e) => updateAuthor(e.target.value)}
             />
           </FormGroup>
           <FormGroup controlId = 'formControlsCategory'>
             <ControlLabel>Category</ControlLabel>
-            <FormControl componentClass="select" disabled={this.props.isExistingPost} value={this.props.category} onChange={(e) => this.props.updateCategory(e.target.value)}>
+            <FormControl componentClass="select" disabled={isExistingPost} value={category} onChange={(e) => updateCategory(e.target.value)}>
               <option value="" hidden>Select Category...</option>
               <option value="react">React</option>
               <option value="redux">Redux</option>
@@ -58,7 +59,7 @@ class PostForm extends React.Component {
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          {(this.props.isExistingPost === true) ? (
+          {(isExistingPost === true) ? (
             <SubmitEditPostButton />
           ):(
             <SubmitNewPostButton />

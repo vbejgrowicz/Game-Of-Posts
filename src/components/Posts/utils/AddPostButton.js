@@ -1,5 +1,6 @@
 /*jshint esversion: 6*/
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { openPostForm, updateID, isExistingPost } from '../../../actions/EditPostAction';
 import { makeID, uniqueID } from '../../../utils/MakeID';
@@ -8,11 +9,9 @@ import { makeID, uniqueID } from '../../../utils/MakeID';
 class AddPostButton extends React.Component {
 
   render() {
-    var IDsUsed = this.props.IDsUsed;
+    const {IDsUsed, openPostForm } = this.props;
     return (
-      <div className="Add-Post">
-        <button onClick={() => this.props.openPostForm(IDsUsed)}>Add Post</button>
-      </div>
+      <Button onClick={() => openPostForm(IDsUsed)}>Add Post</Button>
     );
   }
 }

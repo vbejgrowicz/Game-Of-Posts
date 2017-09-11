@@ -1,18 +1,16 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { openCommentForm, updateParentID, updateCommentID, isExistingComment } from '../../../actions/EditCommentAction';
 import { makeID, uniqueID } from '../../../utils/MakeID';
-
 
 class AddCommentButton extends React.Component {
 
   render() {
-    var IDsUsed = this.props.IDsUsed;
+    const { openCommentForm, IDsUsed, parentId } = this.props;
     return (
-      <div className="Add-Comment">
-        <button onClick={() => this.props.openCommentForm(IDsUsed, this.props.parentId)}>Add Comment</button>
-      </div>
+      <Button onClick={() => openCommentForm(IDsUsed, parentId)}>Add Comment</Button>
     );
   }
 }

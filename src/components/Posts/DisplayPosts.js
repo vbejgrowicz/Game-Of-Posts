@@ -6,17 +6,19 @@ import PostDetails from './PostDetails';
 class DisplayPosts extends React.Component {
 
   render() {
-      return this.props.posts ? (
-          <div className="Post-List">
-          {this.props.posts.map((post) => {
-            return(
-              <li className="Post" key={post.id}>
-                <PostDetails post={post}/>
-              </li>
-            );
-          })}
-        </div>
-        ): null;
+    const { posts } = this.props;
+    return posts ? (
+      <div className="Post-List">
+        {posts.map((post) => {
+          return(
+            <li className="Post" key={post.id}>
+              <PostDetails post={post}/>
+            </li>
+          );
+        })}
+      </div>
+    ):
+    null;
   }
 }
 

@@ -9,16 +9,25 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
+import { changeVoteScore } from '../../actions/PostsAction';
+import { fetchPost } from '../../actions/ActiveViewAction';
 import { detailedPostViewActive, currentPost } from '../../actions/ActiveViewAction';
 
 class PostDetails extends React.Component {
 
+  voteEventPost(post, vote) {
+    this.props.changeVoteScore(post, vote);
+      if (this.props.detailedPostView === true) {
+        this.props.fetchPost(post);
+      }
+  }
+
   render() {
-    const { post } = this.props;
+    const { post, detailedPostViewActive } = this.props;
     return(
       <div>
-        <DisplayVoteScore voteScore={post.voteScore} post={post.id}/>
-        <div className="Post-Data" onClick={() => this.props.detailedPostViewActive(post)}>
+        <DisplayVoteScore voteScore={post.voteScore} post={post.id} voteEvent={this.voteEventPost.bind(this)}/>
+        <div className="Post-Data" onClick={() => detailedPostViewActive(post)}>
           <DisplayTitle title={post.title} />
           <DisplayBody body={post.body} />
           <div className="post-date-and-author">
@@ -37,6 +46,7 @@ class PostDetails extends React.Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.postsReducer.posts,
+    detailedPostView: state.activeViewReducer.detailedPostView,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -45,6 +55,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(currentPost(post));
       dispatch(detailedPostViewActive());
     },
+    changeVoteScore: (id, vote) => dispatch(changeVoteScore(id, vote)),
+    fetchPost: (id) => dispatch(fetchPost(id)),
   };
 };
 

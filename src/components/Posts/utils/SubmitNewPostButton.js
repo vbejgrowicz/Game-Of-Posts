@@ -8,8 +8,9 @@ import { newPost } from '../../../actions/PostsAction';
 class SubmitNewPostButton extends React.Component {
 
   render() {
+    const { newPost, activeView, id, title, body, author, category } = this.props;
     return(
-      <Button onClick={()=>this.props.newPost(this.props.activeView, this.props.id, Date.now(), this.props.title, this.props.body, this.props.author, this.props.category)}>Submit</Button>
+      <Button onClick={()=> newPost(activeView, id, Date.now(), title, body, author, category)}>Submit</Button>
     );
   }
 }

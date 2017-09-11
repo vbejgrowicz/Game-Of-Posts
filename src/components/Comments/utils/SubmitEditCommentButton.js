@@ -8,12 +8,12 @@ import { editComment } from '../../../actions/CommentsAction';
 class SubmitEditCommentButton extends React.Component {
 
   render() {
+    const { editComment, id, body } = this.props;
     return(
-      <Button onClick={()=>this.props.editComment(this.props.id, Date.now(), this.props.body)}>Submit Changes</Button>
+      <Button onClick={()=> editComment(id, Date.now(), body)}>Submit Changes</Button>
     );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchPosts } from './actions/PostsAction';
 import { fetchCategories } from './actions/CategoriesAction';
 
-import './App.css';
+import './style/App.css';
 
 class App extends React.Component {
 

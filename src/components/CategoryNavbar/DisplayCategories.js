@@ -9,12 +9,13 @@ import { Capitalize } from '../../utils/Capitalize';
 class DisplayCategories extends React.Component {
 
   render() {
+    const { category, categories, reloadHomePage, updateCurrentCategoryPosts } = this.props;
     return(
-      <Nav bsStyle="tabs" justified activeKey={this.props.category || "home"}>
-        <NavItem className="category-name" eventKey={"home"} onClick={() => this.props.reloadHomePage("home")}>Home</NavItem>
-        {this.props.categories.map((category, idx) => {
+      <Nav bsStyle="tabs" justified activeKey={category || "home"}>
+        <NavItem className="category-name" eventKey={"home"} onClick={() => reloadHomePage("home")}>Home</NavItem>
+        {categories.map((categoryid, idx) => {
         return(
-          <NavItem className="category-name" key={idx} eventKey={category} onClick={() => this.props.updateCurrentCategoryPosts(category)}>{Capitalize(category)}</NavItem>
+          <NavItem className="category-name" key={idx} eventKey={categoryid} onClick={() => updateCurrentCategoryPosts(categoryid)}>{Capitalize(category)}</NavItem>
         );
       })}
     </Nav>

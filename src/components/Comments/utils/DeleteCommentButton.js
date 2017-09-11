@@ -1,15 +1,15 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { removeComment} from '../../../actions/CommentsAction';
 
 class DeleteCommentButton extends React.Component {
 
   render() {
+    const { removeComment, parentId, id } = this.props;
     return (
-      <div className="Delete-Comment">
-        <button onClick={() => this.props.removeComment(this.props.parentId, this.props.id)}>Delete Comment</button>
-      </div>
+      <Button onClick={() => removeComment(parentId, id)}>Delete Comment</Button>
     );
   }
 }

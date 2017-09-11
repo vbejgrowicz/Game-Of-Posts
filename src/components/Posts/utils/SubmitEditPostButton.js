@@ -8,8 +8,9 @@ import { editPost } from '../../../actions/PostsAction';
 class SubmitEditPostButton extends React.Component {
 
   render() {
+    const { editPost, id, title, body } = this.props;
     return(
-      <Button onClick={()=>this.props.editPost(this.props.id, this.props.title, this.props.body)}>Submit Changes</Button>
+      <Button onClick={()=> editPost(id, title, body)}>Submit Changes</Button>
     );
   }
 }

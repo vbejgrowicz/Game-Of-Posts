@@ -1,15 +1,15 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { openPostForm, updateID, isExistingPost, updateTitle, updateBody, updateAuthor, updateCategory } from '../../../actions/EditPostAction';
 
 class EditPostButton extends React.Component {
 
   render() {
+    const { openPostForm, id, title, body, author, category } = this.props; 
     return (
-      <div className="Edit-Post">
-        <button onClick={() => this.props.openPostForm(this.props.id, this.props.title, this.props.body, this.props.author, this.props.category)}>Edit Post</button>
-      </div>
+      <Button onClick={() => openPostForm(id, title, body, author, category)}>Edit Post</Button>
     );
   }
 }

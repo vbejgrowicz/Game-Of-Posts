@@ -1,15 +1,15 @@
 /*jshint esversion: 6*/
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { removePost } from '../../../actions/PostsAction';
 
 class DeletePostButton extends React.Component {
 
   render() {
+    const { id, removePost } = this.props;
     return (
-      <div className="Delete-Post">
-        <button onClick={() => this.props.removePost(this.props.id)}>Delete Post</button>
-      </div>
+      <Button onClick={() => removePost(id)}>Delete Post</Button>
     );
   }
 }

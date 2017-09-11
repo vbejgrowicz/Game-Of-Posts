@@ -1,6 +1,7 @@
 /* jshint esversion:6 */
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { sortPosts } from '../../actions/PostsAction';
 import { sortComments } from '../../actions/CommentsAction';
 
@@ -9,13 +10,13 @@ class DisplaySorter extends React.Component {
   render() {
     return this.props.parentId ?(
       <div>
-        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "voteScore")}>sort by voteScore</button>
-        <button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "timestamp")}>sort by timestamp</button>
+        <Button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "voteScore")}>sort by voteScore</Button>
+        <Button onClick={() => this.props.sortComments(this.props.parentId, this.props.comments[this.props.parentId], "timestamp")}>sort by timestamp</Button>
       </div>
     ):(
       <div>
-        <button onClick={() => this.props.sortPosts(this.props.posts, "voteScore")}>sort by voteScore</button>
-        <button onClick={() => this.props.sortPosts(this.props.posts, "timestamp")}>sort by timestamp</button>
+        <Button onClick={() => this.props.sortPosts(this.props.posts, "voteScore")}>sort by voteScore</Button>
+        <Button onClick={() => this.props.sortPosts(this.props.posts, "timestamp")}>sort by timestamp</Button>
       </div>
     );
   }

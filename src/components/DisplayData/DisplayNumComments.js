@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 class DisplayNumComments extends React.Component {
 
   render() {
-    var parentId = this.props.parentId;
-    return this.props.comments[parentId] ?(
-    <div className="comments-number">
-      {this.props.comments[parentId].length} Comments
-    </div>
-  ):(
-    <div>&nbsp;</div>
-  );
+    const { comments, parentId } = this.props;
+    return comments[parentId] ?(
+      <div className="comments-number">
+        {comments[parentId].length} Comments
+      </div>
+    ):(
+      <div>&nbsp;</div>
+    );
   }
 }
 
