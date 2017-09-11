@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../actions/EditPostAction';
+import {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
 import SubmitNewPostButton from './utils/SubmitNewPostButton';
 import SubmitEditPostButton from './utils/SubmitEditPostButton';
 

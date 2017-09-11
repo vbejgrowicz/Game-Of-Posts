@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
-import { fetchPost } from '../actions/ActiveViewAction';
-import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
+import { fetchPost } from '../../actions/ActiveViewAction';
+import { detailedPostViewNotActive } from '../../actions/ActiveViewAction';
 import DisplaySorter from '../Sort/DisplaySorter';
 import AddCommentButton from '../Comments/utils/AddCommentButton';
 

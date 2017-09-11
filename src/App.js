@@ -1,9 +1,9 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import HomePage from './HomePage';
-import PostDetailView from './Posts/PostDetailView';
-import PostForm from './Posts/PostForm';
-import CommentForm from './Comments/CommentForm';
+import HomePage from './components/HomePage';
+import PostDetailView from './components/Posts/PostDetailView';
+import PostForm from './components/Posts/PostForm';
+import CommentForm from './components/Comments/CommentForm';
 import { connect } from 'react-redux';
 import { fetchPosts } from './actions/PostsAction';
 import { fetchCategories } from './actions/CategoriesAction';

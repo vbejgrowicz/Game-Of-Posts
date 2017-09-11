@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { closeCommentForm } from '../../actions/EditCommentAction';
-import { newComment } from '../../actions/CommentsAction';
+import { closeCommentForm } from '../../../actions/EditCommentAction';
+import { newComment } from '../../../actions/CommentsAction';
 
 class SubmitNewCommentButton extends React.Component {
 

@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { openCommentForm, updateParentID, updateCommentID, isExistingComment } from '../../actions/EditCommentAction';
-import { makeID, uniqueID } from '../../utils/MakeID';
+import { openCommentForm, updateParentID, updateCommentID, isExistingComment } from '../../../actions/EditCommentAction';
+import { makeID, uniqueID } from '../../../utils/MakeID';
 
 
 class AddCommentButton extends React.Component {

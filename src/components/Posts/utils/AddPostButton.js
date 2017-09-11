@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { openPostForm, updateID, isExistingPost } from '../../actions/EditPostAction';
-import { makeID, uniqueID } from '../../utils/MakeID';
+import { openPostForm, updateID, isExistingPost } from '../../../actions/EditPostAction';
+import { makeID, uniqueID } from '../../../utils/MakeID';
 
 
 class AddPostButton extends React.Component {

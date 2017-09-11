@@ -9,26 +9,27 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
-import { detailedPostViewActive, currentPost } from '../actions/ActiveViewAction';
+import { detailedPostViewActive, currentPost } from '../../actions/ActiveViewAction';
 
 class PostDetails extends React.Component {
 
   render() {
+    const { post } = this.props;
     return(
       <div>
-      <DisplayVoteScore voteScore={this.props.post.voteScore} post={this.props.post.id}/>
-      <div className="Post-Data" onClick={() => this.props.detailedPostViewActive(this.props.post)}>
-        <DisplayTitle title={this.props.post.title} />
-        <DisplayBody body={this.props.post.body} />
-        <div className="post-date-and-author">
-          <DisplayTimestamp timestamp={this.props.post.timestamp} />
-          &nbsp;by&nbsp;
-          <DisplayAuthor author={this.props.post.author} />
+        <DisplayVoteScore voteScore={post.voteScore} post={post.id}/>
+        <div className="Post-Data" onClick={() => this.props.detailedPostViewActive(post)}>
+          <DisplayTitle title={post.title} />
+          <DisplayBody body={post.body} />
+          <div className="post-date-and-author">
+            <DisplayTimestamp timestamp={post.timestamp} />
+            &nbsp;by&nbsp;
+            <DisplayAuthor author={post.author} />
+          </div>
+          <DisplayNumComments parentId={post.id} />
         </div>
-        <DisplayNumComments parentId={this.props.post.id} />
-      </div>
-      <EditPostButton id={this.props.post.id} title={this.props.post.title} body={this.props.post.body} author={this.props.post.author} category={this.props.post.category} />
-      <DeletePostButton id={this.props.post.id} />
+        <EditPostButton id={post.id} title={post.title} body={post.body} author={post.author} category={post.category} />
+        <DeletePostButton id={post.id} />
       </div>
     );
   }

@@ -42,7 +42,7 @@ export function commentsReducer (state = initialState, action) {
           {comments: Object.assign({}, state.comments,
             {[action.parentId]: state.comments[action.parentId].filter(function(comment) {return (comment.id !== action.id);})}
           )}
-      );
+        );
       case ADD_COMMENT:
         return Object.assign({}, state,
           {IDsUsed: state.IDsUsed.concat(action.newComment.id)},

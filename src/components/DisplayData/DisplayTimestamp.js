@@ -1,6 +1,6 @@
 /*jshint esversion:6*/
 import React from 'react';
-import DateCheck from '../utils/DateCheck';
+import DateCheck from '../../utils/DateCheck';
 
 class DisplayTimestamp extends React.Component {
 

@@ -3,24 +3,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CommentDetails from './CommentDetails';
 
-
 class DisplayComments extends React.Component {
 
   render() {
-    var parentId = this.props.parentId;
-    return this.props.comments[parentId] ? (
+    const { comments, parentId } = this.props;
+    return(
       <div className="Comment-List">
-        {this.props.comments[parentId].map((comment) => {
-            return(
-              <li className="Comment" key={comment.id}>
-                <CommentDetails comment={comment}/>
-              </li>
-            );
+        {comments[parentId].map((comment) => {
+          return(
+            <li className="Comment" key={comment.id}>
+              <CommentDetails comment={comment}/>
+            </li>
+          );
         })}
       </div>
-      ):(
-        null
-      );
+    );
   }
 }
 

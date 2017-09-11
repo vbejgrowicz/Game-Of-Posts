@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import { closeCommentForm, updateCommentBody, updateCommentAuthor } from '../actions/EditCommentAction';
+import { closeCommentForm, updateCommentBody, updateCommentAuthor } from '../../actions/EditCommentAction';
 import SubmitNewCommentButton from './utils/SubmitNewCommentButton';
 import SubmitEditCommentButton from './utils/SubmitEditCommentButton';
 

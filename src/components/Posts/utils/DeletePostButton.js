@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { removePost } from '../../actions/PostsAction';
+import { removePost } from '../../../actions/PostsAction';
 
 class DeletePostButton extends React.Component {
 

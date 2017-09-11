@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { closePostForm } from '../../actions/EditPostAction';
-import { editPost } from '../../actions/PostsAction';
+import { closePostForm } from '../../../actions/EditPostAction';
+import { editPost } from '../../../actions/PostsAction';
 
 class SubmitEditPostButton extends React.Component {
 

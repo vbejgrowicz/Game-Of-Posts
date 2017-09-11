@@ -1,9 +1,9 @@
 /*jshint esversion:6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeVoteScore } from '../actions/PostsAction';
-import { changeCommentVoteScore } from '../actions/CommentsAction';
-import { fetchPost } from '../actions/ActiveViewAction';
+import { changeVoteScore } from '../../actions/PostsAction';
+import { changeCommentVoteScore } from '../../actions/CommentsAction';
+import { fetchPost } from '../../actions/ActiveViewAction';
 
 class DisplayVoteScore extends React.Component {
 
@@ -16,7 +16,7 @@ class DisplayVoteScore extends React.Component {
   voteEventComment(vote) {
     this.props.changeCommentVoteScore(this.props.comment, vote);
   }
-
+//pass vote event in props instead of doing this or that
 
   render() {
     return this.props.comment ? (

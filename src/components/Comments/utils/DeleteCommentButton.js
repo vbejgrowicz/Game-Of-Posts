@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeComment} from '../../actions/CommentsAction';
+import { removeComment} from '../../../actions/CommentsAction';
 
 class DeleteCommentButton extends React.Component {
 

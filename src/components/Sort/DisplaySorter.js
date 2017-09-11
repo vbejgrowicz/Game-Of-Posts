@@ -1,8 +1,8 @@
 /* jshint esversion:6 */
 import React from 'react';
 import { connect } from 'react-redux';
-import { sortPosts } from '../actions/PostsAction';
-import { sortComments } from '../actions/CommentsAction';
+import { sortPosts } from '../../actions/PostsAction';
+import { sortComments } from '../../actions/CommentsAction';
 
 class DisplaySorter extends React.Component {
 
