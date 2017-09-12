@@ -1,10 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import PostDetailView from './components/Posts/PostDetailView';
-import PostForm from './components/Posts/PostForm';
-import CommentForm from './components/Comments/CommentForm';
 import { fetchCategories } from './actions/CategoriesAction';
+import { fetchAllIDs } from './actions/PostsAction';
 
 import './style/App.css';
 
@@ -12,23 +10,13 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.getCategories();
+    this.props.fetchAllIDs();
   }
 
   render() {
-    return this.props.detailedPostView ?(
+    return(
       <div className="App">
-        <div className="Post-Detail-Page">
-          <PostDetailView />
-          <PostForm />
-          <CommentForm />
-        </div>
-      </div>
-    ):(
-      <div className="App">
-        <div className="HomePage">
           {this.props.children}
-          <PostForm />
-        </div>
       </div>
     );
   }
@@ -36,15 +24,13 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.postsReducer.posts,
-    detailedPostView: state.activeViewReducer.detailedPostView,
-
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getCategories: () => dispatch(fetchCategories()),
+    fetchAllIDs: () => dispatch(fetchAllIDs()),
   };
 };
 

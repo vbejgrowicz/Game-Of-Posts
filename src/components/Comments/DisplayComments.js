@@ -7,7 +7,7 @@ class DisplayComments extends React.Component {
 
   render() {
     const { comments, parentId } = this.props;
-    return(
+    return comments[parentId] ?(
       <div className="Comment-List">
         {comments[parentId].map((comment) => {
           return(
@@ -17,7 +17,8 @@ class DisplayComments extends React.Component {
           );
         })}
       </div>
-    );
+    ):
+    null;
   }
 }
 

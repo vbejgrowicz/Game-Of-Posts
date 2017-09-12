@@ -5,6 +5,7 @@ import DisplayPosts from './Posts/DisplayPosts';
 import DisplaySorter from './Sort/DisplaySorter';
 import { updateSort, sortPosts } from '../actions/PostsAction';
 import AddPostButton from './Posts/utils/AddPostButton';
+import PostForm from './Posts/PostForm';
 
 class HomePage extends React.Component {
 
@@ -15,6 +16,7 @@ class HomePage extends React.Component {
         <DisplaySorter sortfunction={this.props.updateSort.bind(this)}/>
         <DisplayPosts />
         <AddPostButton />
+        <PostForm />
       </div>
     );
   }

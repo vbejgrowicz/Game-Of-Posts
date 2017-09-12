@@ -1,6 +1,5 @@
 /*jshint esversion: 6*/
 import { getComments, updateCommentVoteScore, deleteComment, addComment, updateComment} from '../utils/DataFetch';
-import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 export const FETCH_COMMENTS = "FETCH_COMMENTS";
 export const UPDATE_SORT = "UPDATE_SORT";
@@ -10,20 +9,12 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
-function getCommentIDs(comments) {
-  var list = [];
-  comments.forEach(function(comment) {
-    list.push(comment.id);
-  });
-  return list;
-}
+
 
 export function fetchComments(id) {
   return function fetchCommentsThunk(dispatch) {
     getComments(id).then(response => {
-      var list = getCommentIDs(response);
-      var sorted = sortByVoteScore(response);
-      dispatch({type: FETCH_COMMENTS, id: id, comments: sorted, IDlist: list });
+      dispatch({type: FETCH_COMMENTS, comments: response, id: id});
       });
     };
   }
@@ -36,33 +27,27 @@ export function removeComment(parentId, id) {
   };
 }
 
-export function sortComments(parentId, comments, sortMethod) {
-  return function sortThunk(dispatch, getState) {
-    var sorted = "";
-    if (sortMethod === "voteScore") {
-      sorted = sortByVoteScore(comments);
-    }
-    else if (sortMethod === "timestamp") {
-      sorted = sortbyTimestamp(comments);
-    }
-    else {
-      return console.log('invalid sort');
-    }
-    return dispatch({type: SORT_COMMENTS, parentId: parentId, comments:sorted, sort:sortMethod});
+export const sortComments = (parentId) => {
+  return {
+    type: SORT_COMMENTS,
+    parentId
   };
-}
+};
+
+export const updateSort = (parentId, sortMethod) => {
+  return {
+    type: UPDATE_SORT,
+    parentId,
+    sortMethod
+  };
+};
 
 export function changeCommentVoteScore(commentId, vote) {
   return function changeCommentVoteScoreThunk(dispatch, getState) {
     updateCommentVoteScore(commentId, vote).then(response => {
-      var parentId = response.parentId;
-      var id = response.id;
-      var voteScore = response.voteScore;
-      dispatch({type: CHANGE_COMMENT_VOTESCORE, parentId: parentId, id: id, voteScore: voteScore });
-        const updatedComments = getState().commentsReducer.comments[parentId];
-        const sortMethod = getState().commentsReducer.sortedby;
-        return dispatch(sortComments(parentId, updatedComments, sortMethod));
-      });
+      dispatch({type: CHANGE_COMMENT_VOTESCORE, parentId: response.parentId, id: response.id, voteScore: response.voteScore });
+      dispatch(sortComments(response.parentId));
+    });
   };
 }
 

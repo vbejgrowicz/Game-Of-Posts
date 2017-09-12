@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 import { getPosts, getPost, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
-import { detailedPostViewNotActive, currentPost } from './ActiveViewAction';
 import { fetchComments } from './CommentsAction';
 
+export const FETCH_IDS = "FETCH_IDS";
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST = "FETCH_POST";
 export const SORT_POSTS = "SORT_POSTS";
@@ -12,12 +12,13 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 
-function getPostIDs(posts) {
-  var list = [];
-  posts.forEach(function(post) {
-    list.push(post.id);
-  });
-  return list;
+export function fetchAllIDs() {
+  return function fetchPostIDsThunk(dispatch) {
+    getPosts().then(response => {
+      response.map((post) => dispatch(fetchComments(post.id)));
+      dispatch({type: FETCH_IDS, postIDs: response });
+    });
+  };
 }
 
 export function fetchPosts(category) {
@@ -40,6 +41,7 @@ export function fetchPosts(category) {
 export function fetchPost(id) {
   return function fetchPostThunk(dispatch) {
     getPost(id).then(response => {
+      dispatch(fetchComments(response.id));
       dispatch({type: FETCH_POST, posts: response});
     });
   };
@@ -61,13 +63,9 @@ export const updateSort = (sortMethod) => {
 export function changeVoteScore(post, vote) {
   return function changeVoteScoreThunk(dispatch, getState) {
     updateVoteScore(post, vote).then(response => {
-      var id = response.id;
-      var voteScore = response.voteScore;
-      dispatch({type: CHANGE_VOTESCORE, id: id, voteScore: voteScore });
-        const updatedPosts = getState().postsReducer.posts;
-        const sortMethod = getState().postsReducer.sortedby;
-        return dispatch(sortPosts(updatedPosts, sortMethod));
-      });
+      dispatch({type: CHANGE_VOTESCORE, id: response.id, voteScore: response.voteScore });
+      dispatch(sortPosts());
+    });
   };
 }
 
@@ -85,10 +83,6 @@ export function newPost(activeView, id, timestamp, title, body, author, category
 export function editPost(id, title, body) {
   return function editPostThunk(dispatch, getState) {
     updatePost(id, title, body).then(response => {
-      const activeView = getState().activeViewReducer.detailedPostView;
-      if (activeView === true) {
-        dispatch(currentPost(response));
-      }
       dispatch({type: EDIT_POST, id: response.id, updatedPost: response });
     });
   };
@@ -97,10 +91,6 @@ export function editPost(id, title, body) {
 export function removePost(id) {
   return function removePostThunk(dispatch, getState) {
     deletePost(id).then(() => {
-      var activeView = getState().activeViewReducer.detailedPostView;
-      if (activeView === true) {
-        dispatch(detailedPostViewNotActive());
-      }
       dispatch({type: DELETE_POST, id: id });
     });
   };

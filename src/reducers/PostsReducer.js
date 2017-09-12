@@ -1,5 +1,6 @@
 /*jshint esversion: 6*/
 import {
+  FETCH_IDS,
   FETCH_POSTS,
   FETCH_POST,
   SORT_POSTS,
@@ -17,25 +18,75 @@ const initialState = {
   IDsUsed: []
 };
 
+function getPostIDs(posts) {
+  var list = [];
+  posts.forEach(function(post) {
+    list.push(post.id);
+  });
+  return list;
+}
+
 function sortPosts(posts, sortedby) {
-  var sorted = "";
-  if (sortedby === "voteScore") {
-    sorted = sortByVoteScore(posts);
-  }
-  else if (sortedby === "timestamp") {
-    sorted = sortbyTimestamp(posts);
+  if (posts.length === undefined) {
+    return posts;
   }
   else {
-    return console.log('invalid sort');
+    var sorted = "";
+    if (sortedby === "voteScore") {
+      sorted = sortByVoteScore(posts);
+    }
+    else if (sortedby === "timestamp") {
+      sorted = sortbyTimestamp(posts);
+    }
+    else {
+      return console.log('invalid sort');
+    }
+    return sorted;
   }
-  return sorted;
 }
+
+
+
+function changeVote(posts, id, voteScore) {
+  if (posts.id === id) {
+    return Object.assign({}, posts, {
+      voteScore: voteScore
+    });
+  }
+  else {
+    return posts.map((post) => {
+      if (post.id === id) {
+        return Object.assign({}, post, {
+          voteScore: voteScore
+        });
+      }
+    return post;
+    });
+  }
+}
+
+function filterDeleted(posts,id) {
+  if (posts.length > 0) {
+    posts.filter(function(post) {
+      return (post.id !== id);
+    });
+  }
+  else {
+    return {};
+  }
+}
+
+
+
 
 export function postsReducer (state = initialState, action) {
   switch (action.type) {
+    case FETCH_IDS:
+      return Object.assign({}, state,
+        {IDsUsed: getPostIDs(action.postIDs)}
+      );
     case FETCH_POSTS:
       return Object.assign({}, state,
-        {IDsUsed: state.IDsUsed.concat(action.idlist)},
         {posts: action.posts.filter(function(post) {return (post.deleted !== true);}),
       });
     case FETCH_POST:
@@ -52,15 +103,8 @@ export function postsReducer (state = initialState, action) {
       );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
-        {posts: state.posts.map((post) => {
-            if (post.id === action.id) {
-              return Object.assign({}, post, {
-                voteScore: action.voteScore
-              });
-            }
-          return post;
-        })
-    });
+        {posts: changeVote(state.posts, action.id, action.voteScore)}
+    );
     case ADD_POST:
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
@@ -82,7 +126,7 @@ export function postsReducer (state = initialState, action) {
     case DELETE_POST:
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.filter(function(id) {return (id !== action.id);})},
-        {posts: state.posts.filter(function(post) {return (post.id !== action.id);}),
+        {posts: filterDeleted(state.posts, action.id)
       }
     );
     default:
