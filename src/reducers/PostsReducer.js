@@ -3,17 +3,33 @@ import {
   FETCH_POSTS,
   FETCH_POST,
   SORT_POSTS,
+  UPDATE_SORT,
   CHANGE_VOTESCORE,
   ADD_POST,
   EDIT_POST,
   DELETE_POST
 } from '../actions/PostsAction';
+import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {
   posts: [],
   sortedby: "voteScore",
   IDsUsed: []
 };
+
+function sortPosts(posts, sortedby) {
+  var sorted = "";
+  if (sortedby === "voteScore") {
+    sorted = sortByVoteScore(posts);
+  }
+  else if (sortedby === "timestamp") {
+    sorted = sortbyTimestamp(posts);
+  }
+  else {
+    return console.log('invalid sort');
+  }
+  return sorted;
+}
 
 export function postsReducer (state = initialState, action) {
   switch (action.type) {
@@ -28,9 +44,12 @@ export function postsReducer (state = initialState, action) {
       );
     case SORT_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts,
-        sortedby: action.sort
+        {posts: sortPosts(state.posts, state.sortedby),
       });
+    case UPDATE_SORT:
+      return Object.assign({}, state,
+        {sortedby: action.sortMethod}
+      );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
         {posts: state.posts.map((post) => {
@@ -45,7 +64,7 @@ export function postsReducer (state = initialState, action) {
     case ADD_POST:
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
-        {posts: state.posts.concat(action.newPost),
+        {posts: sortPosts(state.posts.concat(action.newPost), state.sortedby),
       }
     );
     case EDIT_POST:

@@ -3,6 +3,7 @@ import { getComments, updateCommentVoteScore, deleteComment, addComment, updateC
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 export const FETCH_COMMENTS = "FETCH_COMMENTS";
+export const UPDATE_SORT = "UPDATE_SORT";
 export const SORT_COMMENTS = "SORT_COMMENTS";
 export const CHANGE_COMMENT_VOTESCORE = "CHANGE_COMMENT_VOTESCORE";
 export const DELETE_COMMENT = "DELETE_COMMENT";

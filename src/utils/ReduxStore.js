@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import reducer from '../reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 store.subscribe(() => {
   console.log("store updated", store.getState());

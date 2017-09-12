@@ -1,11 +1,9 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import HomePage from './components/HomePage';
+import { connect } from 'react-redux';
 import PostDetailView from './components/Posts/PostDetailView';
 import PostForm from './components/Posts/PostForm';
 import CommentForm from './components/Comments/CommentForm';
-import { connect } from 'react-redux';
-import { fetchPosts } from './actions/PostsAction';
 import { fetchCategories } from './actions/CategoriesAction';
 
 import './style/App.css';
@@ -13,7 +11,6 @@ import './style/App.css';
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.getPosts();
     this.props.getCategories();
   }
 
@@ -29,7 +26,7 @@ class App extends React.Component {
     ):(
       <div className="App">
         <div className="HomePage">
-          <HomePage />
+          {this.props.children}
           <PostForm />
         </div>
       </div>
@@ -48,7 +45,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCategories: () => dispatch(fetchCategories()),
-    getPosts: () => dispatch(fetchPosts()),
   };
 };
 

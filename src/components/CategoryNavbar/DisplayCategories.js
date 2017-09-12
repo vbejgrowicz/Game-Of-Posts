@@ -1,24 +1,35 @@
 /*jshint esversion: 6*/
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { activeView } from '../../actions/ActiveViewAction';
-import { fetchPosts, fetchCategoryPosts } from '../../actions/PostsAction';
+import { fetchPosts } from '../../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
 import { Capitalize } from '../../utils/Capitalize';
 
 class DisplayCategories extends React.Component {
 
+  componentDidMount() {
+    this.props.updateCurrentCategory(this.props.params.category || "home");
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params.category !== nextProps.params.category) {
+      this.props.updateCurrentCategory(nextProps.params.category || "home");
+    }
+  }
+
   render() {
-    const { category, categories, reloadHomePage, updateCurrentCategoryPosts } = this.props;
+    const { categories } = this.props;
     return(
-      <Nav bsStyle="tabs" justified activeKey={category || "home"}>
-        <NavItem className="category-name" eventKey={"home"} onClick={() => reloadHomePage("home")}>Home</NavItem>
-        {categories.map((categoryid, idx) => {
+      <Nav bsStyle="tabs" justified>
+        <LinkContainer to='/'><NavItem>Home</NavItem></LinkContainer>
+        {categories.map((category, idx) => {
         return(
-          <NavItem className="category-name" key={idx} eventKey={categoryid} onClick={() => updateCurrentCategoryPosts(categoryid)}>{Capitalize(category)}</NavItem>
+          <LinkContainer to={'/' + category} key={idx}><NavItem>{Capitalize(category)}</NavItem></LinkContainer>
         );
       })}
-    </Nav>
+      </Nav>
     );
   }
 }
@@ -26,19 +37,14 @@ class DisplayCategories extends React.Component {
 const mapStateToProps = (state) => {
   return {
     categories: state.categoriesReducer.categories,
-    category: state.activeViewReducer.category,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    reloadHomePage: (category) => {
+    updateCurrentCategory: (category) => {
       dispatch(activeView(category));
-      dispatch(fetchPosts());
+      dispatch(fetchPosts(category));
     },
-    updateCurrentCategoryPosts: (category) => {
-      dispatch(activeView(category));
-      dispatch(fetchCategoryPosts(category));
-    }
   };
 };
 

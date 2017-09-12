@@ -1,8 +1,9 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import DisplayCategories from './CategoryNavbar/DisplayCategories';
+import { connect } from 'react-redux';
 import DisplayPosts from './Posts/DisplayPosts';
 import DisplaySorter from './Sort/DisplaySorter';
+import { updateSort, sortPosts } from '../actions/PostsAction';
 import AddPostButton from './Posts/utils/AddPostButton';
 
 class HomePage extends React.Component {
@@ -10,13 +11,27 @@ class HomePage extends React.Component {
   render() {
     return(
       <div>
-        <DisplayCategories />
-        <DisplaySorter />
+        {this.props.children}
+        <DisplaySorter sortfunction={this.props.updateSort.bind(this)}/>
         <DisplayPosts />
         <AddPostButton />
       </div>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    posts: state.postsReducer.posts,
+    comments: state.commentsReducer.comments,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSort: (sortMethod) => {
+      dispatch(updateSort(sortMethod));
+      dispatch(sortPosts());
+    }
+  };
+};
 
-export default HomePage;
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

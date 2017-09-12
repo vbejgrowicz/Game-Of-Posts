@@ -5,9 +5,18 @@ import { Provider } from 'react-redux';
 import './style/index.css';
 import App from './App';
 import store from './utils/ReduxStore';
-
+import { Router, Route, browserHistory } from 'react-router';
+import HomePage from './components/HomePage';
+import DisplayCategories from './components/CategoryNavbar/DisplayCategories';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <Route component={App}>
+        <Route component={HomePage}>
+          <Route path="/(:category)" component={DisplayCategories}>
+          </Route>
+        </Route>
+      </Route>
+    </Router>
   </Provider>, document.getElementById('root'));
