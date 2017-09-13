@@ -2,17 +2,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PostDetails from './PostDetails';
+import { removePost } from '../../actions/PostsAction';
 
 class DisplayPosts extends React.Component {
 
+  deletePostfunction(post){
+    this.props.removePost(post);
+  }
+
   render() {
-    const { posts } = this.props;
-    return posts ? (
+    const { CurrentPosts } = this.props;
+    return CurrentPosts ? (
       <div className="Post-List">
-        {posts.map((post) => {
+        {CurrentPosts.map((post) => {
           return(
             <li className="Post" key={post.id}>
-              <PostDetails post={post}/>
+              <PostDetails post={post} deletePostfunction={this.deletePostfunction.bind(this, post.id)}/>
             </li>
           );
         })}
@@ -24,11 +29,14 @@ class DisplayPosts extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.postsReducer.posts,
+    CurrentPosts: state.postsReducer.CurrentPosts,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    removePost: (id) => {
+      dispatch(removePost(id));
+    },
   };
 };
 

@@ -9,7 +9,9 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
-import { changeVoteScore } from '../../actions/PostsAction';
+import { changeVoteScore, fetchPostDetails } from '../../actions/PostsAction';
+import { detailedPostViewActive, isLoading } from '../../actions/ActiveViewAction';
+
 
 class PostDetails extends React.Component {
 
@@ -23,7 +25,7 @@ class PostDetails extends React.Component {
       <div>
         <DisplayVoteScore voteScore={post.voteScore} post={post.id} voteEvent={this.voteEventPost.bind(this)}/>
         <div className="Post-Data">
-          <a href={'/'+ post.category + '/' + post.id} className="link">
+          <a href={'/'+ post.category + '/' + post.id} className="link" onClick={() => this.props.fetchPostDetails(post.id)}>
             <DisplayTitle title={post.title} />
             <DisplayBody body={post.body} />
             <div className="post-date-and-author">
@@ -35,7 +37,7 @@ class PostDetails extends React.Component {
           </a>
         </div>
         <EditPostButton id={post.id} title={post.title} body={post.body} author={post.author} category={post.category} />
-        <DeletePostButton id={post.id} />
+        <DeletePostButton id={post.id} deletePostfunction={this.props.deletePostfunction}/>
       </div>
     );
   }
@@ -47,6 +49,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeVoteScore: (id, vote) => dispatch(changeVoteScore(id, vote)),
+    fetchPostDetails: (post) => {
+      dispatch(isLoading());
+      dispatch(detailedPostViewActive());
+      dispatch(fetchPostDetails(post));
+    }
   };
 };
 

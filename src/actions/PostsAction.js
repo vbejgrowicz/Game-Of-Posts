@@ -1,10 +1,11 @@
 /*jshint esversion: 6*/
-import { getPosts, getPost, getCategoryPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
+import { getPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
+import { isNotLoading } from './ActiveViewAction';
 import { fetchComments } from './CommentsAction';
 
-export const FETCH_IDS = "FETCH_IDS";
 export const FETCH_POSTS = "FETCH_POSTS";
-export const FETCH_POST = "FETCH_POST";
+export const FETCH_POST_DETAILS = "FETCH_POST_DETAILS";
+export const FETCH_CURRENT_POSTS = "FETCH_CURRENT_POSTS";
 export const SORT_POSTS = "SORT_POSTS";
 export const UPDATE_SORT = "UPDATE_SORT";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
@@ -12,40 +13,29 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 
-export function fetchAllIDs() {
+export function fetchAll() {
   return function fetchPostIDsThunk(dispatch) {
     getPosts().then(response => {
       response.map((post) => dispatch(fetchComments(post.id)));
-      dispatch({type: FETCH_IDS, postIDs: response });
+      dispatch({type: FETCH_POSTS, posts: response });
+      dispatch(isNotLoading());
     });
   };
 }
 
-export function fetchPosts(category) {
-  return function fetchPostsThunk(dispatch) {
-    if (category === "home") {
-      getPosts().then(response => {
-        response.map((post) => dispatch(fetchComments(post.id)));
-        dispatch({type: FETCH_POSTS, posts: response });
-      });
-    }
-    else {
-      getCategoryPosts(category).then(response => {
-        response.map((post) => dispatch(fetchComments(post.id)));
-        dispatch({type: FETCH_POSTS, posts: response});
-      });
-    }
+export const fetchCurrentPosts = (category) => {
+  return {
+    type: FETCH_CURRENT_POSTS,
+    category
   };
-}
+};
 
-export function fetchPost(id) {
-  return function fetchPostThunk(dispatch) {
-    getPost(id).then(response => {
-      dispatch(fetchComments(response.id));
-      dispatch({type: FETCH_POST, posts: response});
-    });
+export const fetchPostDetails = (id) => {
+  return {
+    type: FETCH_POST_DETAILS,
+    id
   };
-}
+};
 
 export const sortPosts = () => {
   return {

@@ -6,65 +6,66 @@ import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
 import DisplaySorter from '../Sort/DisplaySorter';
 import AddCommentButton from '../Comments/utils/AddCommentButton';
-import PostForm from './PostForm';
-import CommentForm from '../Comments/CommentForm';
-import { detailedPostViewActive } from '../../actions/ActiveViewAction';
-import { fetchPost } from '../../actions/PostsAction';
+import { detailedPostViewActive, detailedPostViewNotActive, isLoading, isNotLoading } from '../../actions/ActiveViewAction';
+import { fetchPostDetails, removePost } from '../../actions/PostsAction';
 import { updateSort, sortComments } from '../../actions/CommentsAction';
 
 class PostDetailView extends React.Component {
 
-  componentDidMount() {
-    this.props.fetchPost(this.props.params.postID);
-    this.props.detailedPostViewActive();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.params.postID !== nextProps.params.postID) {
-      this.props.fetchPost(nextProps.params.postID);
-      this.props.detailedPostViewActive();
-    }
-  }
+deletePostfunction(post){
+  this.props.removePost(post);
+  this.props.history.goBack();
+  console.log('delete');
+}
 
   render() {
-    const { posts } = this.props;
-    return this.props.posts.id ?(
+    const post = this.props.CurrentPosts[0];
+    return post ?(
       <div className="Post-Detail-Page">
         <div>
           <Button onClick={() => this.props.history.goBack()}>Back</Button>
         </div>
         <div className="detailed-post">
-          <PostDetails post={posts} />
+          <PostDetails post={post} deletePostfunction={this.deletePostfunction.bind(this, post.id)}/>
         </div>
         <div className="comments">
-          <DisplaySorter parentId={posts.id} sortfunction={this.props.updateSort.bind(this, posts.id)}/>
-          <DisplayComments parentId={posts.id} />
-          <AddCommentButton parentId={posts.id} />
+          <DisplaySorter parentId={post.id} sortfunction={this.props.updateSort.bind(this, post.id)}/>
+          <DisplayComments parentId={post.id} />
+          <AddCommentButton parentId={post.id} />
         </div>
-        <PostForm />
-        <CommentForm />
       </div>
-    ):
-    <div>
-    <Button onClick={() => this.props.history.goBack()}>Back</Button>
-    Error: Post Not Found
-    </div>;
-  }
+    ):(
+      <div>
+        No Post at this ID available!
+      </div>
+  );
+}
 }
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.postsReducer.posts,
+    CurrentPosts: state.postsReducer.CurrentPosts,
+    isLoading: state.activeViewReducer.isLoading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPost: (post) => dispatch(fetchPost(post)),
+    fetchPostDetails: (post) => {
+      dispatch(fetchPostDetails(post));
+      dispatch(isNotLoading());
+    },
     updateSort: (parentId, sortMethod) => {
       dispatch(updateSort(parentId, sortMethod));
       dispatch(sortComments(parentId));
     },
     detailedPostViewActive: () => dispatch(detailedPostViewActive()),
+    isLoading: () => dispatch(isLoading()),
+    isNotLoading: () => dispatch(isNotLoading()),
+    removePost: (id) => {
+      dispatch(isLoading());
+      dispatch(removePost(id));
+      dispatch(detailedPostViewNotActive());
+    }
   };
 };
 

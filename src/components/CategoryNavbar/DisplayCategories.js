@@ -3,7 +3,7 @@ import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { activeView } from '../../actions/ActiveViewAction';
-import { fetchPosts } from '../../actions/PostsAction';
+import { fetchCurrentPosts } from '../../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
 import { Capitalize } from '../../utils/Capitalize';
 
@@ -13,6 +13,7 @@ class DisplayCategories extends React.Component {
     this.props.updateCurrentCategory(this.props.params.category || "home");
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (this.props.params.category !== nextProps.params.category) {
       this.props.updateCurrentCategory(nextProps.params.category || "home");
@@ -20,6 +21,7 @@ class DisplayCategories extends React.Component {
   }
 
   render() {
+    console.log(this.props.params.postID);
     const { categories } = this.props;
     return(
       <Nav bsStyle="tabs" justified>
@@ -43,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateCurrentCategory: (category) => {
       dispatch(activeView(category));
-      dispatch(fetchPosts(category));
+      dispatch(fetchCurrentPosts(category));
     },
   };
 };

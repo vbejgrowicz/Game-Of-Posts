@@ -9,6 +9,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import HomePage from './components/HomePage';
 import DisplayCategories from './components/CategoryNavbar/DisplayCategories';
 import PostDetailView from './components/Posts/PostDetailView';
+import DetailPage from './components/DetailPage';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,7 +18,9 @@ ReactDOM.render(
         <Route component={HomePage}>
           <Route path="/(:category)" component={DisplayCategories} />
         </Route>
-        <Route path="/(:category)/(:postID)" component={PostDetailView} />
+        <Route component={DetailPage}>
+          <Route path="/(:category)/(:postID)" component={PostDetailView} />
+        </Route>
       </Route>
     </Router>
   </Provider>, document.getElementById('root'));

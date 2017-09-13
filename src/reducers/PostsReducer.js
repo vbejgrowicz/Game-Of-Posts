@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 import {
-  FETCH_IDS,
   FETCH_POSTS,
-  FETCH_POST,
+  FETCH_CURRENT_POSTS,
+  FETCH_POST_DETAILS,
   SORT_POSTS,
   UPDATE_SORT,
   CHANGE_VOTESCORE,
@@ -13,7 +13,8 @@ import {
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {
-  posts: [],
+  AllPosts: [],
+  CurrentPosts: [],
   sortedby: "voteScore",
   IDsUsed: []
 };
@@ -45,8 +46,6 @@ function sortPosts(posts, sortedby) {
   }
 }
 
-
-
 function changeVote(posts, id, voteScore) {
   if (posts.id === id) {
     return Object.assign({}, posts, {
@@ -65,37 +64,53 @@ function changeVote(posts, id, voteScore) {
   }
 }
 
-function filterDeleted(posts,id) {
-  if (posts.length > 0) {
-    posts.filter(function(post) {
-      return (post.id !== id);
-    });
-  }
-  else {
-    return {};
-  }
+const removeDeleted = (posts, id) => {
+  return posts.filter((post) => {
+    return post.id !== id;
+  });
+};
+
+function filterAllDeleted(post) {
+  return post.deleted !== true;
 }
 
+const filterPosts = (category, posts) => {
+  console.log(posts);
+  if (category === "home") {
+    return posts;
+  }
+  else {
+    return posts.filter((post) => {
+      return post.category === category;
+    });
+  }
+};
 
-
+const filterSelectedPost = (id, posts) => {
+  console.log('fetching');
+  return posts.filter((post) => {
+    return post.id === id;
+  });
+};
 
 export function postsReducer (state = initialState, action) {
   switch (action.type) {
-    case FETCH_IDS:
-      return Object.assign({}, state,
-        {IDsUsed: getPostIDs(action.postIDs)}
-      );
     case FETCH_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts.filter(function(post) {return (post.deleted !== true);}),
-      });
-    case FETCH_POST:
+        {IDsUsed: getPostIDs(action.posts)},
+        {AllPosts: action.posts.filter(filterAllDeleted)}
+      );
+    case FETCH_CURRENT_POSTS:
       return Object.assign({}, state,
-        {posts: action.posts}
+        {CurrentPosts: filterPosts(action.category, state.AllPosts)}
+      );
+    case FETCH_POST_DETAILS:
+      return Object.assign({}, state,
+        {CurrentPosts: filterSelectedPost(action.id, state.AllPosts)}
       );
     case SORT_POSTS:
       return Object.assign({}, state,
-        {posts: sortPosts(state.posts, state.sortedby),
+        {CurrentPosts: sortPosts(state.CurrentPosts, state.sortedby),
       });
     case UPDATE_SORT:
       return Object.assign({}, state,
@@ -103,17 +118,28 @@ export function postsReducer (state = initialState, action) {
       );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
-        {posts: changeVote(state.posts, action.id, action.voteScore)}
+        {AllPosts: changeVote(state.AllPosts, action.id, action.voteScore)},
+        {CurrentPosts: changeVote(state.CurrentPosts, action.id, action.voteScore)}
     );
     case ADD_POST:
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
-        {posts: sortPosts(state.posts.concat(action.newPost), state.sortedby),
+        {AllPosts: state.AllPosts.concat(action.newPost)},
+        {CurrentPosts: sortPosts(state.CurrentPosts.concat(action.newPost), state.sortedby),
       }
     );
     case EDIT_POST:
     return Object.assign({}, state,
-      {posts: state.posts.map((post) => {
+      {AllPosts: state.AllPosts.map((post) => {
+        if (post.id === action.id) {
+          return Object.assign({}, post,
+            action.updatedPost
+            );
+          }
+        return post;
+        })
+      },
+      {CurrentPosts: state.CurrentPosts.map((post) => {
         if (post.id === action.id) {
           return Object.assign({}, post,
             action.updatedPost
@@ -126,8 +152,8 @@ export function postsReducer (state = initialState, action) {
     case DELETE_POST:
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.filter(function(id) {return (id !== action.id);})},
-        {posts: filterDeleted(state.posts, action.id)
-      }
+        {AllPosts: removeDeleted(state.AllPosts, action.id)},
+        {CurrentPosts: removeDeleted(state.CurrentPosts, action.id)}
     );
     default:
     return state;
