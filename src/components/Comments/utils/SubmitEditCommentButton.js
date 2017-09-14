@@ -10,7 +10,7 @@ class SubmitEditCommentButton extends React.Component {
   render() {
     const { editComment, id, body } = this.props;
     return(
-      <Button onClick={()=> editComment(id, Date.now(), body)}>Submit Changes</Button>
+      <Button disabled={this.props.editCommentValidationCheck} onClick={()=> editComment(id, Date.now(), body)}>Submit Changes</Button>
     );
   }
 }

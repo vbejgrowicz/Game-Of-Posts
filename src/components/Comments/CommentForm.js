@@ -8,6 +8,16 @@ import SubmitEditCommentButton from './utils/SubmitEditCommentButton';
 
 class CommentForm extends React.Component {
 
+  CommentValidationText(text) {
+    if (text.length > 0) return null;
+    else if (text.length === 0) return 'error';
+  }
+
+  getCommentValidation(body, author) {
+    const status = [this.CommentValidationText(body), this.CommentValidationText(author)];
+    return status.includes("error");
+  }
+
   render() {
     const { commentFormOpen, closeCommentForm, isExistingComment, body, updateCommentBody, author, updateCommentAuthor } = this.props;
     return (
@@ -20,7 +30,7 @@ class CommentForm extends React.Component {
           )}
         </Modal.Header>
         <Modal.Body>
-          <FormGroup controlId = 'formControlsBody'>
+          <FormGroup controlId = 'formControlsBody' validationState={this.CommentValidationText(body)}>
             <ControlLabel>Body</ControlLabel>
             <FormControl
               type="text"
@@ -29,7 +39,7 @@ class CommentForm extends React.Component {
               onChange= {(e) => updateCommentBody(e.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId = 'formControlsAuthor'>
+          <FormGroup controlId = 'formControlsAuthor' validationState={this.CommentValidationText(author)}>
             <ControlLabel>Author</ControlLabel>
             <FormControl
               disabled={isExistingComment}
@@ -42,9 +52,9 @@ class CommentForm extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           {(isExistingComment === true) ? (
-            <SubmitEditCommentButton />
+            <SubmitEditCommentButton editCommentValidationCheck={this.getCommentValidation(body, author)}/>
           ):(
-            <SubmitNewCommentButton />
+            <SubmitNewCommentButton newCommentValidationCheck={this.getCommentValidation(body, author)}/>
           )}
         </Modal.Footer>
       </Modal>

@@ -53,7 +53,7 @@ export function updateAuthor(value) {
 export function updateCategory(value) {
   return {
     type: UPDATE_CATEGORY,
-    category: value
+    category: value,
   };
 }
 

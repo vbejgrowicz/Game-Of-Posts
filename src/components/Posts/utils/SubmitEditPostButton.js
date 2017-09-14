@@ -10,7 +10,7 @@ class SubmitEditPostButton extends React.Component {
   render() {
     const { editPost, id, title, body } = this.props;
     return(
-      <Button onClick={()=> editPost(id, title, body)}>Submit Changes</Button>
+      <Button disabled={this.props.editPostValidationCheck} onClick={()=> editPost(id, title, body)}>Submit Changes</Button>
     );
   }
 }

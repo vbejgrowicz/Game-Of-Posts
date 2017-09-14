@@ -48,7 +48,7 @@ function assignAuthor(state, action) {
 
 function assignCategory(state, action) {
   return Object.assign({}, state.post, {
-      category: action.category
+      category: action.category,
   });
 }
 

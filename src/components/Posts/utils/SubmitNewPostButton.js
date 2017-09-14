@@ -10,7 +10,7 @@ class SubmitNewPostButton extends React.Component {
   render() {
     const { newPost, activeView, id, title, body, author, category } = this.props;
     return(
-      <Button onClick={()=> newPost(activeView, id, Date.now(), title, body, author, category)}>Submit</Button>
+      <Button disabled={this.props.newPostValidationCheck} onClick={()=> newPost(activeView, id, Date.now(), title, body, author, category)}>Submit</Button>
     );
   }
 }

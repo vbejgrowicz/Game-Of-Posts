@@ -8,6 +8,23 @@ import SubmitEditPostButton from './utils/SubmitEditPostButton';
 
 class PostForm extends React.Component {
 
+  PostValidationText(text) {
+    if (text.length > 0) return null;
+    else if (text.length === 0) return 'error';
+  }
+
+  PostValidationCategory(category) {
+    if (category === "react") return null;
+    else if (category === "redux") return null;
+    else if (category === "udacity") return null;
+    else return 'error';
+  }
+
+  getPostValidation(title, body, author, category) {
+    const postStatus = [this.PostValidationText(title), this.PostValidationText(body), this.PostValidationText(author), this.PostValidationCategory(category)];
+    return postStatus.includes("error");
+  }
+
   render() {
     const { postFormOpen, closePostForm, isExistingPost, title, updateTitle, body, updateBody, author, updateAuthor, category, updateCategory } = this.props;
     return(
@@ -20,7 +37,7 @@ class PostForm extends React.Component {
           )}
         </Modal.Header>
         <Modal.Body>
-          <FormGroup controlId = 'formControlsTitle'>
+          <FormGroup controlId = 'formControlsTitle' validationState={this.PostValidationText(title)}>
             <ControlLabel>Title</ControlLabel>
             <FormControl
               type="text"
@@ -29,7 +46,7 @@ class PostForm extends React.Component {
               onChange= {(e) => updateTitle(e.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId = 'formControlsBody'>
+          <FormGroup controlId = 'formControlsBody' validationState={this.PostValidationText(body)}>
             <ControlLabel>Body</ControlLabel>
             <FormControl
               type="text"
@@ -38,7 +55,7 @@ class PostForm extends React.Component {
               onChange= {(e) => updateBody(e.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId = 'formControlsAuthor'>
+          <FormGroup controlId = 'formControlsAuthor' validationState={this.PostValidationText(author)}>
             <ControlLabel>Author</ControlLabel>
             <FormControl
               disabled={isExistingPost}
@@ -48,21 +65,22 @@ class PostForm extends React.Component {
               onChange= {(e) => updateAuthor(e.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId = 'formControlsCategory'>
+          <FormGroup controlId = 'formControlsCategory' validationState={this.PostValidationCategory(category)}>
             <ControlLabel>Category</ControlLabel>
             <FormControl componentClass="select" disabled={isExistingPost} value={category} onChange={(e) => updateCategory(e.target.value)}>
-              <option value="" hidden>Select Category...</option>
+              <option value="selector">Select Category...</option>
               <option value="react">React</option>
               <option value="redux">Redux</option>
               <option value="udacity">Udacity</option>
             </FormControl>
+            <FormControl.Feedback />
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           {(isExistingPost === true) ? (
-            <SubmitEditPostButton />
+            <SubmitEditPostButton editPostValidationCheck={this.getPostValidation(title, body, author, category)} />
           ):(
-            <SubmitNewPostButton />
+            <SubmitNewPostButton newPostValidationCheck={this.getPostValidation(title, body, author, category)} />
           )}
         </Modal.Footer>
       </Modal>
