@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import { getComments, updateCommentVoteScore, deleteComment, addComment, updateComment} from '../utils/DataFetch';
 
+export const SET_PARENT_ID = "SET_PARENT_ID";
 export const FETCH_COMMENTS = "FETCH_COMMENTS";
 export const UPDATE_COMMENT_SORT = "UPDATE_COMMENT_SORT";
 export const SORT_COMMENTS = "SORT_COMMENTS";
@@ -9,7 +10,12 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
-
+export const setParentID = (parentId) => {
+  return {
+    type: SET_PARENT_ID,
+    parentId
+  };
+};
 
 export function fetchComments(id) {
   return function fetchCommentsThunk(dispatch) {
@@ -34,11 +40,11 @@ export const sortComments = (parentId) => {
   };
 };
 
-export const updateCommentSort = (parentId, sortMethod) => {
+export const updateCommentSort = (sortMethod, parentId) => {
   return {
     type: UPDATE_COMMENT_SORT,
-    parentId,
-    sortMethod
+    sortMethod,
+    parentId
   };
 };
 
@@ -56,9 +62,7 @@ export function newComment(id, timestamp, body, author, parentId) {
   return function newCommentThunk(dispatch, getState) {
     addComment(id, timestamp, body, author, parentId).then(response => {
       dispatch({type: ADD_COMMENT, parentId: parentId, id:response.id, newComment: response });
-      const updatedComments = getState().commentsReducer.comments[parentId];
-      const sortMethod = getState().commentsReducer.sortedby;
-      return dispatch(sortComments(parentId, updatedComments, sortMethod));
+      return dispatch(sortComments(parentId));
     });
   };
 }
@@ -67,10 +71,7 @@ export function editComment(id, timestamp, body) {
   return function editPostThunk(dispatch, getState) {
     updateComment(id, timestamp, body).then(response => {
       dispatch({type: EDIT_COMMENT, parentId: response.parentId, id: response.id, updatedComment: response });
-      const parentId = response.parentId;
-      const updatedComments = getState().commentsReducer.comments[parentId];
-      const sortMethod = getState().commentsReducer.sortedby;
-      return dispatch(sortComments(parentId, updatedComments, sortMethod));
+      return dispatch(sortComments(response.parentId));
     });
   };
 }

@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { FETCH_COMMENTS, SORT_COMMENTS, UPDATE_COMMENT_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/CommentsAction';
+import { FETCH_COMMENTS, SET_PARENT_ID, SORT_COMMENTS, UPDATE_COMMENT_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/CommentsAction';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {
@@ -16,16 +16,15 @@ function getCommentIDs(comments) {
   return list;
 }
 
-function sortComments(comments, sortedby) {
+function commentSort(comments, sort) {
   var sorted = [];
-  if (sortedby === "voteScore") {
+  if (sort === "voteScore") {
     sorted = sortByVoteScore(comments);
   }
-  else if (sortedby === "timestamp") {
-    sorted = sortbyTimestamp(comments);
+  else if (sort === "timestamp") {
+    sorted= sortbyTimestamp(comments);
   }
   else {
-    debugger
     return console.log('invalid sort');
   }
   return sorted;
@@ -37,20 +36,26 @@ export function commentsReducer (state = initialState, action) {
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.IDlist)},
         {comments: Object.assign({}, state.comments,
-          {[action.id]: sortComments(action.comments, state.sortedby)
-      })
-    });
+          {[action.id]: commentSort(action.comments, state.sortedby)}
+        )}
+      );
+    case SET_PARENT_ID:
+      return Object.assign({}, state,
+        {parentId: action.parentId}
+      );
     case SORT_COMMENTS:
       return Object.assign({}, state,
         {comments: Object.assign({}, state.comments,
-          {[action.parentId]: sortComments(state.comments[action.parentId], state.sortedby)}
+          {[state.parentId] : commentSort(state.comments[state.parentId], state.sortedby)}
         )}
       );
-      case UPDATE_COMMENT_SORT:
-        return Object.assign({}, state,
-          {sortedby: action.sortMethod},
-          {[action.parentId] : sortComments(state.comments[action.parentId], action.sortedby)}
-        );
+    case UPDATE_COMMENT_SORT:
+      return Object.assign({}, state,
+        {sortedby: action.sortMethod},
+        {comments: Object.assign({}, state.comments,
+          {[state.parentId] : commentSort(state.comments[state.parentId], action.sortMethod)}
+        )}
+      );
       case CHANGE_COMMENT_VOTESCORE:
       return Object.assign({}, state,
         {comments: Object.assign({}, state.comments,
@@ -61,9 +66,8 @@ export function commentsReducer (state = initialState, action) {
               });
             }
             return comment;
-          })
-        })
-        }
+          })}
+        )}
       );
       case DELETE_COMMENT:
         return Object.assign({}, state,
@@ -94,6 +98,6 @@ export function commentsReducer (state = initialState, action) {
         }
       );
   default:
-  return state;
+    return state;
   }
 }

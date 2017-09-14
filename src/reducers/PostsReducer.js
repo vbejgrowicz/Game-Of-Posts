@@ -27,7 +27,7 @@ function getPostIDs(posts) {
   return list;
 }
 
-function sortPosts(posts, sortedby) {
+function postSort(posts, sortedby) {
   if (posts.length === undefined) {
     return posts;
   }
@@ -94,7 +94,7 @@ export function postsReducer (state = initialState, action) {
       );
     case FETCH_CURRENT_POSTS:
       return Object.assign({}, state,
-        {CurrentPosts: sortPosts(filterPosts(action.category, state.AllPosts), state.sortedby)}
+        {CurrentPosts: postSort(filterPosts(action.category, state.AllPosts), state.sortedby)}
       );
     case FETCH_POST_DETAILS:
       return Object.assign({}, state,
@@ -102,12 +102,12 @@ export function postsReducer (state = initialState, action) {
       );
     case SORT_POSTS:
       return Object.assign({}, state,
-        {CurrentPosts: sortPosts(state.CurrentPosts, state.sortedby),
+        {CurrentPosts: postSort(state.CurrentPosts, state.sortedby),
       });
     case UPDATE_POST_SORT:
       return Object.assign({}, state,
         {sortedby: action.sortMethod},
-        {CurrentPosts: sortPosts(state.CurrentPosts, action.sortMethod)}
+        {CurrentPosts: postSort(state.CurrentPosts, action.sortMethod)}
       );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
@@ -118,7 +118,7 @@ export function postsReducer (state = initialState, action) {
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
         {AllPosts: state.AllPosts.concat(action.newPost)},
-        {CurrentPosts: sortPosts(filterPosts(action.category, state.CurrentPosts.concat(action.newPost)), state.sortedby),
+        {CurrentPosts: postSort(filterPosts(action.category, state.CurrentPosts.concat(action.newPost)), state.sortedby),
       }
     );
     case EDIT_POST:

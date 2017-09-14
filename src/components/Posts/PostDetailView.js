@@ -7,8 +7,8 @@ import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
 import DisplaySorter from '../Sort/DisplaySorter';
 import AddCommentButton from '../Comments/utils/AddCommentButton';
-import { isLoading, isNotLoading } from '../../actions/ActiveViewAction';
-import { fetchPostDetails, removePost } from '../../actions/PostsAction';
+import { isLoading } from '../../actions/ActiveViewAction';
+import { removePost } from '../../actions/PostsAction';
 import { updateCommentSort } from '../../actions/CommentsAction';
 
 class PostDetailView extends React.Component {
@@ -33,7 +33,7 @@ deletePost(post, home){
           <PostDetails post={post} deletePostfunction={this.deletePost.bind(this, post.id, this.home.bind(this))}/>
         </div>
         <div className="comments">
-          <DisplaySorter parentId={post.id} sortfunction={this.props.updateCommentSort.bind(this, post.id)}/>
+          <DisplaySorter parentId={post.id} sortfunction={this.props.updateCommentSort.bind(this)}/>
           <DisplayComments parentId={post.id} />
           <AddCommentButton parentId={post.id} />
         </div>
@@ -57,12 +57,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPostDetails: (post) => {
-      dispatch(fetchPostDetails(post));
-      dispatch(isNotLoading());
-    },
-    updateCommentSort: (parentId, sortMethod) => {
-      dispatch(updateCommentSort(parentId, sortMethod));
+    updateCommentSort: (sortMethod) => {
+      dispatch(updateCommentSort(sortMethod));
     },
     isLoading: () => dispatch(isLoading()),
     removePost: (id, home) => {
