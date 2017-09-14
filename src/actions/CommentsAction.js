@@ -2,7 +2,7 @@
 import { getComments, updateCommentVoteScore, deleteComment, addComment, updateComment} from '../utils/DataFetch';
 
 export const FETCH_COMMENTS = "FETCH_COMMENTS";
-export const UPDATE_SORT = "UPDATE_SORT";
+export const UPDATE_COMMENT_SORT = "UPDATE_COMMENT_SORT";
 export const SORT_COMMENTS = "SORT_COMMENTS";
 export const CHANGE_COMMENT_VOTESCORE = "CHANGE_COMMENT_VOTESCORE";
 export const DELETE_COMMENT = "DELETE_COMMENT";
@@ -34,9 +34,9 @@ export const sortComments = (parentId) => {
   };
 };
 
-export const updateSort = (parentId, sortMethod) => {
+export const updateCommentSort = (parentId, sortMethod) => {
   return {
-    type: UPDATE_SORT,
+    type: UPDATE_COMMENT_SORT,
     parentId,
     sortMethod
   };

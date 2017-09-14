@@ -7,7 +7,7 @@ export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST_DETAILS = "FETCH_POST_DETAILS";
 export const FETCH_CURRENT_POSTS = "FETCH_CURRENT_POSTS";
 export const SORT_POSTS = "SORT_POSTS";
-export const UPDATE_SORT = "UPDATE_SORT";
+export const UPDATE_POST_SORT = "UPDATE_POST_SORT";
 export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
@@ -43,9 +43,9 @@ export const sortPosts = () => {
   };
 };
 
-export const updateSort = (sortMethod) => {
+export const updatePostSort = (sortMethod) => {
   return {
-    type: UPDATE_SORT,
+    type: UPDATE_POST_SORT,
     sortMethod
   };
 };
@@ -63,9 +63,7 @@ export function newPost(activeView, id, timestamp, title, body, author, category
   return function newPostThunk(dispatch, getState) {
     addPost(id, timestamp, title, body, author, category).then(response => {
       dispatch(fetchComments(response.id));
-      if ((activeView === "home") || (activeView === response.category)) {
-        dispatch({type: ADD_POST, newPost: response });
-      }
+      dispatch({type: ADD_POST, category: activeView, newPost: response });
     });
   };
 }
@@ -78,10 +76,14 @@ export function editPost(id, title, body) {
   };
 }
 
-export function removePost(id) {
-  return function removePostThunk(dispatch, getState) {
+export function removePost(id, home) {
+  return function removePostThunk(dispatch) {
     deletePost(id).then(() => {
       dispatch({type: DELETE_POST, id: id });
+      if (home) {
+        home();
+      }
+      dispatch(isNotLoading());
     });
   };
 }

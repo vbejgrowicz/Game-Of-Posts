@@ -1,21 +1,25 @@
 /*jshint esversion:6*/
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import PostDetails from './PostDetails';
 import DisplayComments from '../Comments/DisplayComments';
 import DisplaySorter from '../Sort/DisplaySorter';
 import AddCommentButton from '../Comments/utils/AddCommentButton';
-import { detailedPostViewActive, detailedPostViewNotActive, isLoading, isNotLoading } from '../../actions/ActiveViewAction';
+import { isLoading, isNotLoading } from '../../actions/ActiveViewAction';
 import { fetchPostDetails, removePost } from '../../actions/PostsAction';
-import { updateSort, sortComments } from '../../actions/CommentsAction';
+import { updateCommentSort } from '../../actions/CommentsAction';
 
 class PostDetailView extends React.Component {
 
-deletePostfunction(post){
-  this.props.removePost(post);
-  this.props.history.goBack();
-  console.log('delete');
+home() {
+  this.context.router.push('/');
+}
+
+deletePost(post, home){
+  this.props.isLoading();
+  this.props.removePost(post, home);
 }
 
   render() {
@@ -23,13 +27,13 @@ deletePostfunction(post){
     return post ?(
       <div className="Post-Detail-Page">
         <div>
-          <Button onClick={() => this.props.history.goBack()}>Back</Button>
+          <Button onClick={() => this.context.router.push('/')}>Back</Button>
         </div>
         <div className="detailed-post">
-          <PostDetails post={post} deletePostfunction={this.deletePostfunction.bind(this, post.id)}/>
+          <PostDetails post={post} deletePostfunction={this.deletePost.bind(this, post.id, this.home.bind(this))}/>
         </div>
         <div className="comments">
-          <DisplaySorter parentId={post.id} sortfunction={this.props.updateSort.bind(this, post.id)}/>
+          <DisplaySorter parentId={post.id} sortfunction={this.props.updateCommentSort.bind(this, post.id)}/>
           <DisplayComments parentId={post.id} />
           <AddCommentButton parentId={post.id} />
         </div>
@@ -42,10 +46,13 @@ deletePostfunction(post){
 }
 }
 
+PostDetailView.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 const mapStateToProps = (state) => {
   return {
     CurrentPosts: state.postsReducer.CurrentPosts,
-    isLoading: state.activeViewReducer.isLoading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -54,17 +61,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchPostDetails(post));
       dispatch(isNotLoading());
     },
-    updateSort: (parentId, sortMethod) => {
-      dispatch(updateSort(parentId, sortMethod));
-      dispatch(sortComments(parentId));
+    updateCommentSort: (parentId, sortMethod) => {
+      dispatch(updateCommentSort(parentId, sortMethod));
     },
-    detailedPostViewActive: () => dispatch(detailedPostViewActive()),
     isLoading: () => dispatch(isLoading()),
-    isNotLoading: () => dispatch(isNotLoading()),
-    removePost: (id) => {
-      dispatch(isLoading());
-      dispatch(removePost(id));
-      dispatch(detailedPostViewNotActive());
+    removePost: (id, home) => {
+      dispatch(removePost(id, home));
     }
   };
 };

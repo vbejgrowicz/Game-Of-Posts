@@ -7,6 +7,6 @@ export function sortByVoteScore(posts) {
 }
 export function sortbyTimestamp(posts) {
   return posts.slice(0).sort(function(a,b) {
-    return b.timestamp - a.timestamp;
+    return a.timestamp - b.timestamp;
   });
 }

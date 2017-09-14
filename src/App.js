@@ -1,9 +1,9 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { detailedPostViewActive, activeView } from './actions/ActiveViewAction';
+import { isLoading, detailedPostViewActive } from './actions/ActiveViewAction';
 import { fetchCategories } from './actions/CategoriesAction';
-import { fetchAll, fetchPostDetails, fetchCurrentPosts } from './actions/PostsAction';
+import { fetchAll, fetchPostDetails } from './actions/PostsAction';
 
 import './style/App.css';
 
@@ -37,16 +37,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAll: () => {
+      dispatch(isLoading());
       dispatch(fetchCategories());
       dispatch(fetchAll());
     },
     fetchPostDetails: (id) => {
       dispatch(detailedPostViewActive());
       dispatch(fetchPostDetails(id));
-    },
-    updateCurrentCategory: (category) => {
-      dispatch(activeView(category));
-      dispatch(fetchCurrentPosts(category));
     },
   };
 };

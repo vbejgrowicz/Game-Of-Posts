@@ -9,9 +9,7 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
-import { changeVoteScore, fetchPostDetails } from '../../actions/PostsAction';
-import { detailedPostViewActive, isLoading } from '../../actions/ActiveViewAction';
-
+import { changeVoteScore } from '../../actions/PostsAction';
 
 class PostDetails extends React.Component {
 
@@ -25,7 +23,7 @@ class PostDetails extends React.Component {
       <div>
         <DisplayVoteScore voteScore={post.voteScore} post={post.id} voteEvent={this.voteEventPost.bind(this)}/>
         <div className="Post-Data">
-          <a href={'/'+ post.category + '/' + post.id} className="link" onClick={() => this.props.fetchPostDetails(post.id)}>
+          <a href={'/'+ post.category + '/' + post.id} className="link">
             <DisplayTitle title={post.title} />
             <DisplayBody body={post.body} />
             <div className="post-date-and-author">
@@ -49,11 +47,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeVoteScore: (id, vote) => dispatch(changeVoteScore(id, vote)),
-    fetchPostDetails: (post) => {
-      dispatch(isLoading());
-      dispatch(detailedPostViewActive());
-      dispatch(fetchPostDetails(post));
-    }
   };
 };
 

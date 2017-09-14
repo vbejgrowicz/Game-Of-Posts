@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DisplayPosts from './Posts/DisplayPosts';
 import DisplaySorter from './Sort/DisplaySorter';
-import { updateSort, sortPosts } from '../actions/PostsAction';
+import { updatePostSort } from '../actions/PostsAction';
 import AddPostButton from './Posts/utils/AddPostButton';
 import PostForm from './Posts/PostForm';
 import Loading from '../utils/Loading';
@@ -16,7 +16,7 @@ class HomePage extends React.Component {
     ):(
       <div>
         {this.props.children}
-        <DisplaySorter sortfunction={this.props.updateSort.bind(this)}/>
+        <DisplaySorter sortfunction={this.props.updatePostSort.bind(this)}/>
         <DisplayPosts />
         <AddPostButton />
         <PostForm />
@@ -32,9 +32,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSort: (sortMethod) => {
-      dispatch(updateSort(sortMethod));
-      dispatch(sortPosts());
+    updatePostSort: (sortMethod) => {
+      dispatch(updatePostSort(sortMethod));
     }
   };
 };

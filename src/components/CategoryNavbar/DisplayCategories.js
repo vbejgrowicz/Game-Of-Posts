@@ -13,7 +13,6 @@ class DisplayCategories extends React.Component {
     this.props.updateCurrentCategory(this.props.params.category || "home");
   }
 
-
   componentWillReceiveProps(nextProps) {
     if (this.props.params.category !== nextProps.params.category) {
       this.props.updateCurrentCategory(nextProps.params.category || "home");
@@ -21,7 +20,6 @@ class DisplayCategories extends React.Component {
   }
 
   render() {
-    console.log(this.props.params.postID);
     const { categories } = this.props;
     return(
       <Nav bsStyle="tabs" justified>

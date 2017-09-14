@@ -4,7 +4,7 @@ import {
   FETCH_CURRENT_POSTS,
   FETCH_POST_DETAILS,
   SORT_POSTS,
-  UPDATE_SORT,
+  UPDATE_POST_SORT,
   CHANGE_VOTESCORE,
   ADD_POST,
   EDIT_POST,
@@ -47,21 +47,14 @@ function sortPosts(posts, sortedby) {
 }
 
 function changeVote(posts, id, voteScore) {
-  if (posts.id === id) {
-    return Object.assign({}, posts, {
-      voteScore: voteScore
-    });
-  }
-  else {
-    return posts.map((post) => {
-      if (post.id === id) {
-        return Object.assign({}, post, {
-          voteScore: voteScore
-        });
-      }
-    return post;
-    });
-  }
+  return posts.map((post) => {
+    if (post.id === id) {
+      return Object.assign({}, post, {
+        voteScore: voteScore
+      });
+    }
+  return post;
+  });
 }
 
 const removeDeleted = (posts, id) => {
@@ -87,7 +80,6 @@ const filterPosts = (category, posts) => {
 };
 
 const filterSelectedPost = (id, posts) => {
-  console.log('fetching');
   return posts.filter((post) => {
     return post.id === id;
   });
@@ -97,12 +89,12 @@ export function postsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
       return Object.assign({}, state,
-        {IDsUsed: getPostIDs(action.posts)},
+        {IDsUsed: getPostIDs(action.posts.filter(filterAllDeleted))},
         {AllPosts: action.posts.filter(filterAllDeleted)}
       );
     case FETCH_CURRENT_POSTS:
       return Object.assign({}, state,
-        {CurrentPosts: filterPosts(action.category, state.AllPosts)}
+        {CurrentPosts: sortPosts(filterPosts(action.category, state.AllPosts), state.sortedby)}
       );
     case FETCH_POST_DETAILS:
       return Object.assign({}, state,
@@ -112,9 +104,10 @@ export function postsReducer (state = initialState, action) {
       return Object.assign({}, state,
         {CurrentPosts: sortPosts(state.CurrentPosts, state.sortedby),
       });
-    case UPDATE_SORT:
+    case UPDATE_POST_SORT:
       return Object.assign({}, state,
-        {sortedby: action.sortMethod}
+        {sortedby: action.sortMethod},
+        {CurrentPosts: sortPosts(state.CurrentPosts, action.sortMethod)}
       );
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
@@ -125,7 +118,7 @@ export function postsReducer (state = initialState, action) {
       return Object.assign({}, state,
         {IDsUsed: state.IDsUsed.concat(action.newPost.id)},
         {AllPosts: state.AllPosts.concat(action.newPost)},
-        {CurrentPosts: sortPosts(state.CurrentPosts.concat(action.newPost), state.sortedby),
+        {CurrentPosts: sortPosts(filterPosts(action.category, state.CurrentPosts.concat(action.newPost)), state.sortedby),
       }
     );
     case EDIT_POST:

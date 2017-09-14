@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { FETCH_COMMENTS, SORT_COMMENTS, UPDATE_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/CommentsAction';
+import { FETCH_COMMENTS, SORT_COMMENTS, UPDATE_COMMENT_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/CommentsAction';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {
@@ -25,6 +25,7 @@ function sortComments(comments, sortedby) {
     sorted = sortbyTimestamp(comments);
   }
   else {
+    debugger
     return console.log('invalid sort');
   }
   return sorted;
@@ -45,9 +46,10 @@ export function commentsReducer (state = initialState, action) {
           {[action.parentId]: sortComments(state.comments[action.parentId], state.sortedby)}
         )}
       );
-      case UPDATE_SORT:
+      case UPDATE_COMMENT_SORT:
         return Object.assign({}, state,
-          {sortedby: action.sortMethod}
+          {sortedby: action.sortMethod},
+          {[action.parentId] : sortComments(state.comments[action.parentId], action.sortedby)}
         );
       case CHANGE_COMMENT_VOTESCORE:
       return Object.assign({}, state,
