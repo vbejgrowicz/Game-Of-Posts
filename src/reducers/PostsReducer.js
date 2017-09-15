@@ -68,7 +68,6 @@ function filterAllDeleted(post) {
 }
 
 const filterPosts = (category, posts) => {
-  console.log(posts);
   if (category === "home") {
     return posts;
   }
@@ -90,7 +89,7 @@ export function postsReducer (state = initialState, action) {
     case FETCH_POSTS:
       return Object.assign({}, state,
         {IDsUsed: getPostIDs(action.posts.filter(filterAllDeleted))},
-        {AllPosts: action.posts.filter(filterAllDeleted)}
+        {AllPosts: action.posts}
       );
     case FETCH_CURRENT_POSTS:
       return Object.assign({}, state,
@@ -112,7 +111,7 @@ export function postsReducer (state = initialState, action) {
     case CHANGE_VOTESCORE:
       return Object.assign({}, state,
         {AllPosts: changeVote(state.AllPosts, action.id, action.voteScore)},
-        {CurrentPosts: changeVote(state.CurrentPosts, action.id, action.voteScore)}
+        {CurrentPosts: postSort(changeVote(state.CurrentPosts, action.id, action.voteScore), state.sortedby)}
     );
     case ADD_POST:
       return Object.assign({}, state,

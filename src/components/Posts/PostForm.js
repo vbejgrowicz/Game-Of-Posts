@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
+import { Capitalize } from '../../utils/Capitalize';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
 import SubmitNewPostButton from './utils/SubmitNewPostButton';
@@ -10,19 +11,25 @@ class PostForm extends React.Component {
 
   PostValidationText(text) {
     if (text.length > 0) return null;
-    else if (text.length === 0) return 'error';
-  }
-
-  PostValidationCategory(category) {
-    if (category === "react") return null;
-    else if (category === "redux") return null;
-    else if (category === "udacity") return null;
     else return 'error';
   }
 
-  getPostValidation(title, body, author, category) {
-    const postStatus = [this.PostValidationText(title), this.PostValidationText(body), this.PostValidationText(author), this.PostValidationCategory(category)];
-    return postStatus.includes("error");
+  PostValidationCategory(category) {
+    if (this.props.categories.includes(category)) return null;
+    else return 'error';
+  }
+
+  getPostValidation(type, title, body, author, category) {
+    if (type === "new") {
+      const postStatus = [this.PostValidationText(title), this.PostValidationText(body), this.PostValidationText(author), this.PostValidationCategory(category)];
+        return postStatus.includes("error");
+    }
+    else if (type === "edit") {
+      const postStatus = [this.PostValidationText(title), this.PostValidationText(body)];
+        return postStatus.includes("error");
+    }
+    console.log("validation error");
+    return false;
   }
 
   render() {
@@ -68,19 +75,21 @@ class PostForm extends React.Component {
           <FormGroup controlId = 'formControlsCategory' validationState={this.PostValidationCategory(category)}>
             <ControlLabel>Category</ControlLabel>
             <FormControl componentClass="select" disabled={isExistingPost} value={category} onChange={(e) => updateCategory(e.target.value)}>
-              <option value="selector">Select Category...</option>
-              <option value="react">React</option>
-              <option value="redux">Redux</option>
-              <option value="udacity">Udacity</option>
+              <option value="selector">Select a Category...</option>
+              {this.props.categories.map((categoryItem, idx) => {
+                return(
+                  <option key={idx} value={categoryItem}>{Capitalize(categoryItem)}</option>
+                );
+              })}
             </FormControl>
             <FormControl.Feedback />
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
           {(isExistingPost === true) ? (
-            <SubmitEditPostButton editPostValidationCheck={this.getPostValidation(title, body, author, category)} />
+            <SubmitEditPostButton editPostValidationCheck={this.getPostValidation("edit", title, body)} />
           ):(
-            <SubmitNewPostButton newPostValidationCheck={this.getPostValidation(title, body, author, category)} />
+            <SubmitNewPostButton newPostValidationCheck={this.getPostValidation("new", title, body, author, category)} />
           )}
         </Modal.Footer>
       </Modal>
@@ -91,6 +100,7 @@ class PostForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    categories: state.categoriesReducer.categories,
     postFormOpen: state.EditPostReducer.postFormOpen,
     IDsUsed: state.postsReducer.IDsUsed,
     id: state.EditPostReducer.post.id,

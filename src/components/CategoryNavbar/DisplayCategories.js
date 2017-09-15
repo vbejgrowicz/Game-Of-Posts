@@ -2,22 +2,10 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
-import { activeView } from '../../actions/ActiveViewAction';
-import { fetchCurrentPosts } from '../../actions/PostsAction';
 import { Nav, NavItem } from 'react-bootstrap';
 import { Capitalize } from '../../utils/Capitalize';
 
 class DisplayCategories extends React.Component {
-
-  componentDidMount() {
-    this.props.updateCurrentCategory(this.props.params.category || "home");
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.params.category !== nextProps.params.category) {
-      this.props.updateCurrentCategory(nextProps.params.category || "home");
-    }
-  }
 
   render() {
     const { categories } = this.props;
@@ -41,10 +29,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCurrentCategory: (category) => {
-      dispatch(activeView(category));
-      dispatch(fetchCurrentPosts(category));
-    },
   };
 };
 

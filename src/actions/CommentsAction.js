@@ -17,6 +17,15 @@ export const setParentID = (parentId) => {
   };
 };
 
+export function fetchAllComments(posts) {
+  return function fetchAllCommentsThunk(dispatch) {
+    posts.map((post) => {
+      return dispatch(fetchComments(post.id));
+    });
+  };
+}
+
+
 export function fetchComments(id) {
   return function fetchCommentsThunk(dispatch) {
     getComments(id).then(response => {

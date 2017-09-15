@@ -1,16 +1,17 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { isLoading, detailedPostViewActive } from './actions/ActiveViewAction';
+import { isLoading, isNotLoading, activeView, detailedPostViewActive } from './actions/ActiveViewAction';
 import { fetchCategories } from './actions/CategoriesAction';
-import { fetchAll, fetchPostDetails } from './actions/PostsAction';
+import { fetchAll, fetchCurrentPosts, fetchPostDetails } from './actions/PostsAction';
 import { setParentID } from './actions/CommentsAction';
-
+import Loading from './utils/Loading';
 import './style/App.css';
 
 class App extends React.Component {
 
   componentDidMount() {
+    this.props.isLoading();
     this.props.fetchAll();
   }
 
@@ -18,10 +19,18 @@ class App extends React.Component {
     if (this.props.params.postID && this.props.AllPosts !== nextProps.AllPosts){
       this.props.fetchPostDetails(nextProps.params.postID);
     }
+    else if (this.props.AllPosts !== nextProps.AllPosts || this.props.params.category !== nextProps.params.category){
+      this.props.fetchCategoryPosts(nextProps.params.category || "home");
+    }
+    else if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
+      this.props.isNotLoading();
+    }
   }
 
   render() {
-    return(
+    return this.props.LoadingStatus ?(
+      <Loading />
+    ):(
       <div className="App">
           {this.props.children}
       </div>
@@ -31,6 +40,9 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    LoadingStatus: state.activeViewReducer.LoadingStatus,
+    categories: state.categoriesReducer.categories,
+    category: state.activeViewReducer.category,
     comments: state.commentsReducer.comments,
     AllPosts: state.postsReducer.AllPosts
   };
@@ -39,10 +51,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAll: () => {
-      dispatch(isLoading());
-      dispatch(fetchCategories());
       dispatch(fetchAll());
+      dispatch(fetchCategories());
     },
+    fetchCategoryPosts: (category) => {
+      dispatch(activeView(category));
+      dispatch(fetchCurrentPosts(category));
+    },
+    isLoading: () => dispatch(isLoading()),
+    isNotLoading: () => dispatch(isNotLoading()),
     fetchPostDetails: (id) => {
       dispatch(setParentID(id));
       dispatch(detailedPostViewActive());

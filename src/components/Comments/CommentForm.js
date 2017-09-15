@@ -10,13 +10,22 @@ class CommentForm extends React.Component {
 
   CommentValidationText(text) {
     if (text.length > 0) return null;
-    else if (text.length === 0) return 'error';
+    else return 'error';
   }
 
-  getCommentValidation(body, author) {
-    const status = [this.CommentValidationText(body), this.CommentValidationText(author)];
-    return status.includes("error");
+  getCommentValidation(type, body, author) {
+    if (type === "new") {
+      const status = [this.CommentValidationText(body), this.CommentValidationText(author)];
+        return status.includes("error");
+    }
+    else if (type === "edit") {
+      const status = [this.CommentValidationText(body)];
+        return status.includes("error");
+    }
+    console.log("validation error");
+    return false;
   }
+
 
   render() {
     const { commentFormOpen, closeCommentForm, isExistingComment, body, updateCommentBody, author, updateCommentAuthor } = this.props;
@@ -52,9 +61,9 @@ class CommentForm extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           {(isExistingComment === true) ? (
-            <SubmitEditCommentButton editCommentValidationCheck={this.getCommentValidation(body, author)}/>
+            <SubmitEditCommentButton editCommentValidationCheck={this.getCommentValidation("edit", body)}/>
           ):(
-            <SubmitNewCommentButton newCommentValidationCheck={this.getCommentValidation(body, author)}/>
+            <SubmitNewCommentButton newCommentValidationCheck={this.getCommentValidation("new", body, author)}/>
           )}
         </Modal.Footer>
       </Modal>

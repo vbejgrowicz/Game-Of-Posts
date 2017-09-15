@@ -6,14 +6,11 @@ import DisplaySorter from './Sort/DisplaySorter';
 import { updatePostSort } from '../actions/PostsAction';
 import AddPostButton from './Posts/utils/AddPostButton';
 import PostForm from './Posts/PostForm';
-import Loading from '../utils/Loading';
 
 class HomePage extends React.Component {
 
   render() {
-    return this.props.isLoading ?(
-      <Loading />
-    ):(
+    return (
       <div>
         {this.props.children}
         <DisplaySorter sortfunction={this.props.updatePostSort.bind(this)}/>
@@ -26,8 +23,6 @@ class HomePage extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.activeViewReducer.isLoading,
-    detailedPostView: state.activeViewReducer.detailedPostView
   };
 };
 const mapDispatchToProps = (dispatch) => {

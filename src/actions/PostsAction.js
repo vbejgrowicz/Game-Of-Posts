@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import { getPosts, updateVoteScore, addPost, updatePost, deletePost } from '../utils/DataFetch';
 import { isNotLoading } from './ActiveViewAction';
-import { fetchComments } from './CommentsAction';
+import { fetchComments, fetchAllComments } from './CommentsAction';
 
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST_DETAILS = "FETCH_POST_DETAILS";
@@ -13,12 +13,17 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 
+function filterAllDeleted(post) {
+  return post.deleted !== true;
+}
+
+
 export function fetchAll() {
   return function fetchPostIDsThunk(dispatch) {
     getPosts().then(response => {
-      response.map((post) => dispatch(fetchComments(post.id)));
-      dispatch({type: FETCH_POSTS, posts: response });
-      dispatch(isNotLoading());
+      const filteredPosts = response.filter(filterAllDeleted);
+      dispatch(fetchAllComments(filteredPosts));
+      dispatch({type: FETCH_POSTS, posts: filteredPosts });
     });
   };
 }
@@ -54,7 +59,6 @@ export function changeVoteScore(post, vote) {
   return function changeVoteScoreThunk(dispatch, getState) {
     updateVoteScore(post, vote).then(response => {
       dispatch({type: CHANGE_VOTESCORE, id: response.id, voteScore: response.voteScore });
-      dispatch(sortPosts());
     });
   };
 }

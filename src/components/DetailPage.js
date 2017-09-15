@@ -3,14 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PostForm from './Posts/PostForm';
 import CommentForm from './Comments/CommentForm';
-import Loading from '../utils/Loading';
 
 class DetailPage extends React.Component {
 
   render() {
-    return this.props.isLoading ?(
-      <Loading />
-    ):(
+    return (
       <div>
         {this.props.children}
         <PostForm />
@@ -21,7 +18,6 @@ class DetailPage extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.activeViewReducer.isLoading
   };
 };
 const mapDispatchToProps = (dispatch) => {
