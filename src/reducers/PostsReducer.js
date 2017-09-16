@@ -84,6 +84,19 @@ const filterSelectedPost = (id, posts) => {
   });
 };
 
+function edit(posts, updatedPost) {
+  return posts.map((post) => {
+    if (post.id === updatedPost.id) {
+      return Object.assign({}, post,
+        updatedPost
+        );
+      }
+    return post;
+  });
+}
+
+
+
 export function postsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_POSTS:
@@ -122,24 +135,8 @@ export function postsReducer (state = initialState, action) {
     );
     case EDIT_POST:
     return Object.assign({}, state,
-      {AllPosts: state.AllPosts.map((post) => {
-        if (post.id === action.id) {
-          return Object.assign({}, post,
-            action.updatedPost
-            );
-          }
-        return post;
-        })
-      },
-      {CurrentPosts: state.CurrentPosts.map((post) => {
-        if (post.id === action.id) {
-          return Object.assign({}, post,
-            action.updatedPost
-            );
-          }
-        return post;
-        })
-      }
+      {AllPosts: edit(state.AllPosts, action.updatedPost)},
+      {CurrentPosts: edit(state.CurrentPosts, action.updatedPost)}
     );
     case DELETE_POST:
       return Object.assign({}, state,

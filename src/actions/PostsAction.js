@@ -79,7 +79,7 @@ export function newPost(activeView, id, timestamp, title, body, author, category
 export function editPost(id, title, body) {
   return function editPostThunk(dispatch, getState) {
     updatePost(id, title, body).then(response => {
-      dispatch({type: EDIT_POST, id: response.id, updatedPost: response });
+      dispatch({type: EDIT_POST, updatedPost: response });
     });
   };
 }

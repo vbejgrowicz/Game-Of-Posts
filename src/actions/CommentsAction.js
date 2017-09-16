@@ -70,7 +70,6 @@ export function newComment(id, timestamp, body, author, parentId) {
   return function newCommentThunk(dispatch, getState) {
     addComment(id, timestamp, body, author, parentId).then(response => {
       dispatch({type: ADD_COMMENT, parentId: parentId, id:response.id, newComment: response });
-      return dispatch(sortComments(parentId));
     });
   };
 }
@@ -79,7 +78,6 @@ export function editComment(id, timestamp, body) {
   return function editPostThunk(dispatch, getState) {
     updateComment(id, timestamp, body).then(response => {
       dispatch({type: EDIT_COMMENT, parentId: response.parentId, id: response.id, updatedComment: response });
-      return dispatch(sortComments(response.parentId));
     });
   };
 }

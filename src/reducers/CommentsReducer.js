@@ -30,6 +30,34 @@ function commentSort(comments, sort) {
   return sorted;
 }
 
+function changeCommentVote(comments, id, voteScore) {
+  return comments.map((comment) => {
+    if (comment.id === id) {
+      return Object.assign({}, comment, {
+        voteScore: voteScore
+      });
+    }
+  return comment;
+  });
+}
+
+const removeDeletedComment = (comments, id) => {
+  return comments.filter((comment) => {
+    return comment.id !== id;
+  });
+};
+
+function editCommentfunction(comments, updatedComment) {
+  return comments.map((comment) => {
+    if (comment.id === updatedComment.id) {
+      return Object.assign({}, [updatedComment.parentId],
+        updatedComment
+        );
+      }
+    return comment;
+  });
+}
+
 export function commentsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_COMMENTS:
@@ -59,43 +87,28 @@ export function commentsReducer (state = initialState, action) {
       case CHANGE_COMMENT_VOTESCORE:
       return Object.assign({}, state,
         {comments: Object.assign({}, state.comments,
-          {[action.parentId]: state.comments[action.parentId].map((comment) => {
-            if (comment.id === action.id) {
-              return Object.assign({}, comment, {
-                voteScore: action.voteScore
-              });
-            }
-            return comment;
-          })}
+          {[action.parentId]: changeCommentVote(state.comments[action.parentId], action.id, action.voteScore)}
         )}
       );
       case DELETE_COMMENT:
         return Object.assign({}, state,
           {IDsUsed: state.IDsUsed.filter(function(id) {return (id !== action.id);})},
           {comments: Object.assign({}, state.comments,
-            {[action.parentId]: state.comments[action.parentId].filter(function(comment) {return (comment.id !== action.id);})}
+            {[action.parentId]: removeDeletedComment(state.comments[action.parentId], action.id)}
           )}
         );
       case ADD_COMMENT:
         return Object.assign({}, state,
           {IDsUsed: state.IDsUsed.concat(action.newComment.id)},
           {comments: Object.assign({}, state.comments, {
-            [action.parentId]: state.comments[action.parentId].concat(action.newComment)}
+            [action.parentId]: commentSort(state.comments[action.parentId].concat(action.newComment), state.sortedby)}
           )}
         );
       case EDIT_COMMENT:
       return Object.assign({}, state,
         {comments: Object.assign({}, state.comments,
-          {[action.parentId]: state.comments[action.parentId].map((comment) => {
-            if (comment.id === action.id) {
-              return Object.assign({}, [action.parentId],
-                action.updatedComment
-                );
-              }
-            return comment;
-            })
-          })
-        }
+          {[action.parentId]: commentSort(editCommentfunction(state.comments[action.parentId], action.updatedComment), state.sortedby)}
+        )}
       );
   default:
     return state;

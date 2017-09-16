@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { isLoading, isNotLoading, activeView, detailedPostViewActive } from './actions/ActiveViewAction';
+import { isLoading, isNotLoading, activeView, detailedPostViewActive, detailedPostViewNotActive } from './actions/ActiveViewAction';
 import { fetchCategories } from './actions/CategoriesAction';
 import { fetchAll, fetchCurrentPosts, fetchPostDetails } from './actions/PostsAction';
 import { setParentID } from './actions/CommentsAction';
@@ -58,6 +58,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchCategories());
     },
     fetchCategoryPosts: (category) => {
+      dispatch(detailedPostViewNotActive());
       dispatch(activeView(category));
       dispatch(fetchCurrentPosts(category));
     },
