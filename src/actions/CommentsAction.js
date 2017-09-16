@@ -25,7 +25,6 @@ export function fetchAllComments(posts) {
   };
 }
 
-
 export function fetchComments(id) {
   return function fetchCommentsThunk(dispatch) {
     getComments(id).then(response => {

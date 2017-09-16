@@ -17,13 +17,17 @@ function filterAllDeleted(post) {
   return post.deleted !== true;
 }
 
-
 export function fetchAll() {
   return function fetchPostIDsThunk(dispatch) {
     getPosts().then(response => {
       const filteredPosts = response.filter(filterAllDeleted);
-      dispatch(fetchAllComments(filteredPosts));
-      dispatch({type: FETCH_POSTS, posts: filteredPosts });
+      if (filteredPosts.length === 0) {
+        dispatch(isNotLoading());
+      }
+      else {
+        dispatch(fetchAllComments(filteredPosts));
+        dispatch({type: FETCH_POSTS, posts: filteredPosts });
+      }
     });
   };
 }

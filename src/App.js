@@ -12,6 +12,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.isLoading();
+    this.props.fetchCategories();
     this.props.fetchAll();
   }
 
@@ -52,6 +53,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAll: () => {
       dispatch(fetchAll());
+    },
+    fetchCategories: () => {
       dispatch(fetchCategories());
     },
     fetchCategoryPosts: (category) => {

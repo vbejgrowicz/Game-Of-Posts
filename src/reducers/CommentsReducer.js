@@ -34,7 +34,7 @@ export function commentsReducer (state = initialState, action) {
   switch (action.type) {
     case FETCH_COMMENTS:
       return Object.assign({}, state,
-        {IDsUsed: state.IDsUsed.concat(action.IDlist)},
+        {IDsUsed: state.IDsUsed.concat(getCommentIDs(action.comments))},
         {comments: Object.assign({}, state.comments,
           {[action.id]: commentSort(action.comments, state.sortedby)}
         )}
