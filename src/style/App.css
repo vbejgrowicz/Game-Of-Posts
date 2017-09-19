@@ -1,47 +1,211 @@
 .App {
   text-align: center;
-}
-
-.Category-List {
   list-style: none;
-  padding: 10px;
 }
 
+.Sort {
+  width: auto;
+  height: 54px;
+  display: block;
+  padding: 10px;
+  position: relative;
+}
+
+/*Buttons*/
+.Custom-Button {
+  margin: 5px;
+  box-shadow: 2px 2px 4px #595757;
+}
+
+.HomeContent {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.Add-Button {
+  margin: 5px;
+  display: block;
+}
+
+.Edit-Button {
+  display: block;
+}
+
+.Remove-Button {
+  display: block;
+}
+
+/*Comments*/
+.Comment-List {
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.Comment-in-List {
+  color: #fff;
+  display: block;
+  position: relative;
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #aaa;
+  border-radius: 25px;
+  border: 1px solid #555;
+  box-shadow: 0px 0px 6px 2px #555;
+
+}
+
+.Comment {
+  position: relative;
+  height: 120px;
+  padding: 10px;
+  display: flex;
+}
+
+.Comment-Data {
+  margin: auto;
+  width: 80%;
+  height: auto;
+}
+
+.Comment-Link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.Comment-Buttons {
+  min-width: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Post*/
 .Post-List {
-  list-style: none;
-  padding: 10px;
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.Post-in-List {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #c55858;
+  border-radius: 25px;
+  border: 1px solid #555;
+  box-shadow: 0px 0px 6px 2px #555;
 }
 
 .Post {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #e4e3e3;
-  border-radius: 25px;
-  width: 70%;
-  align-content: center;
-}
-.detailed-post {
-  background-color: lightblue;
+  position: relative;
+  height: 120px;
+  padding: 10px;
+  display: flex;
 }
 
-.nav-tabs {
-  font-size: 20px;
+.Post-Data {
+  margin: auto;
+  width: 80%;
+  height: auto;
 }
 
-.nav-tabs>li>a {
-  color: black;
+.Post-Link {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
+.Post-Buttons {
+  width: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Shared Content*/
 .title {
+  display: flex;
   font-weight: bold;
   font-size: 18px;
+  justify-content: center;
 }
 
-.post-date-and-author {
-  display: inline-flex;
+.date-and-author {
+  display: flex;
   font-style: italic;
+  justify-content: center;
+}
+
+.comments-number {
+  display: flex;
+  justify-content: center;
+}
+
+.Vote-Score {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Score {
+  display: flex;
+  font-size: 20px;
+  color: #fff;
+  padding: 5px;
+}
+
+.Vote-Button {
+  display: flex;
+  padding: 5px;
+}
+
+
+/*Detailed Post View*/
+
+.Detailed-Post {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: auto;
+  background-color: #c55858;
+  border-radius: 25px;
+  border: 1px solid #555;
+  box-shadow: 0px 0px 6px 2px #555;
+}
+
+/*Error Page*/
+.Error-Page {
+  padding: 20px;
+}
+
+.Error-Text {
+  text-shadow: 2px 2px 4px #aba9a9;
+  font-weight: bolder;
+  font-size: 40px;
+}
+.Error-Image {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('../Images/erroricon.png');
+  width: 256px;
+  height: 256px;
+  background-repeat: no-repeat;
 }
 
 /* Loading Spinner */

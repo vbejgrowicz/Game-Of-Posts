@@ -18,18 +18,20 @@ class CommentDetails extends React.Component {
   render() {
     const { comment } = this.props;
     return(
-      <div>
+      <div className="Comment">
         <DisplayVoteScore voteScore={comment.voteScore} comment={comment.id} voteEvent={this.voteEventComment.bind(this)}/>
         <div className="Comment-Data">
           <DisplayBody body={comment.body} />
-          <div className="comment-date-and-author">
+          <div className="date-and-author">
             <DisplayTimestamp timestamp={comment.timestamp} />
             &nbsp;by&nbsp;
             <DisplayAuthor author={comment.author} />
           </div>
         </div>
-        <EditCommentButton parentId={comment.parentId} id={comment.id} body={comment.body} author={comment.author}/>
-        <DeleteCommentButton parentId={comment.parentId} id={comment.id} />
+        <div className="Comment-Buttons">
+          <EditCommentButton parentId={comment.parentId} id={comment.id} body={comment.body} author={comment.author}/>
+          <DeleteCommentButton parentId={comment.parentId} id={comment.id} />
+        </div>
       </div>
     );
   }

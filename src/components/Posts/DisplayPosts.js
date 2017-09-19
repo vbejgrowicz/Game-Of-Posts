@@ -16,7 +16,7 @@ class DisplayPosts extends React.Component {
       <div className="Post-List">
         {CurrentPosts.map((post) => {
           return(
-            <li className="Post" key={post.id}>
+            <li className="Post-in-List" key={post.id}>
               <PostDetails post={post} deletePostfunction={this.deletePostfunction.bind(this, post.id)}/>
             </li>
           );

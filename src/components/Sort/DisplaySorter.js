@@ -1,14 +1,14 @@
 /* jshint esversion:6 */
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class DisplaySorter extends React.Component {
 
   render() {
     return(
-      <div>
-        <Button onClick={() => this.props.sortfunction("voteScore")}>sort by voteScore</Button>
-        <Button onClick={() => this.props.sortfunction("timestamp")}>sort by timestamp</Button>
+      <div className="Sort">
+        <Button className="Custom-Button" active={this.props.sortedby === "voteScore"} onClick={() => this.props.sortfunction("voteScore")}><Glyphicon glyph="sort" /> Highest Rated</Button>
+        <Button className="Custom-Button" active={this.props.sortedby === "timestamp"} onClick={() => this.props.sortfunction("timestamp")}> <Glyphicon glyph="sort" /> Most Recent</Button>
       </div>
     );
   }

@@ -1,12 +1,14 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class DeletePostButton extends React.Component {
 
   render() {
     return (
-      <Button onClick={() => this.props.deletePostfunction()}>Delete Post</Button>
+      <div className="Remove-Button">
+        <Button className="Custom-Button" onClick={() => this.props.deletePostfunction()}><Glyphicon glyph="remove"/> Delete</Button>
+      </div>
     );
   }
 }

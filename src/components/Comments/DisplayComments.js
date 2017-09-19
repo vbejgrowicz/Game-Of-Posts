@@ -11,7 +11,7 @@ class DisplayComments extends React.Component {
       <div className="Comment-List">
         {comments[parentId].map((comment) => {
           return(
-            <li className="Comment" key={comment.id}>
+            <li className="Comment-in-List" key={comment.id}>
               <CommentDetails comment={comment}/>
             </li>
           );

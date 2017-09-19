@@ -1,15 +1,17 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { openPostForm, updateID, isExistingPost, updateTitle, updateBody, updateAuthor, updateCategory } from '../../../actions/EditPostAction';
 
 class EditPostButton extends React.Component {
 
   render() {
-    const { openPostForm, id, title, body, author, category } = this.props; 
+    const { openPostForm, id, title, body, author, category } = this.props;
     return (
-      <Button onClick={() => openPostForm(id, title, body, author, category)}>Edit Post</Button>
+      <div className="Edit-Button">
+        <Button className="Custom-Button" onClick={() => openPostForm(id, title, body, author, category)}><Glyphicon glyph="pencil"/> Edit</Button>
+      </div>
     );
   }
 }

@@ -11,9 +11,9 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="HomeContent">
         {this.props.children}
-        <DisplaySorter sortfunction={this.props.updatePostSort.bind(this)}/>
+        <DisplaySorter sortedby={this.props.sortedby} sortfunction={this.props.updatePostSort.bind(this)}/>
         <DisplayPosts />
         <AddPostButton />
         <PostForm />
@@ -23,6 +23,7 @@ class HomePage extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
+    sortedby: state.postsReducer.sortedby
   };
 };
 const mapDispatchToProps = (dispatch) => {

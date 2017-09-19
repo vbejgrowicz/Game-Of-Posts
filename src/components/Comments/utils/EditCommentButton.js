@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { openCommentForm, updateParentID, updateCommentID, isExistingComment, updateCommentBody, updateCommentAuthor } from '../../../actions/EditCommentAction';
 
 class EditCommentButton extends React.Component {
@@ -9,7 +9,9 @@ class EditCommentButton extends React.Component {
   render() {
     const { openCommentForm, parentId, id, body, author } = this.props;
     return (
-      <Button onClick={() => openCommentForm(parentId, id, body, author)}>Edit Comment</Button>
+      <div className="Edit-Button">
+        <Button className="Custom-Button" onClick={() => openCommentForm(parentId, id, body, author)}><Glyphicon glyph="pencil"/> Edit</Button>
+      </div>
     );
   }
 }

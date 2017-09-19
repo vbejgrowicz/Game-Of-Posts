@@ -20,13 +20,13 @@ class PostDetails extends React.Component {
   render() {
     const { post } = this.props;
     return(
-      <div>
+      <div className="Post">
         <DisplayVoteScore voteScore={post.voteScore} post={post.id} voteEvent={this.voteEventPost.bind(this)}/>
         <div className="Post-Data">
-          <a href={'/'+ post.category + '/' + post.id} className="link">
+          <a href={'/'+ post.category + '/' + post.id} className="Post-Link">
             <DisplayTitle title={post.title} />
             <DisplayBody body={post.body} />
-            <div className="post-date-and-author">
+            <div className="date-and-author">
               <DisplayTimestamp timestamp={post.timestamp} />
               &nbsp;by&nbsp;
               <DisplayAuthor author={post.author} />
@@ -34,12 +34,15 @@ class PostDetails extends React.Component {
             <DisplayNumComments parentId={post.id} />
           </a>
         </div>
-        <EditPostButton id={post.id} title={post.title} body={post.body} author={post.author} category={post.category} />
-        <DeletePostButton id={post.id} deletePostfunction={this.props.deletePostfunction}/>
+        <div className="Post-Buttons">
+          <EditPostButton id={post.id} title={post.title} body={post.body} author={post.author} category={post.category} />
+          <DeletePostButton id={post.id} deletePostfunction={this.props.deletePostfunction} />
+        </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
   };

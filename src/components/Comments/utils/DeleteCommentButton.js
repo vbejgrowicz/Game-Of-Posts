@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { removeComment} from '../../../actions/CommentsAction';
 
 class DeleteCommentButton extends React.Component {
@@ -9,7 +9,9 @@ class DeleteCommentButton extends React.Component {
   render() {
     const { removeComment, parentId, id } = this.props;
     return (
-      <Button onClick={() => removeComment(parentId, id)}>Delete Comment</Button>
+      <div className="Remove-Button">
+        <Button className="Custom-Button" onClick={() => removeComment(parentId, id)}><Glyphicon glyph="remove"/> Delete</Button>
+      </div>
     );
   }
 }
