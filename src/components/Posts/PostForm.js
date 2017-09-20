@@ -15,7 +15,8 @@ class PostForm extends React.Component {
   }
 
   PostValidationCategory(category) {
-    if (this.props.categories.includes(category)) return null;
+    const { categories } = this.props.categoriesReducer;
+    if (categories.includes(category)) return null;
     else return 'error';
   }
 
@@ -33,7 +34,11 @@ class PostForm extends React.Component {
   }
 
   render() {
-    const { postFormOpen, closePostForm, isExistingPost, title, updateTitle, body, updateBody, author, updateAuthor, category, updateCategory } = this.props;
+    const { title, body, author, category, isExistingPost} = this.props.EditPostReducer.post;
+    const { postFormOpen } = this.props.EditPostReducer;
+    const { categories } = this.props.categoriesReducer;
+    const {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } = this.props;
+
     return(
       <Modal show={postFormOpen} onHide={() => closePostForm()}>
         <Modal.Header closeButton>
@@ -76,7 +81,7 @@ class PostForm extends React.Component {
             <ControlLabel>Category</ControlLabel>
             <FormControl componentClass="select" disabled={isExistingPost} value={category} onChange={(e) => updateCategory(e.target.value)}>
               <option value="selector">Select a Category...</option>
-              {this.props.categories.map((categoryItem, idx) => {
+              {categories.map((categoryItem, idx) => {
                 return(
                   <option key={idx} value={categoryItem}>{Capitalize(categoryItem)}</option>
                 );
@@ -98,20 +103,10 @@ class PostForm extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categoriesReducer.categories,
-    postFormOpen: state.EditPostReducer.postFormOpen,
-    IDsUsed: state.postsReducer.IDsUsed,
-    id: state.EditPostReducer.post.id,
-    title: state.EditPostReducer.post.title,
-    body: state.EditPostReducer.post.body,
-    author: state.EditPostReducer.post.author,
-    category: state.EditPostReducer.post.category,
-    isExistingPost: state.EditPostReducer.post.isExistingPost
+function mapStateToProps({ categoriesReducer, EditPostReducer }) {
+  return { categoriesReducer, EditPostReducer };
+}
 
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     updateTitle: (value) => dispatch(updateTitle(value)),

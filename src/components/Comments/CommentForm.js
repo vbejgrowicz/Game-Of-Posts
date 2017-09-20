@@ -28,7 +28,9 @@ class CommentForm extends React.Component {
 
 
   render() {
-    const { commentFormOpen, closeCommentForm, isExistingComment, body, updateCommentBody, author, updateCommentAuthor } = this.props;
+    const { commentFormOpen } = this.props.EditCommentReducer;
+    const { isExistingComment, body, author } = this.props.EditCommentReducer.comment;
+    const { closeCommentForm, updateCommentBody, updateCommentAuthor } = this.props;
     return (
       <Modal show={commentFormOpen} onHide={() => closeCommentForm()}>
         <Modal.Header closeButton>
@@ -71,16 +73,10 @@ class CommentForm extends React.Component {
   }
 }
 
+function mapStateToProps({ EditCommentReducer }) {
+  return { EditCommentReducer };
+}
 
-const mapStateToProps = (state) => {
-  return {
-    commentFormOpen: state.EditCommentReducer.commentFormOpen,
-    body: state.EditCommentReducer.comment.body,
-    author: state.EditCommentReducer.comment.author,
-    isExistingComment: state.EditCommentReducer.comment.isExistingComment
-
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     updateCommentBody: (value) => dispatch(updateCommentBody(value)),

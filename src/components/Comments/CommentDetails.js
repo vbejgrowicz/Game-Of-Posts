@@ -37,15 +37,10 @@ class CommentDetails extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    detailedPostView: state.activeViewReducer.detailedPostView,
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCommentVoteScore: (id, vote) => dispatch(changeCommentVoteScore(id, vote)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentDetails);
+export default connect(null, mapDispatchToProps)(CommentDetails);

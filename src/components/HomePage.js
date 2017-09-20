@@ -10,10 +10,12 @@ import PostForm from './Posts/PostForm';
 class HomePage extends React.Component {
 
   render() {
+    const { sortedby } = this.props.postsReducer;
+    const { updatePostSort } = this.props;
     return (
       <div className="HomeContent">
         {this.props.children}
-        <DisplaySorter sortedby={this.props.sortedby} sortfunction={this.props.updatePostSort.bind(this)}/>
+        <DisplaySorter sortedby={sortedby} sortfunction={updatePostSort.bind(this)}/>
         <DisplayPosts />
         <AddPostButton />
         <PostForm />
@@ -21,11 +23,11 @@ class HomePage extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    sortedby: state.postsReducer.sortedby
-  };
-};
+
+function mapStateToProps({ postsReducer }) {
+  return { postsReducer };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updatePostSort: (sortMethod) => {

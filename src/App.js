@@ -11,19 +11,20 @@ import './style/App.css';
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.isLoading();
-    this.props.fetchCategories();
-    this.props.fetchAll();
+    const { isLoading, fetchCategories, fetchAll } = this.props;
+    isLoading();
+    fetchCategories();
+    fetchAll();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.params.postID && this.props.AllPosts !== nextProps.AllPosts){
+    if (nextProps.params.postID && nextProps.AllPosts.length > 0){
       this.props.fetchPostDetails(nextProps.params.postID);
     }
     else if (this.props.AllPosts !== nextProps.AllPosts || this.props.params.category !== nextProps.params.category){
       this.props.fetchCategoryPosts(nextProps.params.category || "home");
     }
-    else if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
+    if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
       this.props.isNotLoading();
     }
   }

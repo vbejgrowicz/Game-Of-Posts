@@ -8,21 +8,18 @@ import { editPost } from '../../../actions/PostsAction';
 class SubmitEditPostButton extends React.Component {
 
   render() {
-    const { editPost, id, title, body } = this.props;
+    const { editPost } = this.props;
+    const { id, title, body } = this.props.EditPostReducer.post;
     return(
       <Button disabled={this.props.editPostValidationCheck} onClick={()=> editPost(id, title, body)}>Submit Changes</Button>
     );
   }
 }
 
+function mapStateToProps({ EditPostReducer }) {
+  return { EditPostReducer };
+}
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.EditPostReducer.post.id,
-    title: state.EditPostReducer.post.title,
-    body: state.EditPostReducer.post.body,
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     editPost: (id, title, body) => {

@@ -6,7 +6,8 @@ import CommentDetails from './CommentDetails';
 class DisplayComments extends React.Component {
 
   render() {
-    const { comments, parentId } = this.props;
+    const { parentId } = this.props;
+    const { comments } = this.props.commentsReducer;
     return comments[parentId] ?(
       <div className="Comment-List">
         {comments[parentId].map((comment) => {
@@ -22,14 +23,8 @@ class DisplayComments extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.commentsReducer.comments,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+function mapStateToProps({ commentsReducer }) {
+  return { commentsReducer };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayComments);
+export default connect(mapStateToProps, null)(DisplayComments);

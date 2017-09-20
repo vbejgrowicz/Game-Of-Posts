@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-
 export function makeID() {
   var text = "";
   var possible = "abcdefghijklmnopqrstuvwxyz0123456789";

@@ -8,7 +8,7 @@ import {
   UPDATE_AUTHOR,
   UPDATE_CATEGORY,
   IS_EXISTING_POST
-} from '../actions/EditPostAction';
+} from '../actions/types';
 
 const initialState = {
   postFormOpen: false,

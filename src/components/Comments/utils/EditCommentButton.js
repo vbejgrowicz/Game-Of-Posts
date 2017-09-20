@@ -16,10 +16,6 @@ class EditCommentButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     openCommentForm: (parentId, id, body, author) => {
@@ -33,4 +29,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditCommentButton);
+export default connect(null, mapDispatchToProps)(EditCommentButton);

@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 class DisplayBody extends React.Component {
 
   render() {
-    return this.props.detailedPostView ?(
+    const { detailedPostView } = this.props.activeViewReducer;
+    return detailedPostView ?(
       <div className="body">{this.props.body}</div>
     ):(
       null
@@ -14,14 +15,8 @@ class DisplayBody extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    detailedPostView: state.activeViewReducer.detailedPostView,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+function mapStateToProps({ activeViewReducer }) {
+  return { activeViewReducer };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayBody);
+export default connect(mapStateToProps, null)(DisplayBody);

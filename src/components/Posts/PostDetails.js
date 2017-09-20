@@ -43,14 +43,10 @@ class PostDetails extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     changeVoteScore: (id, vote) => dispatch(changeVoteScore(id, vote)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
+export default connect(null, mapDispatchToProps)(PostDetails);

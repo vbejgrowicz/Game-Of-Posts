@@ -8,24 +8,20 @@ import { newPost } from '../../../actions/PostsAction';
 class SubmitNewPostButton extends React.Component {
 
   render() {
-    const { newPost, activeView, id, title, body, author, category } = this.props;
+    const { id, title, body, author, category } = this.props.EditPostReducer.post;
+    const { activeView } = this.props.activeViewReducer;
+    const { newPost } = this.props;
+
     return(
       <Button disabled={this.props.newPostValidationCheck} onClick={()=> newPost(activeView, id, Date.now(), title, body, author, category)}>Submit</Button>
     );
   }
 }
 
+function mapStateToProps({ EditPostReducer, activeViewReducer }) {
+  return { EditPostReducer, activeViewReducer };
+}
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.EditPostReducer.post.id,
-    title: state.EditPostReducer.post.title,
-    body: state.EditPostReducer.post.body,
-    author: state.EditPostReducer.post.author,
-    category: state.EditPostReducer.post.category,
-    activeView: state.activeViewReducer.category,
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     newPost: (activeView, id, timestamp, title, body, author, category) => {

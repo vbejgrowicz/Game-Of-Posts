@@ -9,7 +9,7 @@ import {
   ADD_POST,
   EDIT_POST,
   DELETE_POST
-} from '../actions/PostsAction';
+} from '../actions/types';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {

@@ -9,7 +9,9 @@ import { makeID, uniqueID } from '../../../utils/MakeID';
 class AddPostButton extends React.Component {
 
   render() {
-    const {IDsUsed, category, openPostForm } = this.props;
+    const { openPostForm, postsReducer, activeViewReducer } = this.props;
+    const { IDsUsed } = postsReducer;
+    const { category } = activeViewReducer;
     return (
       <div className="Add-Button">
         <Button className="Custom-Button" onClick={() => openPostForm(IDsUsed, category)}><Glyphicon glyph="plus"/> Add</Button>
@@ -18,12 +20,10 @@ class AddPostButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    IDsUsed: state.postsReducer.IDsUsed,
-    category: state.activeViewReducer.category
-  };
-};
+function mapStateToProps({ postsReducer, activeViewReducer }) {
+  return { postsReducer, activeViewReducer };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     openPostForm: (IDsUsed, category) => {

@@ -8,19 +8,19 @@ import { editComment } from '../../../actions/CommentsAction';
 class SubmitEditCommentButton extends React.Component {
 
   render() {
-    const { editComment, id, body } = this.props;
+    const { editComment } = this.props;
+    const { id, body } = this.props.EditCommentReducer.comment;
+
     return(
       <Button disabled={this.props.editCommentValidationCheck} onClick={()=> editComment(id, Date.now(), body)}>Submit Changes</Button>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.EditCommentReducer.comment.id,
-    body: state.EditCommentReducer.comment.body,
-  };
-};
+function mapStateToProps({ EditCommentReducer }) {
+  return { EditCommentReducer };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     editComment: (id, timestamp, body) => {

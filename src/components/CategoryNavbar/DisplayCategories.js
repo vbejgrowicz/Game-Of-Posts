@@ -8,7 +8,7 @@ import { Capitalize } from '../../utils/Capitalize';
 class DisplayCategories extends React.Component {
 
   render() {
-    const { categories } = this.props;
+    const { categories } = this.props.categoriesReducer;
     return(
       <Nav bsStyle="tabs" justified>
         <LinkContainer to='/'><NavItem>Home</NavItem></LinkContainer>
@@ -22,14 +22,8 @@ class DisplayCategories extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categoriesReducer.categories,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+function mapStateToProps({ categoriesReducer }) {
+  return { categoriesReducer };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayCategories);
+export default connect(mapStateToProps, null)(DisplayCategories);

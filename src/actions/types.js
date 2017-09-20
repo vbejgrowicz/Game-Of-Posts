@@ -1,0 +1,49 @@
+/*jshint esversion: 6*/
+
+// ActiveViewAction
+export const ACTIVE_CATEGORY = 'ACTIVE_CATEGORY';
+export const DETAILED_POST_VIEW = 'DETAILED_POST_VIEW';
+export const IS_LOADING = 'IS_LOADING';
+
+// CategoriesAction
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+
+// CommentsAction
+export const SET_PARENT_ID = "SET_PARENT_ID";
+export const FETCH_COMMENTS = "FETCH_COMMENTS";
+export const UPDATE_COMMENT_SORT = "UPDATE_COMMENT_SORT";
+export const SORT_COMMENTS = "SORT_COMMENTS";
+export const CHANGE_COMMENT_VOTESCORE = "CHANGE_COMMENT_VOTESCORE";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+
+//EditCommentAction
+export const TOGGLE_COMMENT_FORM_OPEN = "TOGGLE_COMMENT_FORM_OPEN";
+export const TOGGLE_COMMENT_FORM_CLOSED = "TOGGLE_COMMENT_FORM_CLOSED";
+export const UPDATE_PARENT_ID = "UPDATE_PARENT_ID";
+export const UPDATE_COMMENT_ID = "UPDATE_COMMENT_ID";
+export const UPDATE_COMMENT_BODY = "UPDATE_COMMENT_BODY";
+export const UPDATE_COMMENT_AUTHOR = "UPDATE_COMMENT_AUTHOR";
+export const IS_EXISTING_COMMENT = "IS_EXISTING_COMMENT";
+
+//EditPostAction
+export const TOGGLE_FORM_OPEN = "TOGGLE_FORM_OPEN";
+export const TOGGLE_FORM_CLOSED = "TOGGLE_FORM_CLOSED";
+export const UPDATE_ID = "UPDATE_ID";
+export const UPDATE_TITLE = "UPDATE_TITLE";
+export const UPDATE_BODY = "UPDATE_BODY";
+export const UPDATE_AUTHOR = "UPDATE_AUTHOR";
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
+export const IS_EXISTING_POST = "IS_EXISTING_POST";
+
+//PostsAction
+export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_POST_DETAILS = "FETCH_POST_DETAILS";
+export const FETCH_CURRENT_POSTS = "FETCH_CURRENT_POSTS";
+export const SORT_POSTS = "SORT_POSTS";
+export const UPDATE_POST_SORT = "UPDATE_POST_SORT";
+export const CHANGE_VOTESCORE = "CHANGE_VOTESCORE";
+export const ADD_POST = "ADD_POST";
+export const EDIT_POST = "EDIT_POST";
+export const DELETE_POST = "DELETE_POST";

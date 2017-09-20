@@ -5,9 +5,7 @@
 
 .Sort {
   width: auto;
-  height: 54px;
   display: block;
-  padding: 10px;
   position: relative;
 }
 
@@ -107,7 +105,7 @@
 
 .Post {
   position: relative;
-  height: 120px;
+  min-height: 120px;
   padding: 10px;
   display: flex;
 }
@@ -174,8 +172,8 @@
 
 .Detailed-Post {
   position: relative;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
   width: 70%;
@@ -192,9 +190,10 @@
 }
 
 .Error-Text {
-  text-shadow: 2px 2px 4px #aba9a9;
+  text-shadow: 2px 2px 4px #555;
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 35px;
+  color: white;
 }
 .Error-Image {
   display: block;
@@ -203,9 +202,9 @@
   margin-left: auto;
   margin-right: auto;
   background-image: url('../Images/erroricon.png');
-  width: 256px;
-  height: 256px;
-  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  background-size: contain;
 }
 
 /* Loading Spinner */

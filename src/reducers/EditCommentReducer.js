@@ -7,7 +7,7 @@ import {
   UPDATE_COMMENT_BODY,
   UPDATE_COMMENT_AUTHOR,
   IS_EXISTING_COMMENT
-} from '../actions/EditCommentAction';
+} from '../actions/types';
 
 const initialState = {
   commentFormOpen: false,

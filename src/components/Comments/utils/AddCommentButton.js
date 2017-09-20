@@ -8,7 +8,8 @@ import { makeID, uniqueID } from '../../../utils/MakeID';
 class AddCommentButton extends React.Component {
 
   render() {
-    const { openCommentForm, IDsUsed, parentId } = this.props;
+    const { openCommentForm, parentId } = this.props;
+    const { IDsUsed } = this.props.commentsReducer;
     return (
       <div className="Add-Button">
         <Button className="Custom-Button" onClick={() => openCommentForm(IDsUsed, parentId)}><Glyphicon glyph="plus"/> Add</Button>
@@ -17,11 +18,10 @@ class AddCommentButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    IDsUsed: state.commentsReducer.IDsUsed,
-  };
-};
+function mapStateToProps({ commentsReducer }) {
+  return { commentsReducer };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     openCommentForm: (IDsUsed, parentId) => {

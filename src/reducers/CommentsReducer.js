@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { FETCH_COMMENTS, SET_PARENT_ID, SORT_COMMENTS, UPDATE_COMMENT_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/CommentsAction';
+import { FETCH_COMMENTS, SET_PARENT_ID, SORT_COMMENTS, UPDATE_COMMENT_SORT, CHANGE_COMMENT_VOTESCORE, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/types';
 import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {

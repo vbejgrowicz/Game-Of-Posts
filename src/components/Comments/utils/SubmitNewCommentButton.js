@@ -8,23 +8,20 @@ import { newComment } from '../../../actions/CommentsAction';
 class SubmitNewCommentButton extends React.Component {
 
   render() {
-    const { newComment, id, body, author, parentId } = this.props;
+    const { newComment } = this.props;
+    const { id, body, author, parentId } = this.props.EditCommentReducer.comment;
+    console.log(id);
+    console.log(body);
     return(
       <Button disabled={this.props.newCommentValidationCheck} onClick={()=> newComment(id, Date.now(), body, author, parentId)}>Submit</Button>
     );
   }
 }
 
+function mapStateToProps({ EditCommentReducer }) {
+  return { EditCommentReducer };
+}
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.EditCommentReducer.comment.id,
-    parentId: state.EditCommentReducer.comment.parentId,
-    body: state.EditCommentReducer.comment.body,
-    author: state.EditCommentReducer.comment.author,
-
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     newComment: (id, timestamp, body, author, parentId) => {

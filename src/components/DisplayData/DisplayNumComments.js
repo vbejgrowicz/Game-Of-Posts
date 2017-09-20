@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 class DisplayNumComments extends React.Component {
 
   render() {
-    const { comments, parentId } = this.props;
+    const { comments } = this.props.commentsReducer;
+    const { parentId } = this.props;
     return comments[parentId] ?(
       <div className="comments-number">
         {comments[parentId].length} Comments
@@ -16,14 +17,8 @@ class DisplayNumComments extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.commentsReducer.comments,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
+function mapStateToProps({ commentsReducer }) {
+  return { commentsReducer };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayNumComments);
+export default connect(mapStateToProps, null)(DisplayNumComments);

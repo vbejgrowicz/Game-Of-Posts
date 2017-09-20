@@ -16,10 +16,6 @@ class DeleteCommentButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     removeComment: (parentId, comment) => {
@@ -28,4 +24,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteCommentButton);
+export default connect(null, mapDispatchToProps)(DeleteCommentButton);

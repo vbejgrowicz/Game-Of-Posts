@@ -16,10 +16,6 @@ class EditPostButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
 const mapDispatchToProps = (dispatch) => {
   return {
     openPostForm: (id, title, body, author, category) => {
@@ -34,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditPostButton);
+export default connect(null, mapDispatchToProps)(EditPostButton);

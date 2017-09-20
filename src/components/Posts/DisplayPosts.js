@@ -11,7 +11,7 @@ class DisplayPosts extends React.Component {
   }
 
   render() {
-    const { CurrentPosts } = this.props;
+    const { CurrentPosts } = this.props.postsReducer;
     return CurrentPosts ? (
       <div className="Post-List">
         {CurrentPosts.map((post) => {
@@ -27,11 +27,10 @@ class DisplayPosts extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    CurrentPosts: state.postsReducer.CurrentPosts,
-  };
-};
+function mapStateToProps({ postsReducer }) {
+  return { postsReducer };
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     removePost: (id) => {

@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import { ACTIVE_CATEGORY, IS_LOADING, DETAILED_POST_VIEW } from '../actions/ActiveViewAction';
+import { ACTIVE_CATEGORY, IS_LOADING, DETAILED_POST_VIEW } from '../actions/types';
 
 export function activeViewReducer (state = {category:"", detailedPostView:false, LoadingStatus: false}, action) {
   switch (action.type) {
