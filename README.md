@@ -1,5 +1,7 @@
 # Readable - Content and Comment Web App
-A single-page application built with React that allows users to view, update, and remove posts and comments.
+A single-page application built with React that allows users to view, update, and remove posts and comments. 
+
+Server provided by [Udacity](https://github.com/udacity/reactnd-project-readable-starter).
 
 ## Getting Started
 1.  Clone this repository:
