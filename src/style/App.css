@@ -21,19 +21,6 @@
   width: 100%;
 }
 
-.Add-Button {
-  margin: 5px;
-  display: block;
-}
-
-.Edit-Button {
-  display: block;
-}
-
-.Remove-Button {
-  display: block;
-}
-
 /*Comments*/
 .Comment-List {
   position: relative;

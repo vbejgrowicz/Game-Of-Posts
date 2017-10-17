@@ -3,8 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { closeCommentForm, updateCommentBody, updateCommentAuthor } from '../../actions/EditCommentAction';
-import SubmitNewCommentButton from './utils/SubmitNewCommentButton';
-import SubmitEditCommentButton from './utils/SubmitEditCommentButton';
+import { newComment, editComment } from '../../actions/CommentsAction';
+
+import CustomButton from '../utils/CustomButton';
 
 class CommentForm extends React.Component {
 
@@ -29,7 +30,7 @@ class CommentForm extends React.Component {
 
   render() {
     const { commentFormOpen } = this.props.EditCommentReducer;
-    const { isExistingComment, body, author } = this.props.EditCommentReducer.comment;
+    const { isExistingComment, id, parentId, body, author } = this.props.EditCommentReducer.comment;
     const { closeCommentForm, updateCommentBody, updateCommentAuthor } = this.props;
     return (
       <Modal show={commentFormOpen} onHide={() => closeCommentForm()}>
@@ -63,9 +64,9 @@ class CommentForm extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           {(isExistingComment === true) ? (
-            <SubmitEditCommentButton editCommentValidationCheck={this.getCommentValidation("edit", body)}/>
+            <CustomButton disabled={this.getCommentValidation("edit", body)} onPress={this.props.editComment.bind(this, id, Date.now(), body)}>Submit Changes</CustomButton>
           ):(
-            <SubmitNewCommentButton newCommentValidationCheck={this.getCommentValidation("new", body, author)}/>
+            <CustomButton disabled={this.getCommentValidation("new", body, author)} onPress={this.props.newComment.bind(this, id, Date.now(), body, author, parentId)}>Submit</CustomButton>
           )}
         </Modal.Footer>
       </Modal>
@@ -82,6 +83,14 @@ const mapDispatchToProps = (dispatch) => {
     updateCommentBody: (value) => dispatch(updateCommentBody(value)),
     updateCommentAuthor: (value) => dispatch(updateCommentAuthor(value)),
     closeCommentForm: () => dispatch(closeCommentForm()),
+    editComment: (id, timestamp, body) => {
+      dispatch(editComment(id, timestamp, body));
+      dispatch(closeCommentForm());
+    },
+    newComment: (id, timestamp, body, author, parentId) => {
+      dispatch(newComment(id, timestamp, body, author, parentId));
+      dispatch(closeCommentForm());
+    },
   };
 };
 

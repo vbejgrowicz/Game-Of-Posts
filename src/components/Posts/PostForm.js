@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Capitalize } from '../../utils/Capitalize';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
-import SubmitNewPostButton from './utils/SubmitNewPostButton';
-import SubmitEditPostButton from './utils/SubmitEditPostButton';
+import { closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
+import { editPost, newPost } from '../../actions/PostsAction';
+import CustomButton from '../utils/CustomButton';
 
 class PostForm extends React.Component {
 
@@ -34,11 +34,11 @@ class PostForm extends React.Component {
   }
 
   render() {
-    const { title, body, author, category, isExistingPost} = this.props.EditPostReducer.post;
+    const { id, title, body, author, category, isExistingPost } = this.props.EditPostReducer.post;
     const { postFormOpen } = this.props.EditPostReducer;
     const { categories } = this.props.categoriesReducer;
-    const {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } = this.props;
-
+    const {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory, activeViewReducer, editPost, newPost } = this.props;
+    const { activeView } = activeViewReducer;
     return(
       <Modal show={postFormOpen} onHide={() => closePostForm()}>
         <Modal.Header closeButton>
@@ -92,9 +92,9 @@ class PostForm extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           {(isExistingPost === true) ? (
-            <SubmitEditPostButton editPostValidationCheck={this.getPostValidation("edit", title, body)} />
+            <CustomButton disabled={this.getPostValidation("edit", title, body)} onPress={editPost.bind(this, id, title, body)}>Submit Changes</CustomButton>
           ):(
-            <SubmitNewPostButton newPostValidationCheck={this.getPostValidation("new", title, body, author, category)} />
+            <CustomButton disabled={this.getPostValidation("new", title, body, author, category)} onPress={newPost.bind(this, activeView, id, Date.now(), title, body, author, category)}>Submit</CustomButton>
           )}
         </Modal.Footer>
       </Modal>
@@ -103,8 +103,8 @@ class PostForm extends React.Component {
 }
 
 
-function mapStateToProps({ categoriesReducer, EditPostReducer }) {
-  return { categoriesReducer, EditPostReducer };
+function mapStateToProps({ categoriesReducer, EditPostReducer, activeViewReducer }) {
+  return { categoriesReducer, EditPostReducer, activeViewReducer };
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -114,6 +114,14 @@ const mapDispatchToProps = (dispatch) => {
     updateAuthor: (value) => dispatch(updateAuthor(value)),
     updateCategory: (value) => dispatch(updateCategory(value)),
     closePostForm: () => dispatch(closePostForm()),
+    editPost: (id, title, body) => {
+      dispatch(editPost(id,title,body));
+      dispatch(closePostForm());
+    },
+    newPost: (activeView, id, timestamp, title, body, author, category) => {
+      dispatch(newPost(activeView, id, timestamp, title, body, author, category));
+      dispatch(closePostForm());
+    },
   };
 };
 
