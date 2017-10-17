@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 export default function CustomButton({ children, onPress, style, disabled }) {
   return (
     <div style={style}>
-      <Button className="Custom-Button" onClick={onPress}>{children}</Button>
+      <Button className="Custom-Button" disabled={disabled} onClick={onPress}>{children}</Button>
     </div>
   );
 }
