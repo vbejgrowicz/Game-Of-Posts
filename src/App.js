@@ -11,6 +11,7 @@ import './style/App.css';
 class App extends React.Component {
 
   componentDidMount() {
+    console.log(this.props);
     const { isLoading, fetchCategories, fetchAll } = this.props;
     isLoading();
     fetchCategories();
@@ -22,7 +23,14 @@ class App extends React.Component {
       this.props.fetchPostDetails(nextProps.params.postID);
     }
     else if ((this.props.AllPosts !== nextProps.AllPosts) || (this.props.params.category !== nextProps.params.category) || this.props.params.postID !== nextProps.params.postID){
-      this.props.fetchCategoryPosts(nextProps.params.category || "home");
+      let category;
+      if (nextProps.params.category === undefined) {
+        category = "home"
+      } else {
+        category = nextProps.params.category.split("_").join(" ");
+        console.log('category', category);
+      }
+      this.props.fetchCategoryPosts(category);
     }
     if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
       this.props.isNotLoading();

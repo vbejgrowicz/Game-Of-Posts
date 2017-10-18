@@ -7,15 +7,15 @@ const defaultData = {
   categories: [
       {
         name: 'House Stark',
-        path: 'House Stark'
+        path: 'House_Stark'
       },
       {
         name: 'House Lannister',
-        path: 'House Lannister'
+        path: 'House_Lannister'
       },
       {
         name: 'House Targaryen',
-        path: 'House Targaryen'
+        path: 'House_Targaryen'
       }
   ]
 }

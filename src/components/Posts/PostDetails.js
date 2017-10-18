@@ -25,7 +25,7 @@ class PostDetails extends React.Component {
       <div className="Post">
         <DisplayVoteScore voteScore={voteScore} post={id} voteEvent={this.voteEventPost.bind(this)}/>
         <div className="Post-Data">
-          <a href={'/'+ category + '/' + id} className="Post-Link">
+          <a href={'/'+ category.split(" ").join("_") + '/' + id} className="Post-Link">
             <DisplayTitle title={title} />
             <DisplayBody body={body} />
             <div className="date-and-author">

@@ -14,7 +14,7 @@ class DisplayCategories extends React.Component {
         <LinkContainer to='/'><NavItem>Home</NavItem></LinkContainer>
         {categories.map((category, idx) => {
         return(
-          <LinkContainer to={'/' + category} key={idx}><NavItem>{Capitalize(category)}</NavItem></LinkContainer>
+          <LinkContainer to={'/' + category.split(" ").join("_")} key={idx}><NavItem>{Capitalize(category)}</NavItem></LinkContainer>
         );
       })}
       </Nav>
