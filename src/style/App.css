@@ -32,7 +32,7 @@
   color: #fff;
   display: block;
   position: relative;
-  width: 80%;
+  width: 90%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -45,7 +45,7 @@
 
 .Comment {
   position: relative;
-  height: 120px;
+  min-height: 120px;
   padding: 10px;
   display: flex;
 }
@@ -80,7 +80,7 @@
 .Post-in-List {
   display: block;
   position: relative;
-  width: 70%;
+  width: 90%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -99,7 +99,7 @@
 
 .Post-Data {
   margin: auto;
-  width: 80%;
+  width: 90%;
   height: auto;
 }
 
@@ -126,9 +126,16 @@
 }
 
 .date-and-author {
-  display: flex;
   font-style: italic;
   justify-content: center;
+}
+
+.timestamp {
+  display: inline-flex;
+}
+
+.author {
+  display: inline-flex;
 }
 
 .comments-number {
@@ -163,7 +170,7 @@
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 90%;
   height: auto;
   background-color: #c55858;
   border-radius: 25px;
