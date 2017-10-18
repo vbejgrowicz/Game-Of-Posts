@@ -1,16 +1,16 @@
-# Readable - Content and Comment Web App
-A single-page application built with React that allows users to view, update, and remove posts and comments. 
+# Game Of Posts - Content and Comment Web App
+A single-page application built with React that allows users to view, update, and remove posts and comments with a Game of Thrones twist!
 
 Server provided by [Udacity](https://github.com/udacity/reactnd-project-readable-starter).
 
 ## Getting Started
 1.  Clone this repository:
 
-  `$ git clone https://github.com/vbejgrowicz/readable.git`
+  `$ git clone https://github.com/vbejgrowicz/Game-Of-Posts.git`
 
 2.  Navigate to the server directory.
 
-  `$ cd readable/readable-server`
+  `$ cd Game-Of-Posts/server`
 
 3.  Install the package.
 
@@ -33,4 +33,4 @@ Server provided by [Udacity](https://github.com/udacity/reactnd-project-readable
   `$ npm start`
   
 ## How to Use
-After running the server and application a browser will open with the Readable App where you can view, update, and remove posts and comments.
+After running the server and application a browser will open with the Game of Posts App where you can view, update, and remove posts and comments.
