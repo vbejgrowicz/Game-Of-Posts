@@ -6,21 +6,41 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'Udacity is the best place to learn React',
-    body: 'Everyone says so after all.',
-    author: 'thingtwo',
-    category: 'react',
-    voteScore: 6,
+    title: 'You\'re a Stark of Winterfell.',
+    body: 'You know our words.',
+    author: 'Eddard Stark',
+    category: 'House Stark',
+    voteScore: 1,
+    deleted: false
+  },
+  "m0m6ok3ym7mf1p33lnez": {
+    id: 'm0m6ok3ym7mf1p33lnez',
+    timestamp: 1468478867190,
+    title: 'There is great honor in serving in the Nights Watch.',
+    body: 'The Starks have manned the Wall for thousands of years, and you are a Stark. You may not have my name, but you have my blood.',
+    author: 'Eddard Stark',
+    category: 'House Stark',
+    voteScore: 5,
     deleted: false
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'Learn Redux in 10 minutes!',
-    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
-    author: 'thingone',
-    category: 'redux',
+    title: 'I am the King!',
+    body: 'I will punish you.',
+    author: 'Joffrey Baratheon',
+    category: 'House Lannister',
     voteScore: -5,
+    deleted: false
+  },
+  "axi6ok3ym7mf1p33lnez": {
+    id: 'axi6ok3ym7mf1p33lnez',
+    timestamp: 1509332615079,
+    title: 'You stand in the presence of Daenerys Stormborn of House Targaryen.',
+    body: 'Rightful heir to the Iron Throne, rightful Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains.',
+    author: 'Missandei',
+    category: 'House Targaryen',
+    voteScore: 10,
     deleted: false
   }
 }

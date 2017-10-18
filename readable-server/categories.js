@@ -6,16 +6,16 @@ let db = {}
 const defaultData = {
   categories: [
       {
-        name: 'react',
-        path: 'react'
+        name: 'House Stark',
+        path: 'House Stark'
       },
       {
-        name: 'redux',
-        path: 'redux'
+        name: 'House Lannister',
+        path: 'House Lannister'
       },
       {
-        name: 'udacity',
-        path: 'udacity'
+        name: 'House Targaryen',
+        path: 'House Targaryen'
       }
   ]
 }
