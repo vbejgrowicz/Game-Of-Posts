@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DisplayPosts from './Posts/DisplayPosts';
 import DisplaySorter from './Sort/DisplaySorter';
 import { updatePostSort } from '../actions/PostsAction';
+import { detailedPostViewNotActive } from '../actions/ActiveViewAction';
 import CustomButton from './utils/CustomButton';
 import PostForm from './Posts/PostForm';
 import { Glyphicon } from 'react-bootstrap';
@@ -11,6 +12,9 @@ import { openPostForm, updateID, updateCategory, isExistingPost } from '../actio
 import { makeID, uniqueID } from '../utils/MakeID';
 
 class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.detailedPostViewNotActive();
+  }
 
   render() {
     const { sortedby } = this.props.postsReducer;
@@ -47,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(openPostForm());
       dispatch(isExistingPost(false));
     },
+    detailedPostViewNotActive: () => dispatch(detailedPostViewNotActive()),
   };
 };
 
