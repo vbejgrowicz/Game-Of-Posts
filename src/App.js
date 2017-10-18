@@ -21,7 +21,7 @@ class App extends React.Component {
     if (nextProps.params.postID && nextProps.AllPosts.length > 0){
       this.props.fetchPostDetails(nextProps.params.postID);
     }
-    else if (this.props.AllPosts !== nextProps.AllPosts || this.props.params.category !== nextProps.params.category){
+    else if ((this.props.AllPosts !== nextProps.AllPosts) || (this.props.params.category !== nextProps.params.category) || this.props.params.postID !== nextProps.params.postID){
       this.props.fetchCategoryPosts(nextProps.params.category || "home");
     }
     if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
