@@ -12,7 +12,7 @@
 /*Buttons*/
 .Custom-Button {
   margin: 5px;
-  box-shadow: 2px 2px 4px #595757;
+  box-shadow: 0px 0px 10px 1px #313030
 }
 
 .HomeContent {
@@ -36,10 +36,10 @@
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: #aaa;
+  background-color: #c55858;
   border-radius: 25px;
   border: 1px solid #555;
-  box-shadow: 0px 0px 6px 2px #555;
+  box-shadow: 0px 0px 10px 1px #313030;
 
 }
 
@@ -52,21 +52,15 @@
 
 .Comment-Data {
   margin: auto;
-  width: 80%;
   height: auto;
-}
-
-.Comment-Link {
-  display: block;
-  width: 100%;
-  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .Comment-Buttons {
-  min-width: 100px;
+  display: flex;
   margin-top: auto;
   margin-bottom: auto;
-  display: flex;
   flex-direction: column;
 }
 
@@ -80,11 +74,11 @@
 .Post-in-List {
   display: block;
   position: relative;
-  width: 90%;
+  width: 70%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: #c55858;
+  background-color: #616060;
   border-radius: 25px;
   border: 1px solid #555;
   box-shadow: 0px 0px 6px 2px #555;
@@ -99,8 +93,11 @@
 
 .Post-Data {
   margin: auto;
-  width: 90%;
   height: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 a.Post-Data {
   color: white;
   text-decoration: none;
@@ -113,22 +110,29 @@ a.Post-Data {
 }
 
 .Post-Buttons {
-  width: 100px;
+  display: flex;
   margin-top: auto;
   margin-bottom: auto;
-  display: flex;
   flex-direction: column;
 }
 
 /*Shared Content*/
 .title {
+  padding: 2px;
   display: flex;
   font-weight: bold;
   font-size: 18px;
   justify-content: center;
 }
 
+.body {
+  font-size: 14px;
+}
+
 .date-and-author {
+  padding: 2px;
+  font-size: 12px;
+  color: #ddd;
   font-style: italic;
   justify-content: center;
 }
@@ -147,8 +151,8 @@ a.Post-Data {
 }
 
 .Vote-Score {
-  width: 100px;
-  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
   flex-direction: column;
 }
 
@@ -173,9 +177,9 @@ a.Post-Data {
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 70%;
   height: auto;
-  background-color: #c55858;
+  background-color: #616060;
   border-radius: 25px;
   border: 1px solid #555;
   box-shadow: 0px 0px 6px 2px #555;
