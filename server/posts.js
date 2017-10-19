@@ -5,7 +5,7 @@ let db = {}
 const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
-    timestamp: 1467166872634,
+    timestamp: 1508283158397,
     title: 'You\'re a Stark of Winterfell.',
     body: 'You know our words.',
     author: 'Eddard Stark',
@@ -15,32 +15,32 @@ const defaultData = {
   },
   "m0m6ok3ym7mf1p33lnez": {
     id: 'm0m6ok3ym7mf1p33lnez',
-    timestamp: 1468478867190,
+    timestamp: 1508303158397,
     title: 'There is great honor in serving in the Nights Watch.',
     body: 'The Starks have manned the Wall for thousands of years, and you are a Stark. You may not have my name, but you have my blood.',
     author: 'Eddard Stark',
     category: 'House Stark',
-    voteScore: 5,
+    voteScore: 4,
     deleted: false
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
-    timestamp: 1468479767190,
+    timestamp: 1508293158397,
     title: 'I am the King!',
     body: 'I will punish you.',
     author: 'Joffrey Baratheon',
     category: 'House Lannister',
-    voteScore: -5,
+    voteScore: -2,
     deleted: false
   },
   "axi6ok3ym7mf1p33lnez": {
     id: 'axi6ok3ym7mf1p33lnez',
-    timestamp: 1509332615079,
+    timestamp: 1508423158397,
     title: 'You stand in the presence of Daenerys Stormborn of House Targaryen.',
     body: 'Rightful heir to the Iron Throne, rightful Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains.',
     author: 'Missandei',
     category: 'House Targaryen',
-    voteScore: 10,
+    voteScore: 7,
     deleted: false
   }
 }

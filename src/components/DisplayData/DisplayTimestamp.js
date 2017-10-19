@@ -6,9 +6,9 @@ class DisplayTimestamp extends React.Component {
 
   render() {
     const { timestamp } = this.props;
-    var currentTime = Date.now();
-    var postedDate = new Date(timestamp);
-    var timeDiff = (currentTime - postedDate);
+    const currentTime = Date.now();
+    const postedDate = new Date(timestamp);
+    const timeDiff = (currentTime - postedDate);
     return timeDiff <= 86400000 ? (
       <div className="timestamp">{DateCheck(timeDiff)}</div>
     ):(
