@@ -151,21 +151,20 @@ a.Post-Data {
 }
 
 .Vote-Score {
+  width: 50px;
   margin-top: auto;
   margin-bottom: auto;
   flex-direction: column;
 }
 
 .Score {
-  display: flex;
   font-size: 20px;
   color: #fff;
-  padding: 5px;
 }
 
 .Vote-Button {
   display: flex;
-  padding: 5px;
+  margin: auto;
 }
 
 
@@ -178,6 +177,7 @@ a.Post-Data {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
+  min-width: 350px;
   height: auto;
   background-color: #616060;
   border-radius: 25px;
