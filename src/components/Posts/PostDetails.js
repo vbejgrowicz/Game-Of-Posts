@@ -2,7 +2,7 @@
 import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import CustomButton from '../utils/CustomButton';
+import CustomButtonWithTooltip from '../utils/CustomButtonWithTooltip';
 import DisplayTitle from '../DisplayData/DisplayTitle';
 import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayBody from '../DisplayData/DisplayBody';
@@ -37,8 +37,8 @@ class PostDetails extends React.Component {
           </a>
         </div>
         <div className="Post-Buttons">
-          <CustomButton onPress={this.props.openPostForm.bind(this, id, title, body, author, category)}><Glyphicon glyph="pencil"/> Edit</CustomButton>
-          <CustomButton onPress={this.props.deletePostfunction}><Glyphicon glyph="remove"/> Delete</CustomButton>
+          <CustomButtonWithTooltip tooltipText="Edit" onPress={this.props.openPostForm.bind(this, id, title, body, author, category)}><Glyphicon glyph="pencil"/></CustomButtonWithTooltip>
+          <CustomButtonWithTooltip tooltipText="Delete" onPress={this.props.deletePostfunction}><Glyphicon glyph="remove"/></CustomButtonWithTooltip>
         </div>
       </div>
     );

@@ -6,7 +6,7 @@ import DisplayBody from '../DisplayData/DisplayBody';
 import DisplayAuthor from '../DisplayData/DisplayAuthor';
 import DisplayTimestamp from '../DisplayData/DisplayTimestamp';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
-import CustomButton from '../utils/CustomButton';
+import CustomButtonWithTooltip from '../utils/CustomButtonWithTooltip';
 import { changeCommentVoteScore, removeComment } from '../../actions/CommentsAction';
 import { openCommentForm, updateParentID, updateCommentID, isExistingComment, updateCommentBody, updateCommentAuthor } from '../../actions/EditCommentAction';
 
@@ -32,8 +32,8 @@ class CommentDetails extends React.Component {
           </div>
         </div>
         <div className="Comment-Buttons">
-          <CustomButton onPress={this.props.openCommentForm.bind(this, parentId, id, body, author)}><Glyphicon glyph="pencil"/> Edit</CustomButton>
-          <CustomButton onPress={this.props.removeComment.bind(this, parentId, id)}><Glyphicon glyph="remove"/> Delete</CustomButton>
+          <CustomButtonWithTooltip tooltipText="Edit" onPress={this.props.openCommentForm.bind(this, parentId, id, body, author)}><Glyphicon glyph="pencil"/></CustomButtonWithTooltip>
+          <CustomButtonWithTooltip tooltipText="Delete" onPress={this.props.removeComment.bind(this, parentId, id)}><Glyphicon glyph="remove"/></CustomButtonWithTooltip>
         </div>
       </div>
     );
