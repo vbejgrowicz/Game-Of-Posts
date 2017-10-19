@@ -101,6 +101,9 @@
   margin: auto;
   width: 90%;
   height: auto;
+a.Post-Data {
+  color: white;
+  text-decoration: none;
 }
 
 .Post-Link {

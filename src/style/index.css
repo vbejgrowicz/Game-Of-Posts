@@ -5,52 +5,35 @@ body {
   font-family: sans-serif;
 }
 
-a:link {
-  color: #fff;
-  text-decoration: none;
-}
-a:visited {
-  color: #fff;
-  text-decoration: none;
-}
-a:hover {
-  color: #fff;
-  text-decoration: none;
-}
-a:active {
-  color: #fff;
-  text-decoration: none;
-}
-
-a:focus {
-  color: #fff;
-  text-decoration: none;
-}
-
 .btn-link {
   color: #fff;
+  text-decoration: none;
 }
 
 .btn-link:visited {
   color: #fff;
+  text-decoration: none;
 }
 
 .btn-link:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 .btn-link:active {
   color: #fff;
+  text-decoration: none;
 }
 
 .btn-link:focus {
   color: #fff;
+  text-decoration: none;
 }
-
 
 /*Navigation Bar*/
 .nav-tabs {
   font-size: 18px;
+  font-weight: bold;
 }
 
 .nav-justified {
