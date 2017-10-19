@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import PostDetails from './PostDetails';
 import { removePost } from '../../actions/PostsAction';
+import PostDetails from './PostDetails';
 
 class DisplayPosts extends React.Component {
 
@@ -16,9 +16,9 @@ class DisplayPosts extends React.Component {
       <div className="Post-List">
         {CurrentPosts.map((post) => {
           return(
-            <li className="Post-in-List" key={post.id}>
+            <a href={'/'+ post.category.split(" ").join("_") + '/' + post.id} className="Post-in-List" key={post.id}>
               <PostDetails post={post} deletePostfunction={this.deletePostfunction.bind(this, post.id)}/>
-            </li>
+            </a>
           );
         })}
       </div>

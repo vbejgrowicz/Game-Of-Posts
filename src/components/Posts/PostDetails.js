@@ -25,7 +25,6 @@ class PostDetails extends React.Component {
       <div className="Post">
         <DisplayVoteScore voteScore={voteScore} post={id} voteEvent={this.voteEventPost.bind(this)}/>
         <div className="Post-Data">
-          <a href={'/'+ category.split(" ").join("_") + '/' + id} className="Post-Link">
             <DisplayTitle title={title} />
             <DisplayBody body={body} />
             <div className="date-and-author">
@@ -34,7 +33,6 @@ class PostDetails extends React.Component {
               <DisplayAuthor author={author} />
             </div>
             <DisplayNumComments parentId={id} />
-          </a>
         </div>
         <div className="Post-Buttons">
           <CustomButtonWithTooltip tooltipText="Edit" onPress={this.props.openPostForm.bind(this, id, title, body, author, category)}><Glyphicon glyph="pencil"/></CustomButtonWithTooltip>
