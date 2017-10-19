@@ -75,6 +75,7 @@
   display: block;
   position: relative;
   width: 70%;
+  min-width: 350px;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
