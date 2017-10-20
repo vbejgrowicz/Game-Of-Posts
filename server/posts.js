@@ -42,6 +42,16 @@ const defaultData = {
     category: 'House Targaryen',
     voteScore: 7,
     deleted: false
+  },
+  "l9l6ok3ym7mf1p33lnez": {
+    id: 'l9l6ok3ym7mf1p33lnez',
+    timestamp: 1508538664307,
+    title: 'Daenerys is the Dragon Queen.',
+    body: 'Can\'t very well let the dragons starve. That\'s obvious.',
+    author: 'Tyrion Lannister',
+    category: 'House Targaryen',
+    voteScore: 5,
+    deleted: false
   }
 }
 

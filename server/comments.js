@@ -133,6 +133,47 @@ const defaultData = {
     deleted: false,
     parentDeleted: false
   },
+  "q5yursun105n8un48ve89": {
+    id: 'q5yursun105n8un48ve89',
+    parentId: "l9l6ok3ym7mf1p33lnez",
+    timestamp: 1508538674307,
+    body: 'If the dragon does not want to eat, how do you force him to eat.',
+    author: 'Greyworm',
+    voteScore: -2,
+    deleted: false,
+    parentDeleted: false
+  },
+  "q50ursun105n8un48ve89": {
+    id: 'q50ursun105n8un48ve89',
+    parentId: "l9l6ok3ym7mf1p33lnez",
+    timestamp: 1508538764307,
+    body: 'Dragons do not do well in captivity.',
+    author: 'Tyrion Lannister',
+    voteScore: 0,
+    deleted: false,
+    parentDeleted: false
+  },
+  "q5012sun105n8un48ve89": {
+    id: 'q5012sun105n8un48ve89',
+    parentId: "l9l6ok3ym7mf1p33lnez",
+    timestamp: 1508538864307,
+    body: 'How do you know this?',
+    author: 'Missandei',
+    voteScore: 0,
+    deleted: false,
+    parentDeleted: false
+  },
+  "q5012sun105n8y048ve89": {
+    id: 'q5012sun105n8y048ve89',
+    parentId: "l9l6ok3ym7mf1p33lnez",
+    timestamp: 1508538964307,
+    body: 'That\'s what I do. I drink and I know things.',
+    author: 'Tyrion Lannister',
+    voteScore: 10,
+    deleted: false,
+    parentDeleted: false
+  },
+
 }
 
 function getData (token) {
