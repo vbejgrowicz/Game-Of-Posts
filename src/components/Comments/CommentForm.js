@@ -30,7 +30,7 @@ class CommentForm extends React.Component {
 
   render() {
     const { commentFormOpen } = this.props.EditCommentReducer;
-    const { isExistingComment, id, parentId, body, author } = this.props.EditCommentReducer.comment;
+    const { isExistingComment, id, parentId, body, author, timestamp } = this.props.EditCommentReducer.comment;
     const { closeCommentForm, updateCommentBody, updateCommentAuthor } = this.props;
     return (
       <Modal show={commentFormOpen} onHide={() => closeCommentForm()}>
@@ -64,7 +64,7 @@ class CommentForm extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           {(isExistingComment === true) ? (
-            <CustomButton disabled={this.getCommentValidation("edit", body)} onPress={this.props.editComment.bind(this, id, Date.now(), body)}>Submit Changes</CustomButton>
+            <CustomButton disabled={this.getCommentValidation("edit", body)} onPress={this.props.editComment.bind(this, id, timestamp, body)}>Submit Changes</CustomButton>
           ):(
             <CustomButton disabled={this.getCommentValidation("new", body, author)} onPress={this.props.newComment.bind(this, id, Date.now(), body, author, parentId)}>Submit</CustomButton>
           )}
