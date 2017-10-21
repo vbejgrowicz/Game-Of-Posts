@@ -15,7 +15,7 @@ import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 const initialState = {
   AllPosts: [],
   CurrentPosts: [],
-  sortedby: "voteScore",
+  sortedby: "timestamp",
   IDsUsed: []
 };
 

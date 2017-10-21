@@ -4,7 +4,7 @@ import { sortByVoteScore, sortbyTimestamp } from '../utils/SortFunctions';
 
 const initialState = {
   comments: [],
-  sortedby: "voteScore",
+  sortedby: "timestamp",
   IDsUsed: [],
 };
 
