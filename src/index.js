@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import './style/index.css';
 import App from './App';
 import store from './utils/ReduxStore';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import HomePage from './components/HomePage';
 import DisplayCategories from './components/CategoryNavbar/DisplayCategories';
 import PostDetailView from './components/Posts/PostDetailView';
@@ -13,7 +13,7 @@ import DetailPage from './components/DetailPage';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Route component={App}>
         <Route component={HomePage}>
           <Route path="/(:category)" component={DisplayCategories} />

@@ -11,6 +11,7 @@ import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
 import { changeVoteScore } from '../../actions/PostsAction';
 import { openPostForm, updateID, isExistingPost, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
+import { Link } from 'react-router'
 
 class PostDetails extends React.Component {
 
@@ -24,7 +25,7 @@ class PostDetails extends React.Component {
     return(
       <div className="Post">
         <DisplayVoteScore voteScore={voteScore} post={id} voteEvent={this.voteEventPost.bind(this)}/>
-        <a href={'/'+ post.category.split(" ").join("_") + '/' + post.id} className="Post-Data">
+        <Link to={'/'+ post.category.split(" ").join("_") + '/' + post.id} className="Post-Data">
             <DisplayTitle title={title} />
             <DisplayBody body={body} />
             <div className="date-and-author">
@@ -33,7 +34,7 @@ class PostDetails extends React.Component {
               <DisplayAuthor author={author} />
             </div>
             <DisplayNumComments parentId={id} />
-        </a>
+        </Link>
         <div className="Post-Buttons">
           <CustomButtonWithTooltip tooltipText="Edit" onPress={this.props.openPostForm.bind(this, id, title, body, author, category)}><Glyphicon glyph="pencil"/></CustomButtonWithTooltip>
           <CustomButtonWithTooltip tooltipText="Delete" onPress={this.props.deletePostfunction}><Glyphicon glyph="remove"/></CustomButtonWithTooltip>
