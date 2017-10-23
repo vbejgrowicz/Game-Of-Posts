@@ -3,7 +3,6 @@ import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
-import { Capitalize } from '../../utils/Capitalize';
 
 class DisplayCategories extends React.Component {
 
@@ -11,10 +10,10 @@ class DisplayCategories extends React.Component {
     const { categories } = this.props.categoriesReducer;
     return(
       <Nav bsStyle="tabs" justified>
-        <LinkContainer to='/'><NavItem>Home</NavItem></LinkContainer>
+        <LinkContainer exact={true} to='/'><NavItem>Home</NavItem></LinkContainer>
         {categories.map((category, idx) => {
         return(
-          <LinkContainer to={'/' + category.split(" ").join("_")} key={idx}><NavItem>{Capitalize(category)}</NavItem></LinkContainer>
+          <LinkContainer exact={true} to={'/' + category.split(" ").join("_")} key={idx}><NavItem>{category}</NavItem></LinkContainer>
         );
       })}
       </Nav>

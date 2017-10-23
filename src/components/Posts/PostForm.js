@@ -1,7 +1,6 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { Capitalize } from '../../utils/Capitalize';
 import { Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { closePostForm, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
 import { editPost, newPost } from '../../actions/PostsAction';
@@ -83,7 +82,7 @@ class PostForm extends React.Component {
               <option value="selector">Select a Category...</option>
               {categories.map((categoryItem, idx) => {
                 return(
-                  <option key={idx} value={categoryItem}>{Capitalize(categoryItem)}</option>
+                  <option key={idx} value={categoryItem}>{categoryItem}</option>
                 );
               })}
             </FormControl>
