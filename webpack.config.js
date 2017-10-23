@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const VENDOR_LIBS = ["react", "react-dom", "prop-types", "react-bootstrap", "react-redux", "react-router", "react-router-bootstrap", "react-router-dom", "redux", "redux-thunk"];
+const VENDOR_LIBS = ["react", "react-dom", "prop-types", "react-bootstrap", "react-redux", "react-router-bootstrap", "react-router-dom", "redux", "redux-thunk"];
 const extractCSS = new ExtractTextPlugin('[name].[chunkhash].css');
 
 module.exports = {

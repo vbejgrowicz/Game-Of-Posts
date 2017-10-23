@@ -1,17 +1,18 @@
 /*jshint esversion: 6*/
 import React from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isLoading, isNotLoading, activeView, detailedPostViewActive, detailedPostViewNotActive } from './actions/ActiveViewAction';
+import { isLoading, isNotLoading } from './actions/ActiveViewAction';
 import { fetchCategories } from './actions/CategoriesAction';
-import { fetchAll, fetchCurrentPosts, fetchPostDetails } from './actions/PostsAction';
-import { setParentID } from './actions/CommentsAction';
+import { fetchAll } from './actions/PostsAction';
 import Loading from './utils/Loading';
 import './style/App.css';
+import HomePage from './components/HomePage';
+import DetailPage from './components/DetailPage';
 
 class App extends React.Component {
 
   componentDidMount() {
-    console.log(this.props);
     const { isLoading, fetchCategories, fetchAll } = this.props;
     isLoading();
     fetchCategories();
@@ -19,19 +20,6 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.postID && nextProps.AllPosts.length > 0){
-      this.props.fetchPostDetails(nextProps.params.postID);
-    }
-    else if ((this.props.AllPosts !== nextProps.AllPosts) || (this.props.params.category !== nextProps.params.category) || this.props.params.postID !== nextProps.params.postID){
-      let category;
-      if (nextProps.params.category === undefined) {
-        category = "home"
-      } else {
-        category = nextProps.params.category.split("_").join(" ");
-        console.log('category', category);
-      }
-      this.props.fetchCategoryPosts(category);
-    }
     if (this.props.categories.length > 0 && (Object.keys(nextProps.comments).length === nextProps.AllPosts.length)) {
       this.props.isNotLoading();
     }
@@ -42,7 +30,11 @@ class App extends React.Component {
       <Loading />
     ):(
       <div className="App">
-          {this.props.children}
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/:category" component={HomePage} />
+          <Route exact path="/:category/:postID" component={DetailPage} />
+        </Switch>
       </div>
     );
   }
@@ -66,19 +58,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchCategories: () => {
       dispatch(fetchCategories());
     },
-    fetchCategoryPosts: (category) => {
-      dispatch(detailedPostViewNotActive());
-      dispatch(activeView(category));
-      dispatch(fetchCurrentPosts(category));
-    },
     isLoading: () => dispatch(isLoading()),
     isNotLoading: () => dispatch(isNotLoading()),
-    fetchPostDetails: (id) => {
-      dispatch(setParentID(id));
-      dispatch(detailedPostViewActive());
-      dispatch(fetchPostDetails(id));
-    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

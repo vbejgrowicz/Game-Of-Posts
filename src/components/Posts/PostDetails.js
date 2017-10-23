@@ -11,7 +11,7 @@ import DisplayNumComments from '../DisplayData/DisplayNumComments';
 import DisplayVoteScore from '../DisplayData/DisplayVoteScore';
 import { changeVoteScore } from '../../actions/PostsAction';
 import { openPostForm, updateID, isExistingPost, updateTitle, updateBody, updateAuthor, updateCategory } from '../../actions/EditPostAction';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 class PostDetails extends React.Component {
 

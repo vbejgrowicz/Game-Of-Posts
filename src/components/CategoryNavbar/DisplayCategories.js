@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
 
@@ -25,4 +26,4 @@ function mapStateToProps({ categoriesReducer }) {
   return { categoriesReducer };
 }
 
-export default connect(mapStateToProps, null)(DisplayCategories);
+export default withRouter(connect(mapStateToProps, null)(DisplayCategories));
