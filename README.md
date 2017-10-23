@@ -1,5 +1,5 @@
 # Game Of Posts - Content and Comment Web App
-A single-page application built with React that allows users to view, update, and remove posts and comments with a Game of Thrones twist!
+A single-page application built with React that allows users to view, update, add and remove posts and comments with a Game of Thrones twist!
 
 Server provided by [Udacity](https://github.com/udacity/reactnd-project-readable-starter).
 
@@ -30,7 +30,8 @@ Server provided by [Udacity](https://github.com/udacity/reactnd-project-readable
 
 7.  Run the application.
 
-  `$ npm start`
+  `$ npm run serve`
   
 ## How to Use
-After running the server and application a browser will open with the Game of Posts App where you can view, update, and remove posts and comments.
+After running the server and application, open your browser to http://localhost:8080/. 
+There you can use the Game of Posts App where you can view, update, add and remove posts and comments.
