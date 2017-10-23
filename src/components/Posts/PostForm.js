@@ -37,7 +37,7 @@ class PostForm extends React.Component {
     const { postFormOpen } = this.props.EditPostReducer;
     const { categories } = this.props.categoriesReducer;
     const {closePostForm, updateTitle, updateBody, updateAuthor, updateCategory, activeViewReducer, editPost, newPost } = this.props;
-    const { activeView } = activeViewReducer;
+    const activeView = activeViewReducer.category;
     return(
       <Modal show={postFormOpen} onHide={() => closePostForm()}>
         <Modal.Header closeButton>
