@@ -1,10 +1,10 @@
 /* jshint esversion:6 */
 export function makeID() {
-  var text = "";
-  var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < 22; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  return text;
+  var id = "";
+  var possible = "0123456789";
+  for (var i = 0; i < 4; i++)
+    id += possible.charAt(Math.floor(Math.random() * possible.length));
+  return id;
 }
 
 export function uniqueID(id, IDsUsed) {
