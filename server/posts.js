@@ -3,8 +3,8 @@ const clone = require('clone')
 let db = {}
 
 const defaultData = {
-  "8xf0y6ziyjabvozdd253nd": {
-    id: '8xf0y6ziyjabvozdd253nd',
+  "1": {
+    id: '1',
     timestamp: 1508283158397,
     title: 'You\'re a Stark of Winterfell.',
     body: 'You know our words.',
@@ -13,8 +13,8 @@ const defaultData = {
     voteScore: 1,
     deleted: false
   },
-  "m0m6ok3ym7mf1p33lnez": {
-    id: 'm0m6ok3ym7mf1p33lnez',
+  "2": {
+    id: '2',
     timestamp: 1508303158397,
     title: 'There is great honor in serving in the Nights Watch.',
     body: 'The Starks have manned the Wall for thousands of years, and you are a Stark. You may not have my name, but you have my blood.',
@@ -23,8 +23,8 @@ const defaultData = {
     voteScore: 4,
     deleted: false
   },
-  "6ni6ok3ym7mf1p33lnez": {
-    id: '6ni6ok3ym7mf1p33lnez',
+  "3": {
+    id: '3',
     timestamp: 1508293158397,
     title: 'I am the King!',
     body: 'I will punish you.',
@@ -33,8 +33,8 @@ const defaultData = {
     voteScore: -2,
     deleted: false
   },
-  "axi6ok3ym7mf1p33lnez": {
-    id: 'axi6ok3ym7mf1p33lnez',
+  "4": {
+    id: '4',
     timestamp: 1508423158397,
     title: 'You stand in the presence of Daenerys Stormborn of House Targaryen.',
     body: 'Rightful heir to the Iron Throne, rightful Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains.',
@@ -43,8 +43,8 @@ const defaultData = {
     voteScore: 7,
     deleted: false
   },
-  "l9l6ok3ym7mf1p33lnez": {
-    id: 'l9l6ok3ym7mf1p33lnez',
+  "5": {
+    id: '5',
     timestamp: 1508538664307,
     title: 'Daenerys is the Dragon Queen.',
     body: 'Can\'t very well let the dragons starve. That\'s obvious.',
