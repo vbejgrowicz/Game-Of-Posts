@@ -52,6 +52,16 @@ const defaultData = {
     category: 'House Targaryen',
     voteScore: 5,
     deleted: false
+  },
+  "6": {
+    id: '6',
+    timestamp: 1508847813082,
+    title: 'We know no king but the King in the North whose name is Stark.',
+    body: 'Your son was butchered at the Red Wedding, Lord Manderly, but you refused the call. You swore allegiance to House Stark, Lord Glover, but in their hour of greatest need, you refused the call. And you, Lord Cerwyn, your father was skinned alive by Ramsay Bolton. Still you refused the call. But House Mormont remembers. The North remembers. We know no king but the King in the North whose name is Stark. I don\'t care if he\'s a bastard. Ned Stark\'s blood runs through his veins. He\'s my king from this day until his last day.',
+    author: 'Lyanna Mormont',
+    category: 'House Stark',
+    voteScore: 6,
+    deleted: false
   }
 }
 

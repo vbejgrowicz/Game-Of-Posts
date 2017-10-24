@@ -173,7 +173,86 @@ const defaultData = {
     deleted: false,
     parentDeleted: false
   },
-
+  "601": {
+    id: '601',
+    parentId: "6",
+    timestamp: 1508848767627,
+    body: 'Lady Mormont speaks harshly and truly. My son died for Robb Stark the young wolf. I didn\'t think we\'d find another king in my lifetime. I didn\'t commit my men to your cause because I didn\'t want more Manderly\'s dying for nothing. But I was wrong. Jon Snow avenged the red wedding, he is the white wolf, the King in the North.',
+    author: 'Lord Manderly',
+    voteScore: 4,
+    deleted: false,
+    parentDeleted: false
+  },
+  "602": {
+    id: '602',
+    parentId: "6",
+    timestamp: 1508848967627,
+    body: 'I did not fight beside you on the field and I will regret that until my dying day. A man can only admit when he was wrong and ask forgiveness.',
+    author: 'Lord Glover',
+    voteScore: -2,
+    deleted: false,
+    parentDeleted: false
+  },
+  "603": {
+    id: '603',
+    parentId: "6",
+    timestamp: 1508849167627,
+    body: 'There\'s nothing to forgive my lord.',
+    author: 'Jon Snow',
+    voteScore: 3,
+    deleted: false,
+    parentDeleted: false
+  },
+  "604": {
+    id: '604',
+    parentId: "6",
+    timestamp: 1508849210415,
+    body: 'There will be more fights to come. House Glover will stand behind House Stark as we have for a thousand years and I will stand behind Jon Snow the King in the North.',
+    author: 'Lord Glover',
+    voteScore: 1,
+    deleted: false,
+    parentDeleted: false
+  },
+  "605": {
+    id: '605',
+    parentId: "6",
+    timestamp: 1508849410415,
+    body: 'King in the North!',
+    author: 'Lord Manderly',
+    voteScore: 3,
+    deleted: false,
+    parentDeleted: false
+  },
+  "606": {
+    id: '606',
+    parentId: "6",
+    timestamp: 1508849510415,
+    body: 'King in the North!',
+    author: 'Lady Mormont',
+    voteScore: 8,
+    deleted: false,
+    parentDeleted: false
+  },
+  "607": {
+    id: '607',
+    parentId: "6",
+    timestamp: 1508849610415,
+    body: 'King in the North!',
+    author: 'Lord Glover',
+    voteScore: 5,
+    deleted: false,
+    parentDeleted: false
+  },
+  "608": {
+    id: '608',
+    parentId: "6",
+    timestamp: 1508849710415,
+    body: 'King in the North!',
+    author: 'Lord Cerwyn',
+    voteScore: 2,
+    deleted: false,
+    parentDeleted: false
+  },
 }
 
 function getData (token) {
