@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { isLoading, isNotLoading } from './actions/ActiveViewAction';
 import { fetchCategories } from './actions/CategoriesAction';
@@ -30,11 +30,13 @@ class App extends React.Component {
       <Loading />
     ):(
       <div className="App">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/:category" component={HomePage} />
-          <Route exact path="/:category/:postID" component={DetailPage} />
-        </Switch>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/:category" component={HomePage} />
+            <Route exact path="/:category/:postID" component={DetailPage} />
+          </Switch>
+        </Router>
       </div>
     );
   }
@@ -63,4 +65,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default connect(mapStateToProps, mapDispatchToProps)(App);
